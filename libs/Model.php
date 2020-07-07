@@ -2,7 +2,6 @@
 require_once "./define.php";
 class Model
 {
-
 	public $host   = DB_HOST;
 	public $user   = DB_USER;
 	public $pass   = DB_PASS;
@@ -87,5 +86,28 @@ class Model
 			}
 		}
 		return $arrItems;
+	}
+	
+	public function createWhereDeleteSQL($data){
+		$newWhere = '';
+		if(!empty($data)){
+			foreach($data as $id) {
+				$newWhere .= "'" . $id . "', ";
+			}
+			$newWhere .= "'0'";
+		}
+		return $newWhere;
+	}
+
+	public function fetchRow($query){
+		$result = array();
+		if(!empty($query)){
+			$resultQuery = $this->select($query);
+			if(mysqli_num_rows($resultQuery) > 0){
+				$result = mysqli_fetch_assoc($resultQuery);
+			}
+			mysqli_free_result($resultQuery);
+		}
+		return $result;
 	}
 }

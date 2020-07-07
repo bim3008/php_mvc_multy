@@ -48,15 +48,15 @@
 <?php
         // ALl
         $linkAll  = URL::createLink('admin', 'group', 'index');
-        $btnAll   = HTMLHelper::cmsButton($linkAll, 'btn btn-info', 'cancel', 'Cancel');
+        $btnAll   = HTMLHelper::cmsButton($linkAll, 'btn btn-info','', 'cancel', 'Cancel');
 
         // ACTIVE
         $linkActive  = URL::createLink('admin', 'group', 'index', array('params' => 'active'));
-        $btnActive   = HTMLHelper::cmsButton($linkActive, 'btn btn-success ', 'ac', 'Save & Close');
+        $btnActive   = HTMLHelper::cmsButton($linkActive, 'btn btn-success ', '','ac', 'Save & Close');
 
         // INACTIVE
         $linkInactive  = URL::createLink('admin', 'group', 'index', array('params' => 'inactive'));
-        $btnInactive   = HTMLHelper::cmsButton($linkInactive, 'btn btn-danger ', 'inac', 'Save & New');
+        $btnInactive   = HTMLHelper::cmsButton($linkInactive, 'btn btn-danger ','', 'inac', 'Save & New');
 
         $stringBtn = $btnAll . $btnInactive . $btnActive;
 

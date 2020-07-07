@@ -12,13 +12,20 @@ class Controller{
 	
 	// Params (GET - POST)
 	protected $_arrParam;
-	
+
+	// Pagination
+	protected $_pagination	= array(
+				'totalItemsPerPage'	=> 4, // Tổng số phần tử một trang
+				'pageRange'			=> 3, // Trang hiển thị 	
+	);
 	public function __construct($arrParams){
 		$this->setModel($arrParams['module'], $arrParams['controller']);
 		$this->setTemplate($this);
-		$this->setView($arrParams['module']);
+		$this->setView($arrParams['module']) ;
+		$this->_pagination['currentPage']	= (isset($arrParams['filter_page'])) ? $arrParams['filter_page'] : 1;
+		$arrParams['pagination'] = $this->_pagination;
 		$this->setParams($arrParams);
-
+	 
 		$this->_view->arrParam = $arrParams ;
 	}	
 	// SET MODEL
@@ -42,24 +49,26 @@ class Controller{
 	public function getView(){
 		return $this->_view;
 	}
-	
 	// SET TEMPLATE
 	public function setTemplate(){
 		$this->_templateObj = new Template($this);	
 	}
-	
 	// GET TEMPLATE
 	public function getTemplate(){
 		return $this->_templateObj;
 	}
-	
 	// GET PARAMS
 	public function setParams($arrParam){
 		$this->_arrParam= $arrParam;
 	}
-	
 	// GET PARAMS
 	public function getParams($arrParam){
 		$this->_arrParam= $arrParam;
+	}
+
+	// GET PAGINATION
+	public function setPagination($config){
+		$this->_pagination['totalItemsPerPage'] = $config['totalItemsPerPage'] ;
+		$this->_pagination['pageRange'] 		= $config['pageRange'] ;
 	}
 }

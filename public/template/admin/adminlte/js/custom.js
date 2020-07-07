@@ -1,4 +1,5 @@
 function changeStatus(url) {
+
     $.get(url, function(data) {
         var element = ' a#status-' + data[0];
         var className = '';
@@ -37,15 +38,30 @@ function changeAjaxACP(url) {
     }, 'json');
 
 }
+
+function submitDelete(url) {
+    $('#groupform').attr('action', url).submit();
+}
+
+function changePage(page) {
+    $('input[name =filter_page]').val(page);
+    $('#groupform').submit();
+}
+
+function submitMultyDelete(url) {
+    $('#groupform').attr('action', url).submit();
+}
+
 $(document).ready(function() {
 
     $('input[name=checkall-toggle]').change(function() {
-
         var checkStatus = this.checked;
         $('#groupform').find(':checkbox').each(function() {
             this.checked = checkStatus;
         });
     });
-
+    $('#example1_filter button[name=formSearch]').click(function() {
+        // $('#groupform').submit();
+    });
 
 })

@@ -50,7 +50,7 @@
                         // STATUS
                         $buttonStatus = HTMLHelper::cmsStatus($status, URL::createLink('admin', 'group', 'changeStatus', array('id' => $id, 'status'    => $status)), $id);
                         // EDIT
-                        $linkEdit     = URL::createLink('admin', 'group', 'edit');
+                        $linkEdit     = URL::createLink('admin', 'group', 'form', array('id' => $id));
                         $linkDelete   = URL::createLink('admin', 'group', 'delete', array('id' => $id));
                         //DELETE
                         $buttonEdit   = HTMLHelper::cmsButton($linkEdit, 'btn btn-warning btn-sm', 'fa fa-edit', 'edit', 'Edit');

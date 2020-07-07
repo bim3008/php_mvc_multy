@@ -3,8 +3,10 @@
     // SEARCH 
     // $linkSearch = URL::createLink('admin', 'group', 'index') ;
     // $btnSearch  = HTMLHelper::cmsButton($linkSearch,'btn btn-default formSearch','', 'formSearch' ,'Search','buttonSearch' ) ;   
+
+    
     // Add
-    $linkAdd  = URL::createLink('admin', 'group', 'form',array('params' => 'add')) ;
+    $linkAdd  = URL::createLink('admin', 'group', 'form') ;
     $btnAdd   = HTMLHelper::cmsButton($linkAdd,'btn btn-danger','fas fa-plus','add' , 'Add' ) ;       
     // Multy - Delete 
     $linkMultyDelete = URL::createLink('admin', 'group', 'multydelete') ;

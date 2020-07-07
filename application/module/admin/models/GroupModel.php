@@ -37,10 +37,10 @@ class GroupModel extends Model
 		$query[] = "SELECT * FROM `$this->_tableName` " ;
 		$flag = false ;
 		if (empty($arrParam['params'])) {
-			$query[]  = "";
+			$query[]  = "ORDER BY `id` DESC ";
 		} 
 		if($arrParam['params'] == 'inactive') {
-			$query[]  = " WHERE `status` = 1  ";
+			$query[]  = " WHERE  `status` = 1 ";
 			$flag = true ;
 		} 
 		if($arrParam['params'] == 'active') {
@@ -66,6 +66,7 @@ class GroupModel extends Model
 			$position = ($pagination['currentPage'] - 1) * $totalItemsPerPage ;
 			$query[]  = " LIMIT $position, $totalItemsPerPage " ;
 		}
+
 	    $query = implode(" " ,$query) ;
 		return $this->arrSelectResult($query) ;
 	}
@@ -81,7 +82,6 @@ class GroupModel extends Model
 			$query[]  = "SET `status` = $status WHERE `id` = '$id' " ;
 			$query = implode(" " ,$query) ;	
 			$result = $this->update($query) ;
-			Session::set('messge','Phần tử đã được thay đổi trạng thái') ;
 			return array($id, $status, URL::createLink('admin','group','changeStatus', array('id'=> $id , 'status' => $status ))) ;
 			
 		}
@@ -92,7 +92,6 @@ class GroupModel extends Model
 			$query[]  = "SET `group_acp` = $groupACP WHERE `id` = '$id' " ;
 			$query = implode(" " ,$query) ;
 			$result = $this->update($query) ;
-			Session::set('messge','Phần tử đã được thay đổi trạng thái') ;	
 			return array($id, $groupACP, URL::createLink('admin','group','changeAjaxACP', array('id'=> $id , 'group_acp' => $groupACP ))) ;
 			
 		}
@@ -147,5 +146,40 @@ class GroupModel extends Model
 			}
 		}
 					
+	}
+
+	public function insertItems($arrParam,$opption=null)
+	{	
+		$id			= $arrParam['id'] ;
+		$name 		=  $arrParam['name'] ;
+		$ordering   =  $arrParam['ordering'] ;
+		$status 	=  $arrParam['status'] ;
+		$group_acp  =  $arrParam['groupacp'] ;		
+		if($opption['task'] == 'add')
+		{
+			$query = "INSERT INTO `$this->_tableName` ( `name`, `group_acp`,`status`,`ordering` ) VALUES ('$name','$group_acp','$status','$ordering')" ;
+			$result = $this->insert($query) ;
+			if($result == true)
+			{
+				Session::set('messge','Dữ liệu đã được thêm thành công') ;
+			}			
+			return $result ;
+		}
+		if($opption['task'] == 'edit')
+		{
+			$query = "UPDATE `$this->_tableName` SET `name` = '$name', `group_acp` = '$group_acp', `status` = '$status',`ordering` = '$ordering'  WHERE `id` = $id" ; 
+			$result = $this->update($query) ;
+			if($result == true)
+			{
+				Session::set('messge','Edit dữ liệu thành công') ;
+			}			
+			return $result ;
+		}
+	}
+	public function infoItems($arrParam,$opption=null)
+	{	
+		$id = $arrParam['id'] ;
+     	$query = "SELECT `id` , `name` ,`group_acp`,`status` ,`ordering`  FROM `$this->_tableName` WHERE `id` = $id " ;
+		return $this->fetchRow($query) ;	
 	}
 }

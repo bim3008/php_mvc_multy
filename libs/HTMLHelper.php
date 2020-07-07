@@ -6,7 +6,10 @@ class HTMLHelper
     {
         if ($type == 'new') {
             $xhtml = ' <a href="' . $link . '" class="' . $class . '"> <span class="' . $icon . '" name="' . $id . '"></span> ' . $name . '</a> ';
-        } else if ($type == 'submitDelete') {
+        }else if ($type == 'submit') {
+            $xhtml = ' <a href="#"  onclick="javascript:submitForm(\'' . $link . '\')" class="' . $class . '"> <span class="' . $icon . '"></span> ' . $name . '</a> ';
+        }
+        else if ($type == 'submitDelete') {
             $xhtml = ' <a href="#"  onclick="javascript:submitDelete(\'' . $link . '\')" class="' . $class . '"> <span class="' . $icon . '"></span> ' . $name . '</a> ';
         }
         else if ($type == 'submitMultyDelete') {         
@@ -16,10 +19,9 @@ class HTMLHelper
             $xhtml = ' <a href="#"  onclick="javascript:buttonSearch(\'' . $link . '\')" class="' . $class . '"> <span class="' . $icon . '"></span> ' . $name . '</a> ';
        }else if ($type == 'submitOrdering') {         
         $xhtml = ' <a href="#"  onclick="javascript:submitOrdering(\'' . $link . '\')" class="' . $class . '"> <span class="' . $icon . '"></span> ' . $name . '</a> ';
-   }
+       }
         return $xhtml;
     }
-
     public static function cmsStatus($status, $link, $id)
     {
         $strStatus = ($status == 0) ? 'Active' : 'Inactive';
@@ -70,5 +72,42 @@ class HTMLHelper
             </div>
         </div>';
         return $xhtml;
+    }
+    public static function cmsInput($type,$id,$name,$class,$value)
+    {
+        $xhtml = '<input type="'.$type.'" id="'.$id.'" name="'.$name.'" class="'.$class.'" value="'.$value.'" > ';
+        return $xhtml;
+    }
+
+    public static function cmsSelectbox($name, $class, $arrValue, $keySelect = 'default', $style = null){
+		$xhtml = '<select style="'.$style.'" name="'.$name.'" class="'.$class.'" >';
+		foreach($arrValue as $key => $value){
+			if($key == $keySelect && is_numeric($keySelect)){
+				$xhtml .= '<option selected="selected" value = "'.$key.'">'.$value.'</option>';
+			}else{
+				$xhtml .= '<option value = "'.$key.'">'.$value.'</option>';
+			}
+		}
+		$xhtml .= '</select>';
+		return $xhtml;
+    }
+    
+    public static function cmsRowInput($lbName,$input)
+    {
+        $xhtml = '<div class="form-group"><label name="'.$lbName.'">'.ucfirst($lbName).'</label>'.$input.'</div> ';
+        return $xhtml;
+    }
+    
+    public static function cmsSelectboxForm($lbName, $nameLb , $class, $arrValue, $keySelect = 'default', $style = null){
+		$xhtml =  '<div class="form-group"> <label name="'.$lbName.'">'.$nameLb.'</label><select name="'.$lbName.'" class="'.$class.'"> ' ;
+        foreach($arrValue as $key => $value){
+			if($key == $keySelect && is_numeric($keySelect)){
+				$xhtml .= '<option selected="selected" value = "'.$key.'">'.$value.'</option>';
+			}else{
+				$xhtml .= '<option value = "'.$key.'">'.$value.'</option>';
+			}
+		}
+        $xhtml .= '</select></div>';
+		return $xhtml;
     }
 }

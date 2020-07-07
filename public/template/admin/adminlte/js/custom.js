@@ -39,6 +39,10 @@ function changeAjaxACP(url) {
 
 }
 
+function submitForm(url) {
+    $('#addedit').attr('action', url).submit();
+}
+
 function submitDelete(url) {
     $('#groupform').attr('action', url).submit();
 }

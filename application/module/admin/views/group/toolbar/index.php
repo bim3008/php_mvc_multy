@@ -1,47 +1,47 @@
+
 <?php
-           
-    // SEARCH 
-    // $linkSearch = URL::createLink('admin', 'group', 'index') ;
-    // $btnSearch  = HTMLHelper::cmsButton($linkSearch,'btn btn-default formSearch','', 'formSearch' ,'Search','buttonSearch' ) ;   
 
-    
-    // Add
-    $linkAdd  = URL::createLink('admin', 'group', 'form') ;
-    $btnAdd   = HTMLHelper::cmsButton($linkAdd,'btn btn-danger','fas fa-plus','add' , 'Add' ) ;       
-    // Multy - Delete 
-    $linkMultyDelete = URL::createLink('admin', 'group', 'multydelete') ;
-    $btnMultyDelete  = HTMLHelper::cmsButton($linkMultyDelete,'btn btn-danger btn-multydelete','fas fa-trash', 'multydelete' ,'Delete','submitMultyDelete' ) ;
+$lblModule       = isset($this->arrParam['module']) ? $this->arrParam['module'] : 'admin';
+$lblController   = isset($this->arrParam['controller']) ? $this->arrParam['controller'] : 'group';
+$lblAction       = isset($this->arrParam['action']) ? $this->arrParam['action'] : 'index';
+$lblStatus       = isset($this->arrParam['status']) ? $this->arrParam['status'] : '';
+$lblFilterSearch = isset($this->arrParam['filter_search']) ? $this->arrParam['filter_search'] : '';
 
-    // Multy - Delete 
-    $linkOrdering  = URL::createLink('admin', 'group', 'ordering') ;
-    $btnOrdering   = HTMLHelper::cmsButton($linkOrdering,'btn btn-danger btn-ordering','fas fa-check', 'ordering' ,'Ordering','submitMultyDelete' ) ;
+// ADD
+$linkAdd  = URL::createLink('admin', 'group', 'form');
+$btnAdd   = Helper::cmsButton($linkAdd, 'btn  bg-warning', 'fas fa-plus', 'add', 'Add');
 
-    $stringCRUD = $btnAdd . $btnMultyDelete .$btnOrdering ;
-    //ALL
-    $linkAll  = URL::createLink('admin', 'group', 'index');
-    $btnAll   = HTMLHelper::cmsButton($linkAll, 'btn btn-info', '','all', 'All' . '(' .$this->countItems[0]. ')');
+// Multy - Delete 
+$linkMultyDelete = URL::createLink('admin', 'group', 'multydelete');
+$btnMultyDelete  = Helper::cmsButton("#", 'btn btn-danger btn-multydelete', 'fas fa-trash', 'btn-multydelete', 'Delete');
 
-     // ACTIVE
-     $linkActive  = URL::createLink('admin', 'group', 'index', array('params' => 'active'));
-     $btnActive   = HTMLHelper::cmsButton($linkActive, 'btn btn-success ','', 'ac', 'Active'. '(' .$this->countItems[1] . ')');
+$btnCRUD = $btnAdd . $btnMultyDelete;
+//ALL
+$linkAll  = URL::createLink('admin', 'group', 'index', array('status' => 'all', 'filter_search' =>  $lblFilterSearch));
+$btnAll   = Helper::cmsButton($linkAll, 'btn btn-info', '', 'all', 'All' . '(' . $this->countItems[0]['total'] . ')');
 
-     // INACTIVE
-     $linkInactive  = URL::createLink('admin', 'group', 'index', array('params' => 'inactive'));
-     $btnInactive   = HTMLHelper::cmsButton($linkInactive, 'btn btn-danger ','', 'inac', 'Inactive'. '(' .$this->countItems[2] . ')');
+// ACTIVE
+$linkActive  = URL::createLink('admin', 'group', 'index', array('status' => 'active', 'filter_search' => $lblFilterSearch));
+$btnActive   = Helper::cmsButton($linkActive, 'btn  bg-warning', '', 'ac', 'Active' . '(' . $this->countItems[1]['total'] . ')');
 
-     $stringFillter = $btnAll . $btnActive . $btnInactive ;
+// INACTIVE
+$linkInactive  = URL::createLink('admin', 'group', 'index', array('status' => 'inactive', 'filter_search' => $lblFilterSearch));
+$btnInactive   = Helper::cmsButton($linkInactive, 'btn  btn-success', '', 'inac', 'Inactive' . '(' . $this->countItems[2]['total'] . ')');
 
+$btnFillter = $btnAll . $btnActive . $btnInactive;
 
-
-
-
-    
-
-
-
-
-
-
+$formSearch = '
+    <form action="" method="get">
+            <p style ="display: inline-flex;">
+                <input type="hidden"  name="module"       value="'.$lblModule.'">
+                <input type="hidden"  name="controller"   value="'.$lblController.'" >
+                <input type="hidden"  name="action"       value="'.$lblAction.'">
+                <input type="hidden"  name="status"       value="'.$lblStatus.'">
+                <input type="text"    name="filter_search" class="form-control" placeholder="Search" value="'.$lblFilterSearch.'">           
+                <input type="submit"   style="margin-left:5px" class="btn  bg-warning" value="Search" >       
+                <a  style="margin-left:5px" href="'.URL::createLink($lblModule,$lblController,'index').'"  class="btn btn-info float-right" > Clear</a>   
+            </p>
+    </form>    ';
 
 
 ?>

@@ -1,51 +1,14 @@
-function changeStatus(url) {
-
-    $.get(url, function(data) {
-        var element = ' a#status-' + data[0];
-        var className = '';
-        var textContent = '';
-        if (data[1] == 0) {
-            className = 'btn btn-warning btn-sm';
-            textContent = 'Active';
-        } else {
-            className = 'btn btn-danger btn-sm';
-            textContent = 'Inactive';
-        }
-        $(element).attr('href', "javascript:changeStatus('" + data[2] + "')");
-        $(element + ' span').attr('class', className);
-        $(element + ' span').html(textContent);
-
-    }, 'json');
-
-}
-
-function changeAjaxACP(url) {
-    $.get(url, function(data) {
-        var element = ' a#group-' + data[0];
-        var className = '';
-        var textContent = '';
-        if (data[1] == 0) {
-            className = 'btn btn-warning btn-sm';
-            textContent = 'Active';
-        } else {
-            className = 'btn btn-danger btn-sm';
-            textContent = 'Inactive';
-        }
-        $(element).attr('href', "javascript:changeAjaxACP('" + data[2] + "')");
-        $(element + ' span').attr('class', className);
-        $(element + ' span').html(textContent);
-
-    }, 'json');
-
-}
-
 function submitForm(url) {
     $('#addedit').attr('action', url).submit();
 }
 
-function submitDelete(url) {
-    $('#groupform').attr('action', url).submit();
-}
+// function submitDelete(url) {
+//     $('#groupform').attr('action', url).submit();
+// }
+$('#btn-multydelete').click(function() {
+    // alert(1);
+    $('#listItemsForm').submit();
+});
 
 function changePage(page) {
     $('input[name =filter_page]').val(page);
@@ -58,14 +21,28 @@ function submitMultyDelete(url) {
 
 $(document).ready(function() {
 
-    $('input[name=checkall-toggle]').change(function() {
-        var checkStatus = this.checked;
-        $('#groupform').find(':checkbox').each(function() {
-            this.checked = checkStatus;
-        });
+    // Select/Deselect checkboxes
+    var checkbox = $('table tbody input[type="checkbox"]');
+    $("#selectAll").click(function() {
+        if (this.checked) {
+            checkbox.each(function() {
+                this.checked = true;
+            });
+        } else {
+            checkbox.each(function() {
+                this.checked = false;
+            });
+        }
     });
-    $('#example1_filter button[name=formSearch]').click(function() {
-        // $('#groupform').submit();
+    checkbox.click(function() {
+        if (!this.checked) {
+            $("#selectAll").prop("checked", false);
+        }
+    });
+
+    $('#form-group a[name=tagSearch]').click(function() {
+        // $('#searchForm').submit(); 
+        // alert('Hello')
     });
 
 })

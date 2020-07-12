@@ -22,7 +22,7 @@ class Controller{
 		$this->setModel($arrParams['module'], $arrParams['controller']);
 		$this->setTemplate($this);
 		$this->setView($arrParams['module']) ;
-		$this->_pagination['currentPage']	= (isset($arrParams['filter_page'])) ? $arrParams['filter_page'] : 1;
+		$this->_pagination['currentPage']	= (isset($arrParams['page'])) ? $arrParams['page'] : 1;
 		$arrParams['pagination'] = $this->_pagination;
 		$this->setParams($arrParams);
 	 

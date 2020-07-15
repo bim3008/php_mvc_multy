@@ -1,6 +1,5 @@
 <?php
     class HTML{
-
         public static function Filter($filter)
         {
             $xhtml = '
@@ -9,7 +8,6 @@
             </div> ' ;
             return $xhtml ;
         }
-
         public static function cmsCRUD($cmsCRUD)
         {
             $xhtml = '
@@ -20,59 +18,61 @@
             </div> ' ;
             return $xhtml ;
         }
-        
-        public static function CmsSearch()
+        public static function menuGroup()
         {
             $xhtml = '
-                            <input type="text" class="form-control" name="filter_search" value="" style="margin-left: 10px;">
-                            <input type="submit" class="btn btn-default" name="btn-search" value="Search"> ' ;
+            <div class="card-body">
+            <form action="'.URL::createLink('admin','group','multydelete').'" method="POST" id="formListGroup">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th style="width: 5%">
+							<span class="custom-checkbox"><input type="checkbox" id="selectAll"></span>
+						</th>
+						<th style="width: 5%">Id</th>
+						<th style="width: 15%">Name</th>
+						<th style="width: 15%">Group ACP</th>
+						<th style="width: 15%">Status</th>
+						<th style="width: 15">Ordering</th>
+						<th style="width: 15%">Created</th>
+						<th style="width: 10%">Modified</th>
+						<th style="width: 20%">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+            ' ;
+
+            return $xhtml ;
+        }
+        public static function menuUser()
+        {
+            $xhtml = '
+             <div class="card-body">
+            <form action="'.URL::createLink('admin','user','multydelete').'" method="POST" id="formListUser">
+			<table class=" table-striped">
+	            <thead>
+                    <tr>
+                        <th style="width: 3%">
+                            <span class="custom-checkbox"><input type="checkbox" id="selectAll"></span>
+                        </th>
+                        <th>ID</th>
+                        <th class="sorting" rowspan="1" colspan="1" style="width: 9.5%;text-align: center;">UserName</th>
+                        <th class="sorting" rowspan="1" colspan="1" style="width: 10%;text-align: center;">Email</th>
+                        <th class="sorting" rowspan="1" colspan="1" style="width: 14.5%;text-align: center;">Full Name</th>
+                        <th class="sorting" rowspan="1" colspan="1" style="width: 12%;text-align: center;">Created</th>
+                        <th class="sorting" rowspan="1" colspan="1" style="width: 12%;text-align: center;">Modifiled </th>
+                        <th class="sorting" rowspan="1" colspan="1" style="width: 5%;text-align: center;">Register_ip</th>
+                        <th class="sorting" rowspan="1" colspan="1" style="width: 5%;text-align: center;">Status</th>
+                        <th class="sorting" rowspan="1" colspan="1" style="width: 3%;text-align: center;">Ordering</th>
+                        <th class="sorting" rowspan="1" colspan="1" style="width: 7%;text-align: center;">Group</th>
+                        <th class="sorting" rowspan="2" colspan="2" style="width: 21%;text-align: center;">Action</th>
+		            </tr>
+                </thead>
+                
+                ' ;
+
             return $xhtml ;
         }
 
+}
 
-    }
-
-
-
-?>
-
-<div class="card-body">
-     <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
-         <div class="row">
-             <div class="col-sm-12 col-md-6"></div>
-             <div class="col-sm-12 col-md-6"></div>
-         </div>
-         <div class="row">
-             <div class="col-sm-12">
-                 <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid" aria-describedby="example2_info">
-                     <thead>
-                         <tr>
-                             <th width="1%"><span class="custom-checkbox">
-                                     <input type="checkbox" id="selectAll">
-                                 </span></th>
-                             <th rowspan="1" colspan="1">ID</th>
-                             <th rowspan="1" colspan="1">Name</th>
-                             <th rowspan="1" colspan="1"> Group ACP</th>
-                             <th rowspan="1" colspan="1">Status</th>
-                             <th rowspan="1" colspan="1" class="center">Ordering</th>
-                             <th rowspan="1" colspan="2">Create</th>
-                             <th rowspan="1" colspan="1">Modified</th>
-                             <th rowspan="1" colspan="2">Action</th>
-                         </tr>
-                     </thead>
-                     <tbody>
-                         <tr role="row" class="odd">
-                             <?php echo $xhtm; ?>
-                         </tr>
-                     </tbody>
-                 </table>
-             </div>
-         </div>
-         <div class="row">
-             <?php
-                $linkPagination = URL::createLink('admin', 'group', 'index', ['status' => $this->arrParam['status'], 'filter_search' => $this->arrParam['filter_search']]);
-                echo $this->pagination->showPagination($linkPagination);
-                ?>
-         </div>
-     </div>
- </div>

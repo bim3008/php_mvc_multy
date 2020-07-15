@@ -14,10 +14,11 @@
 	define	('PUBLIC_URL'		, ROOT_URL . 'public' . DS);
 	define	('TEMPLATE_URL'		, PUBLIC_URL . 'template' . DS);
 	
-	define	('DEFAULT_MODULE'		, 'admin');
-	define	('DEFAULT_CONTROLLER'	, 'index');
-	define	('DEFAULT_ACTION'		, 'dashbroad');
+	define	('DEFAULT_MODULE'		, 'default');
+	define	('DEFAULT_CONTROLLER'	, 'user');
+	define	('DEFAULT_ACTION'		, 'login');	
 	define	('DB_TABLE_GROUP'		, 'group');
+	define	('DB_TABLE_USER'		, 'user');
 	define	('DB_TABLE_FAQ'			, 'faq');
 
 	// ====================== DATABASE TABLE===========================

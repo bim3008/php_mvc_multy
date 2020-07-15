@@ -2,12 +2,13 @@ function submitForm(url) {
     $('#addedit').attr('action', url).submit();
 }
 
-// function submitDelete(url) {
-//     $('#groupform').attr('action', url).submit();
-// }
 $('#btn-multydelete').click(function() {
+    $('#formListGroup').submit();
+});
+$('#btn-multydeleteUser').click(function() {
+    $('#formListUser').submit();
     // alert(1);
-    $('#listItemsForm').submit();
+
 });
 
 function changePage(page) {

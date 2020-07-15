@@ -2,52 +2,51 @@
 class GroupModel extends Model
 {
 	protected $_tableName = DB_TABLE_GROUP ;
-
-
 	public function countItems($arrParam,$opption = null)
 	{
 		$query[] = "SELECT count(`id`) as `total` FROM `$this->_tableName`" ;	
-
+		$query[] = "WHERE `id` > 0" ;
 		if(isset($opption['task']) == null)
 		{	
 			$arrParam['status'] = isset($arrParam['status']) ? $arrParam['status'] : 'all';
 			{
-				if($arrParam['status']  == 'active')
+				if($arrParam['status']  == 'all')
 				{	
-					$query[] = "WHERE `status` = 0 ";
+					$query[] = "";
+				}
+				else if($arrParam['status']  == 'active')
+				{	
+					$query[] = "AND `status` = 0 ";
 				}
 				else if($arrParam['status']  == 'inactive')
 				{	
-					$query[] = "WHERE `status` = 1 ";
-				}		
-				else if($arrParam['status']  == 'all')
-				{	
-					$query[] = "";
-				}	
-			    $query  = implode(" " ,$query) ;
+					$query[] = "AND `status` = 1 ";
+				}
+				if(!empty($arrParam['filter_search'])) {
+						$search = '"%'.$arrParam['filter_search'].'%"';
+						$query[]  = "AND `name` LIKE $search ";
+				}			
+				$query  = implode(" " ,$query) ;
 				return $this->fetchRow($query) ;
-
+			    
 			}
-			
-		} 	
+		}
+		// ĐẾM 
 		if($opption['task'] == 'active')
 		{	
-		
-			$query[] = "WHERE `status` = 0 ";
-			$query  = implode(" " ,$query) ;
+			$query[] = "AND `status` = 0 ";
+				$query  = implode(" " ,$query) ;
 			return $this->fetchRow($query) ;
+			
 		}	
 		if($opption['task'] == 'inactive')
 		{	
-			$query[] = "WHERE `status` = 1 ";
-			$query  = implode(" " ,$query) ;
+			$query[] = "AND `status` = 1 ";			
+				$query  = implode(" " ,$query) ;
 			return $this->fetchRow($query) ;
 		}	
 	
 	}
-		
-										
-	//}
 	public function listItems($arrParam, $opption = null)
 	{	
 		$query[] = "SELECT * FROM `$this->_tableName` " ;
@@ -72,8 +71,8 @@ class GroupModel extends Model
 			$query[]  = " LIMIT $position, $totalItemsPerPage " ;
 		}
 
-	 echo   $query = implode(" " ,$query) ;
-		return $this->arrSelectResult($query) ;
+		$query = implode(" " ,$query) ;
+		return $this->fetchAll($query) ;
 	}
 	public function changeStatus($arrParam, $opption = null)
 	{	

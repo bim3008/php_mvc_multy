@@ -16,7 +16,7 @@
                                     '.$content.' 
                                 </div>
                                 <div>
-                                        <input type="hidden" name="form[token]" value="123"> 
+                                        <input type="hidden" name="form[token]" value="12323"> 
                                 </div>
                             </div>
                         </div>
@@ -25,8 +25,8 @@
             ' ;
             return $xhtml ;
         }
-    public static function actionMenu($stringBtn)
-    {
+        public static function actionMenu($stringBtn)
+        {
         $xhtml = '
                 <section class="content-header">
                         <div class="container-fluid">
@@ -41,7 +41,9 @@
                 </section>
         ' ;
         return $xhtml ;
-    }
+        }
+
+        
    
 }
 

@@ -25,7 +25,7 @@ class FaqModel extends Model
 		} else if ($arrParam['params'] == 'inactive') {
 			$query  = " SELECT * FROM `$this->_tableName` WHERE `status` = 1 ORDER BY 'id' DESC ";
 		}
-		return $this->arrSelectResult($query) ;
+		return $this->fetchAll($query) ;
 	}
 
 	public function changeStatus($arrParam, $opption = null)

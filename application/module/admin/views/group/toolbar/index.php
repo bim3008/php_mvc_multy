@@ -8,24 +8,24 @@ $lblStatus       = isset($this->arrParam['status']) ? $this->arrParam['status'] 
 $lblFilterSearch = isset($this->arrParam['filter_search']) ? $this->arrParam['filter_search'] : '';
 
 // ADD
-$linkAdd  = URL::createLink('admin', 'group', 'form');
+$linkAdd  = URL::createLink($lblModule , $lblController, 'form');
 $btnAdd   = Helper::cmsButton($linkAdd, 'btn  bg-warning', 'fas fa-plus', 'add', 'Add');
 
 // Multy - Delete 
-$linkMultyDelete = URL::createLink('admin', 'group', 'multydelete');
+$linkMultyDelete = URL::createLink($lblModule , $lblController, 'multydelete');
 $btnMultyDelete  = Helper::cmsButton("#", 'btn btn-danger btn-multydelete', 'fas fa-trash', 'btn-multydelete', 'Delete');
 
 $btnCRUD = $btnAdd . $btnMultyDelete;
 //ALL
-$linkAll  = URL::createLink('admin', 'group', 'index', array('status' => 'all', 'filter_search' =>  $lblFilterSearch));
+$linkAll  = URL::createLink($lblModule , $lblController, 'index', array('status' => 'all', 'filter_search' =>  $lblFilterSearch));
 $btnAll   = Helper::cmsButton($linkAll, 'btn btn-info', '', 'all', 'All' . '(' . $this->countItems[0]['total'] . ')');
 
 // ACTIVE
-$linkActive  = URL::createLink('admin', 'group', 'index', array('status' => 'active', 'filter_search' => $lblFilterSearch));
+$linkActive  = URL::createLink($lblModule , $lblController, 'index', array('status' => 'active', 'filter_search' => $lblFilterSearch));
 $btnActive   = Helper::cmsButton($linkActive, 'btn  bg-warning', '', 'ac', 'Active' . '(' . $this->countItems[1]['total'] . ')');
 
 // INACTIVE
-$linkInactive  = URL::createLink('admin', 'group', 'index', array('status' => 'inactive', 'filter_search' => $lblFilterSearch));
+$linkInactive  = URL::createLink($lblModule , $lblController, 'index', array('status' => 'inactive', 'filter_search' => $lblFilterSearch));
 $btnInactive   = Helper::cmsButton($linkInactive, 'btn  btn-success', '', 'inac', 'Inactive' . '(' . $this->countItems[2]['total'] . ')');
 
 $btnFillter = $btnAll . $btnActive . $btnInactive;

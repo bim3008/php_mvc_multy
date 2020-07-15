@@ -31,8 +31,9 @@ class Template{
 			$_view->_metaHTTP 	= $_view->createMeta($arrCongif['metaHTTP'], 'http-equiv');
 			$_view->_metaName 	= $_view->createMeta($arrCongif['metaName'], 'name');
 			$_view->_cssFiles 	= $_view->createLink($this->_folderTemplate . $arrCongif['dirCss'], $arrCongif['fileCss'], 'css');
-			$_view->_jsFiles 	= $_view->createLink($this->_folderTemplate . $arrCongif['dirJs'], $arrCongif['fileJs'], 'js');
-			$_view->_dirImg 		=  TEMPLATE_URL.$this->_folderTemplate . $arrCongif['dirImg'];
+			$_view->_jsFiles 	= $_view->createLink($this->_folderTemplate . $arrCongif['dirJs'],  $arrCongif['fileJs'], 'js');
+			$_view->_font 		= $_view->createLink($this->_folderTemplate . $arrCongif['dirFont'],$arrCongif['fileFont'], 'fonts');
+			$_view->_dirImg 	=  TEMPLATE_URL.$this->_folderTemplate . $arrCongif['dirImg'];
 								
 			$_view->setTemplatePath(TEMPLATE_PATH . $folderTemplate . $fileTemplate);
 		}

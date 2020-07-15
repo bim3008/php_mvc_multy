@@ -76,7 +76,7 @@ class Model
 		}
 	}
 
-	public function arrSelectResult($query)
+	public function fetchAll($query)
 	{
 		$result = $this->select($query);
 		$arrItems = [];
@@ -109,6 +109,28 @@ class Model
 			mysqli_free_result($resultQuery);
 		}
 		return $result;
+	}
+	
+	public function fetchPairs($query){
+		$result = array();
+		if(!empty($query)){
+			$resultQuery = $this->select($query);
+			if(mysqli_num_rows($resultQuery) > 0){				
+				while($row = mysqli_fetch_assoc($resultQuery)){
+					$result[$row['id']] = $row['name'];
+				}
+				mysqli_free_result($resultQuery);
+			}
+		}
+		return $result;
+	}
+
+	public function isExist($query){
+		if($query != null) {
+			$this->resultQuery = $this->select($query);
+		}
+		if(mysqli_num_rows($this->resultQuery ) > 0) return true;
+		return false;
 	}
 }
 

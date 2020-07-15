@@ -1,18 +1,26 @@
- <div class="login">
-      <h1>Login to Web App</h1>
-      <form method="post" action="index.html">
-        <p><input type="text" name="login" value="" placeholder="Username or Email"></p>
-        <p><input type="password" name="password" value="" placeholder="Password"></p>
-        <p class="remember_me">
-          <label>
-            <input type="checkbox" name="remember_me" id="remember_me">
-            Remember me on this computer
-          </label>
-        </p>
-        <p class="submit"><input type="submit" name="commit" value="Login"></p>
-      </form>
-    </div>
+<div class="wrap-input100 validate-input m-b-23" data-validate="Username is reauired">
+    <span class="label-input100">Username</span>
+    <input class="input100" type="text" name="username" placeholder="Type your username">
+    <span class="focus-input100" data-symbol="&#xf206;"></span>
+</div>
 
-    <div class="login-help">
-      <p>Forgot your password? <a href="index.html">Click here to reset it</a>.</p>
+<div class="wrap-input100 validate-input" data-validate="Password is required">
+    <span class="label-input100">Password</span>
+    <input class="input100" type="password" name="pass" placeholder="Type your password">
+    <span class="focus-input100" data-symbol="&#xf190;"></span>
+</div>
+
+<div class="text-right p-t-8 p-b-31">
+    <a href="#">
+        Forgot password?
+    </a>
+</div>
+
+<div class="container-login100-form-btn">
+    <div class="wrap-login100-form-btn">
+        <div class="login100-form-bgbtn"></div>
+        <button class="login100-form-btn">
+            Login
+        </button>
     </div>
+</div>

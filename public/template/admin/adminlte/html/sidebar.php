@@ -1,5 +1,5 @@
 <?php
-    $urlLink =  URL::createLink('admin','index','dashbroad')
+    $urlLink =  URL::createLink('admin','index','index')
 ?>
 
 <!-- Main Sidebar Container -->

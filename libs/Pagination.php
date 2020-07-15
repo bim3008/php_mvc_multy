@@ -3,7 +3,7 @@ class Pagination
 {
 
 	private $totalItems;					// Tổng số phần tử
-	private $totalItemsPerPage;		// Tổng số phần tử xuất hiện trên một trang
+	private $totalItemsPerPage;				// Tổng số phần tử xuất hiện trên một trang
 	private $pageRange				= 5;	// Số trang xuất hiện
 	private $totalPage;						// Tổng số trang
 	private $currentPage			= 1;	// Trang hiện tại
@@ -75,27 +75,6 @@ class Pagination
 					$listPages .= '<li class="paginate_button page-item "><a href="' . $link . '&page=' . $i . '"  class="page-link">' . $i . '</a></li>';
 				}
 			}
-
-			/* 
-			<div class="col-sm-12 col-md-5">
-                <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-			</div>
-			
-
-            <div class="col-sm-12 col-md-7">
-                <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-                    <ul class="pagination">
-                        <?php
-                            $linkPagination = URL::createLink('admin', 'group', 'index', ['status' => $this->arrParam['status'], 'filter_search' => $this->arrParam['filter_search']]);
-                            echo $this->pagination->showPagination($linkPagination);
-                        ?>
-                </div>
-            </div>
-			*/
-
-
-
-			// $endPagination	= '<div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing ' . $this->currentPage . ' of ' . $this->totalPage . '</div> ';
 			$paginationHTML = $start . $prev . $listPages . $next . $end ;
 		
 			$paginationForm .='
@@ -105,7 +84,7 @@ class Pagination
 
             <div class="col-sm-12 col-md-7">
                 <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-                    <ul class="pagination">
+                    <ul class="pagination" style="float: right;" >
 						'.$paginationHTML.'
 					</ul>
                 </div>

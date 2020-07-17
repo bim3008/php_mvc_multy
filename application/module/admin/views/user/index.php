@@ -3,12 +3,13 @@ require_once 'toolbar/index.php';
 	echo	Helper::notifyMessege('messege');
 ?>
 <?php
-
+ 
 	echo Helper::toolbarUser($btnFillter, $formSearch, $btnCRUD);
 	echo HTML::menuUser() ?>
 <?php
 
 foreach ($this->listItems as $key => $value) {
+	// VALUE
 	$id 			= $value['id'];
 	$username       = ($lblFilterSearch != null) ? preg_replace("/\p{L}*?" . preg_quote($lblFilterSearch) . "\p{L}*/ui", '<b style="background-color: pink;">\\0</b>', $value['username']) : $value['username'];
 	$email			= $value['email'];
@@ -24,27 +25,30 @@ foreach ($this->listItems as $key => $value) {
 	$status			= $value['status'];
 	$ordering		= $value['ordering'];
 	$group_id		= $value['group_name'];
-
-	$linkEdit     = URL::createLink($lblModule, $lblController, 'form', array('id' => $id));
-	$linkDelete   = URL::createLink($lblModule, $lblController,  'delete', array('id' => $id));
-	$buttonEdit   = Helper::cmsButton($linkEdit, 'btn btn-warning btn-sm', 'fa fa-edit', 'edit', 'Edit',);
-	$buttonDelete = Helper::cmsButton($linkDelete, 'btn btn-danger btn-sm btn-delete', 'fa fa-trash', 'delete', 'Delete');
-	$xhtml = '	
-							<tr>
-								<td><span class="custom-checkbox"><input type="checkbox" id="checkbox1" name="cid[]" value="' . $id . '"></span></td>
-								<td style ="text-align: center;">' . $id . '</td>
-								<td style ="text-align: center;">' . $username . '</td>
-								<td style ="text-align: center;">' . $email . '</td>
-								<td style ="text-align: center;">' . $fullname . '</td>
-								<td style ="text-align: center;">' . $created . '  </br>' . $created_by . '</td>
-								<td style ="text-align: center;">' . $modified . ' </br>' . $modified_by . '</td>
-								<td style ="text-align: center;">' . $register_ip.'</td>
-								' . Helper::cmsStatus($status, URL::createLink($lblModule, $lblController,  'changeStatus', array('id' => $id, 'status' => $status)), $id) . '
-								<td style ="text-align: center;">' . $ordering . '</td>
-								<td style ="text-align: center;">' . $group_id . '</td>
-								<td>' . $buttonEdit . $buttonDelete . '</td>
-							</tr> ';
+	// LINK AND BUTTON
+	$linkEdit     				= URL::createLink($lblModule, $lblController, 'form', array('id' => $id));
+	$linkDelete   				= URL::createLink($lblModule, $lblController,  'delete', array('id' => $id));
+	$linkChangePass   			= URL::createLink($lblModule, $lblController,  'form', array('id' => $id,'type'=> 'change-pass'));
+	$buttonEdit   				= Helper::cmsButton($linkEdit ,'', 'far fa-edit', 'edit',' ');
+	$buttonDelete 				= Helper::cmsButton($linkDelete, '', 'fas fa-trash', 'delete', '');
+	$buttonChangePassword		= Helper::cmsButton($linkChangePass, '', 'fas fa-key', 'change-pass', '');
+	//
+	$xhtml = '
+			<tr>
+				<td><span class="custom-checkbox"><input type="checkbox" id="checkbox1" name="cid[]" value="' . $id . '"></span></td>
+				<td style ="text-align: center;">' . $id . '</td>
+				<td style ="text-align: center;">' . $username . '</td>
+				<td style ="text-align: center;">' . $email . '</td>
+				<td style ="text-align: center;">' . $fullname . '</td>
+				' . Helper::cmsStatus($status, URL::createLink($lblModule, $lblController,  'changeStatus', array('id' => $id, 'status' => $status)), $id) . '
+				<td style ="text-align: center;">' . $ordering . '</td>
+				<td style ="text-align: center;">' . $group_id . '</td>
+				<td>' .$buttonChangePassword. $buttonEdit . $buttonDelete . '</td>
+			</tr> ';
 	echo $xhtml;
+			// <td style ="text-align: center;">' . $created . '  </br>' . $created_by . '</td>
+			// <td style ="text-align: center;">' . $modified . ' </br>' . $modified_by . '</td>
+			// <td style ="text-align: center;">' . $register_ip.'</td>
 }
 ?>
 </tbody>

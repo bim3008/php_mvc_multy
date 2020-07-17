@@ -27,14 +27,14 @@
         $stringBtn = $btnSave . $btnSaveNew . $btnSaveClose . $btnCancel;
         // EDIT
         //Input
-        $groupName          =  Helper::cmsInput('text', 'name', 'form[name]', 'form-control',$name);
-        $groupOrdering      =  Helper::cmsInput('text', 'ordering', 'form[ordering]' ,  'form-control', $ordering);
-        $groupid            =  Helper::cmsInput('hidden', 'id', 'form[id]',  'form-control',$id);
+        $groupName          =  Helper::cmsInput(  'text', 'name',     'form[name]',       'form-control',$name);
+        $groupOrdering      =  Helper::cmsInput(  'text', 'ordering', 'form[ordering]',  'form-control', $ordering);
+        $groupid            =  Helper::cmsInput(  'hidden', 'id',       'form[id]',         'form-control',$id);
         // Row
         $rowGroup           = Helper::cmsRowInput('name', $groupName);
         $rowOrdering        = Helper::cmsRowInput('ordering', $groupOrdering );
-        $rowSelectStatus    = Helper::cmsSelectboxForm('form[status]','Status','form-control custom-select',array('default'=>'Select status','0'=>'Active','1'=>'Inactive'),$status) ;
-        $rowSelectGroupAcp  = Helper::cmsSelectboxForm('form[group_acp]','Group_ACP','form-control custom-select',array('default'=>'Select group','0'=>'Yes','1'=>'No'),$ordering) ;
+        $rowSelectStatus    = Helper::cmsSelectboxForm('form[status]', 'Status',     'form-control custom-select', array('default'=>'Select status','0'=>'Active','1'=>'Inactive'),$status) ;
+        $rowSelectGroupAcp  = Helper::cmsSelectboxForm('form[group_acp]','Group_ACP','form-control custom-select', array('default'=>'Select group','0'=>'No','1'=>'Yes')          ,$group_acp) ;
         $content = $rowGroup .$rowSelectStatus . $rowSelectGroupAcp . $rowOrdering .$groupid ;
 
         echo Helper::notifyMessege('messege') ;   
@@ -44,8 +44,7 @@
        
 <form  action="#" method="POST" id="addedit" name="addedit">    
         <?php 
-                echo   Form::Content('Group Add',$content) ;
-                echo   Form::actionMenu($stringBtn) ;
+                echo  Form::Content('Group Add',$content,$stringBtn) ;
         ?>
 </form>
 

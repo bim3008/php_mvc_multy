@@ -46,26 +46,27 @@
         }
         public static function menuUser()
         {
+            //<th class="sorting" rowspan="1" colspan="1" style="width: 12%;text-align: center;">Created</th>
+            // <th class="sorting" rowspan="1" colspan="1" style="width: 12%;text-align: center;">Modifiled </th>
+            // <th class="sorting" rowspan="1" colspan="1" style="width: 5%;text-align: center;">Register_ip</th>
             $xhtml = '
              <div class="card-body">
             <form action="'.URL::createLink('admin','user','multydelete').'" method="POST" id="formListUser">
-			<table class=" table-striped">
+			<table class=" table table-striped">
 	            <thead>
                     <tr>
                         <th style="width: 3%">
                             <span class="custom-checkbox"><input type="checkbox" id="selectAll"></span>
                         </th>
-                        <th>ID</th>
+                        <th style="width: 9.5%;text-align: center;">ID</th>
                         <th class="sorting" rowspan="1" colspan="1" style="width: 9.5%;text-align: center;">UserName</th>
                         <th class="sorting" rowspan="1" colspan="1" style="width: 10%;text-align: center;">Email</th>
                         <th class="sorting" rowspan="1" colspan="1" style="width: 14.5%;text-align: center;">Full Name</th>
-                        <th class="sorting" rowspan="1" colspan="1" style="width: 12%;text-align: center;">Created</th>
-                        <th class="sorting" rowspan="1" colspan="1" style="width: 12%;text-align: center;">Modifiled </th>
-                        <th class="sorting" rowspan="1" colspan="1" style="width: 5%;text-align: center;">Register_ip</th>
+                        
                         <th class="sorting" rowspan="1" colspan="1" style="width: 5%;text-align: center;">Status</th>
                         <th class="sorting" rowspan="1" colspan="1" style="width: 3%;text-align: center;">Ordering</th>
-                        <th class="sorting" rowspan="1" colspan="1" style="width: 7%;text-align: center;">Group</th>
-                        <th class="sorting" rowspan="2" colspan="2" style="width: 21%;text-align: center;">Action</th>
+                        <th class="sorting" rowspan="1" colspan="1" style="width: 20%;text-align: center;">Group</th>
+                        <th class="sorting" rowspan="2" colspan="2" style="width: 10%;text-align: center;">Action</th>
 		            </tr>
                 </thead>
                 

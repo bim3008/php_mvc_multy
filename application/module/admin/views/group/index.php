@@ -3,12 +3,13 @@ require_once 'toolbar/index.php';
 echo	Helper::notifyMessege('messege');
 ?>
 <?php
+
 echo Helper::toolbarGroup($btnFillter, $formSearch, $btnCRUD);
 echo HTML::menuGroup() ?>
 <?php
 foreach ($this->listItems as $key => $value) {
 	$id 			= $value['id'];
-	$name           = ($lblFilterSearch != null) ? preg_replace("/\p{L}*?" . preg_quote($lblFilterSearch) . "\p{L}*/ui", '<b style="background-color: pink;">\\0</b>', $value['name']) : $value['name'];
+	$name           = ($lblFilterSearch != null) ? preg_replace("/\p{L}*?" . preg_quote($lblFilterSearch) . "\p{L}*/ui", '<b style="background-color: yellow;">\\0</b>', $value['name']) : $value['name'];
 	$ordering		= $value['ordering'];
 	$group_acp 		= $value['group_acp'];
 	$status 		= $value['status'];
@@ -29,7 +30,7 @@ foreach ($this->listItems as $key => $value) {
 		<td>' . $id . '</td>
 		<td>' . $name . '</td>
 		' . Helper::cmsGroupAcp($group_acp, URL::createLink($lblModule, $lblController,  'changeGroupAcp', array('id' => $id, 'group_acp' => $group_acp)), $id) . '
-		' . Helper::cmsStatus($status, URL::createLink($lblModule, $lblController,  'changeStatus', array('id' => $id, 'status' => $status)), $id) . '
+		' . Helper::cmsStatus  ($status,    URL::createLink($lblModule, $lblController,  'changeStatus',   array('id' => $id, 'status' => $status)), $id) . '
 		<td>' . $ordering . '</td>
 		<td>' . $created . '  </br>' . $created_by . '</td>
 		<td>' . $modified . ' </br>' . $modified_by . '</td>

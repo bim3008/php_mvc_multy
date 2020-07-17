@@ -62,9 +62,9 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="./index.html" class="nav-link ">
+                            <a href="<?php echo URL::createLink('admin','user','index')?>" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Dashboard v1</p>
+                                <p>List</p>
                             </a>
                         </li>
                     </ul>

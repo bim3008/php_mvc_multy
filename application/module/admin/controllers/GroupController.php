@@ -11,18 +11,16 @@ class GroupController extends Controller
 	}
 	public function indexAction()
 	{
-		$this->_view->setTitle( ucfirst($this->_arrParam['controller']) );
+		$this->_view->setTitle(ucfirst($this->_arrParam['controller']) );
 		$this->_view->listItems      		= $this->_model->listItems($this->_arrParam);
 		$this->_view->countItems[]			= $this->_model->countItems($this->_arrParam);
-		$this->_view->countItems[]   		= $this->_model->countItems($this->_arrParam,['task' => 'active']);
-		$this->_view->countItems[]   		= $this->_model->countItems($this->_arrParam, array('task' => 'inactive'));
-		$this->_view->countItems[] 	    	= $this->_model->countItems($this->_arrParam, array('task' => 'filter_search'));
+		$this->_view->countItems[]			= $this->_model->countItems($this->_arrParam,array('task'=> 'active'));
+		$this->_view->countItems[]			= $this->_model->countItems($this->_arrParam,array('task'=> 'inactive'));
 		$this->_view->pagination        	= new Pagination($this->_view->countItems[0]['total'] , $this->_pagination);
 		$this->_view->render($this->_arrParam['controller'] .DS.'index');
 	}
 	public function formAction()
 	{	
-	
 		$this->_view->setTitle(ucfirst($this->_arrParam['controller']) . ' : Add');
 		$task = (!empty($this->_arrParam['form']['id'])) ? 'edit' : 'add';
 		if (!empty($this->_arrParam['id'])) {
@@ -42,7 +40,6 @@ class GroupController extends Controller
 			if ($validate->isValid() == false) {
 				$this->_view->errors = $validate->showErrors();
 			} else {
-				
 				$this->_model->insertItems($this->_arrParam['form'], array('task' => $task));
 				$type = $this->_arrParam['type'];
 				if ($type == 'save-close') URL::redirect('admin', $this->_arrParam['controller'], 'index');

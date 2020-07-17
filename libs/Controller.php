@@ -19,6 +19,7 @@ class Controller{
 				'pageRange'			=> 3, // Trang hiển thị 	
 	);
 	public function __construct($arrParams){
+
 		$this->setModel($arrParams['module'], $arrParams['controller']);
 		$this->setTemplate($this);
 		$this->setView($arrParams['module']) ;
@@ -65,7 +66,6 @@ class Controller{
 	public function getParams($arrParam){
 		$this->_arrParam= $arrParam;
 	}
-
 	// GET PAGINATION
 	public function setPagination($config){
 		$this->_pagination['totalItemsPerPage'] = $config['totalItemsPerPage'] ;

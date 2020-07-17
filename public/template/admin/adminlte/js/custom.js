@@ -46,4 +46,10 @@ $(document).ready(function() {
         // alert('Hello')
     });
 
+    $(".btn-change-password").click(function() {
+
+        $('#changePasswod').submit();
+        // alert(1);
+    });
+
 })

@@ -14,12 +14,11 @@
 	define	('PUBLIC_URL'		, ROOT_URL . 'public' . DS);
 	define	('TEMPLATE_URL'		, PUBLIC_URL . 'template' . DS);
 	
-	define	('DEFAULT_MODULE'		, 'default');
+	define	('DEFAULT_MODULE'		, 'admin');
 	define	('DEFAULT_CONTROLLER'	, 'user');
-	define	('DEFAULT_ACTION'		, 'login');	
-	define	('DB_TABLE_GROUP'		, 'group');
-	define	('DB_TABLE_USER'		, 'user');
-	define	('DB_TABLE_FAQ'			, 'faq');
+	define	('DEFAULT_ACTION'		, 'index');	
+
+
 
 	// ====================== DATABASE TABLE===========================
 	define ('TBL_GROUP'			, 'group');
@@ -31,8 +30,11 @@
 	
 
 	// ====================== DATABASE ===========================
-	define("DB_HOST", "localhost");
-	define("DB_USER", "root");
-	define("DB_PASS", "");
-	define("DB_NAME", "php_bookstore");		
-	define ('DB_TABLE'			    , 'group');			
+		define("DB_HOST", "localhost");
+		define("DB_USER", "root");
+		define("DB_PASS", "");
+		define("DB_NAME", "php_bookstore");		
+		define('DB_TABLE', 'group');		
+		define	('DB_TABLE_GROUP'		, 'group');
+		define	('DB_TABLE_USER'		, 'user');
+		

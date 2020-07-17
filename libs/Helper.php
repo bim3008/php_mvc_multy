@@ -8,8 +8,7 @@ class Helper
             $xhtml = ' <a href="' . $link . '" " class="' . $class . '" id="' . $id . '"  > <span class="' . $icon . '" ></span> ' . $name . '</a> ';
         } else if ($type == 'submit') {
             $xhtml = ' <a href="#"  onclick="javascript:submitForm(\'' . $link . '\')" class="' . $class . '"> <span class="' . $icon . '"></span> ' . $name . '</a> ';
-        }
-        else if ($type == 'submitDelete') {
+        } else if ($type == 'submitDelete') {
             $xhtml = ' <a href="#"  onclick="javascript:submitMultyDelete(\'' . $link . '\')" class="' . $class . '"> <span class="' . $icon . '"></span> ' . $name . '</a> ';
         }
         return $xhtml;
@@ -23,28 +22,29 @@ class Helper
     }
     public static function cmsGroupAcp($group_acp, $link, $id)
     {
-        $strGroupAcp = ($group_acp == 0) ? 'Active' : 'Inactive';
-        $class       = ($group_acp == 0) ? 'btn btn-warning btn-sm' : 'btn btn-sm btn-danger';
+        $strGroupAcp = ($group_acp == 1) ? 'Yes' : 'No';
+        $class       = ($group_acp == 1) ? 'btn btn-warning btn-sm' : 'btn btn-sm btn-danger';
         $xhtml =    ' <td><a  id="group-' . $id . '"  href="' . $link . ')"> <span class="' . $class . '" > ' . $strGroupAcp . ' </span> </a></td> ';
         return $xhtml;
     }
-    public static function cmsInput($type, $id, $name, $class, $value , $style = null)
+    public static function cmsInput($type, $id, $name, $class, $value, $style = null)
     {
-        $xhtml = '<input  style = "'.$style.'" type="' . $type . '" id="' . $id . '" name="' . $name . '" class="' . $class . '" value="' . $value . '" > ';
+        $xhtml = '<input  style = "' . $style . '" type="' . $type . '" id="' . $id . '" name="' . $name . '" class="' . $class . '" value="' . $value . '" > ';
         return $xhtml;
     }
-    public static function cmsSelectbox($name, $class, $arrValue, $keySelect = 'default', $style = null){
-		$xhtml = '<select style="'.$style.'" name="'.$name.'" class="'.$class.'" >';
-		foreach($arrValue as $key => $value){
-			if($key == $keySelect && is_numeric($keySelect)){
-				$xhtml .= '<option selected="selected" value = "'.$key.'">'.$value.'</option>';
-			}else{
-				$xhtml .= '<option value = "'.$key.'">'.$value.'</option>';
-			}
-		}
-		$xhtml .= '</select>';
-		return $xhtml;
-	}
+    public static function cmsSelectbox($name, $class, $arrValue, $keySelect = 'default', $style = null)
+    {
+        $xhtml = '<select style="' . $style . '" name="' . $name . '" class="' . $class . '" >';
+        foreach ($arrValue as $key => $value) {
+            if ($key == $keySelect && is_numeric($keySelect)) {
+                $xhtml .= '<option selected="selected" value = "' . $key . '">' . $value . '</option>';
+            } else {
+                $xhtml .= '<option value = "' . $key . '">' . $value . '</option>';
+            }
+        }
+        $xhtml .= '</select>';
+        return $xhtml;
+    }
     public static function cmsRowInput($lbName, $input)
     {
         $xhtml = '<div class="form-group"><label name="' . $lbName . '">' . ucfirst($lbName) . '</label>' . $input . '</div> ';
@@ -93,9 +93,9 @@ class Helper
             <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-sm-4">'.$tblFiler.'</div>
-                    <div class="col-sm-5">'.$tblSearch.'</div>
-                    <div class="col-sm-3">'.$tblCRUD.'</div>
+                    <div class="col-sm-4">' . $tblFiler . '</div>
+                    <div class="col-sm-5">' . $tblSearch . '</div>
+                    <div class="col-sm-3">' . $tblCRUD . '</div>
                 </div>
             </div>
         
@@ -110,9 +110,9 @@ class Helper
             <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-sm-4">'.$tblFiler.'</div>
-                    <div class="col-sm-4">'.$tblSearch.'</div>
-                    <div class="col-sm-4">'.$tblCRUD.'</div>
+                    <div class="col-sm-4">' . $tblFiler . '</div>
+                    <div class="col-sm-4">' . $tblSearch . '</div>
+                    <div class="col-sm-4">' . $tblCRUD . '</div>
                 </div>
             </div>
         
@@ -130,8 +130,47 @@ class Helper
             } else {
                 $xhtml .= '<option style="background-color: red;" value = "' . $key . '">' . $value . '</option>';
             }
-        }   
+        }
         $xhtml .= '</select>';
         return $xhtml;
+    }
+
+
+    
+    /* 
+        small-box bg-info 
+    */
+
+    public static function smallBoxIndexController($class,$total,$name,$link)
+    {
+        $xhtml = '
+                <div class="col-lg-3 col-6">
+                    <div class="'.$class.'">
+                        <div class="inner">
+                            <h3>'.$total.'</h3>
+                                <p>'.$name.'</p>
+                        </div>
+                        <div class="icon">
+                                <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="'.$link.'" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                 </div>
+        ';
+        return $xhtml;
+    }
+
+
+
+    public static function cmsInputChangePassword($nameMain,$type,$nameInput,$placeholder,$value)
+    {
+        $xhtml = '
+        <div class="form-group">
+            <label for="exampleInputEmail1">'.$nameMain.'</label>
+            <input type="'.$type.'" class="form-control" name="'.$nameInput.'" placeholder="'.$placeholder.'" value="'.$value.'">
+        </div>
+        ' ;
+        return $xhtml ;
+
     }
 }

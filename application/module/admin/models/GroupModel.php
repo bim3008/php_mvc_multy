@@ -4,47 +4,37 @@ class GroupModel extends Model
 	protected $_tableName = DB_TABLE_GROUP ;
 	public function countItems($arrParam,$opption = null)
 	{
-		$query[] = "SELECT count(`id`) as `total` FROM `$this->_tableName`" ;	
-		$query[] = "WHERE `id` > 0" ;
-		if(isset($opption['task']) == null)
-		{	
-			$arrParam['status'] = isset($arrParam['status']) ? $arrParam['status'] : 'all';
-			{
-				if($arrParam['status']  == 'all')
-				{	
-					$query[] = "";
-				}
-				else if($arrParam['status']  == 'active')
-				{	
-					$query[] = "AND `status` = 0 ";
-				}
-				else if($arrParam['status']  == 'inactive')
-				{	
-					$query[] = "AND `status` = 1 ";
-				}
-				if(!empty($arrParam['filter_search'])) {
-						$search = '"%'.$arrParam['filter_search'].'%"';
-						$query[]  = "AND `name` LIKE $search ";
-				}			
-				$query  = implode(" " ,$query) ;
-				return $this->fetchRow($query) ;
-			    
-			}
+		$query[] =  "SELECT count(`id`) as `total` " ;
+		$query[] =  "FROM `$this->_tableName`" ;	
+		$query[] =  "WHERE `id` > 0" ;
+
+		//FILTER : KEYWORD
+		$arrParam['filter_status'] = isset($arrParam['filter_status']) ? ($arrParam['filter_status']) : '' ;
+		if(($arrParam['filter_status']) == 'active')
+		{
+			$query[]		 = "AND `status` = 0 ";
 		}
-		// ĐẾM 
-		if($opption['task'] == 'active')
+		if(($arrParam['filter_status']) == 'inactive')
+		{
+			$query[]		 = "AND `status` = 1 ";
+		}
+		//FILTER : KEYWORD
+		if(!empty($arrParam['filter_search'])){
+			$keyword	= '"%' . $arrParam['filter_search'] . '%"';
+			$query[]	= "AND `name` LIKE $keyword";
+		}
+		$opption['task'] = isset($opption['task']) ? $opption['task'] : '' ;
+		if(($opption['task']) == 'active')
 		{	
-			$query[] = "AND `status` = 0 ";
-				$query  = implode(" " ,$query) ;
-			return $this->fetchRow($query) ;
-			
-		}	
-		if($opption['task'] == 'inactive')
+			$query[] =  "AND `status` =  0" ;
+		}
+
+		if( ($opption['task']) == 'inactive')
 		{	
-			$query[] = "AND `status` = 1 ";			
-				$query  = implode(" " ,$query) ;
-			return $this->fetchRow($query) ;
-		}	
+			$query[] =  "AND `status` =  1" ;
+		}
+		$query  = implode(" " ,$query) ;
+		return $this->fetchRow($query) ;
 	
 	}
 	public function listItems($arrParam, $opption = null)
@@ -52,10 +42,10 @@ class GroupModel extends Model
 		$query[] = "SELECT * FROM `$this->_tableName` " ;
 		$query[] = "WHERE `id` > 0" ;
 		
-		if(isset($arrParam['status'])&&$arrParam['status'] == 'active') {
+		if(isset($arrParam['filter_status'])&&$arrParam['filter_status'] == 'active') {
 			$query[]  = " AND  `status` = 0 ";
 		} 
-		if(isset($arrParam['status'])&&$arrParam['status'] == 'inactive') {
+		if(isset($arrParam['filter_status'])&&$arrParam['filter_status'] == 'inactive') {
 			$query[]  = " AND `status` = 1 ";
 		} 		
 		if(!empty($arrParam['filter_search'])) {
@@ -84,7 +74,7 @@ class GroupModel extends Model
 			$id     = $arrParam['id'] ;
 			$query[]  = "SET `status` = $status WHERE `id` = '$id' " ;
 			$query = implode(" " ,$query) ;		
-			$result = $this->update($query) ;
+			$result = $this->query($query) ;
 			Session::set('messege','Thay đổi trạng thái Status thành công') ;
 		}
 		if($opption['task'] == 'ajax-change-group_acp')
@@ -93,7 +83,7 @@ class GroupModel extends Model
 			$id     = $arrParam['id'] ;
 			$query[]  = "SET `group_acp` = $groupACP WHERE `id` = '$id' " ;
 			$query = implode(" " ,$query) ;
-			$result = $this->update($query) ;
+			$result = $this->query($query) ;
 			Session::set('messege','Thay đổi trạng thái Group ACP thành công') ;
 		}
 	}
@@ -107,7 +97,7 @@ class GroupModel extends Model
 				$id = $arrParam['id'] ;
 				$query[] = " WHERE id = '$id' " ;
 				$query = implode(" " ,$query) ;	
-				$result =  $this->delete($query) ;		
+				$result =  $this->query($query) ;		
 				if($result == true)
 				{
 					Session::set('messege','Xóa thành công') ;	
@@ -123,7 +113,7 @@ class GroupModel extends Model
 				$ids = 	$this->createWhereDeleteSQL($id) ;
 				$query[] = "WHERE id IN ($ids) " ;
 				$query = implode(" " ,$query) ;		
-				$result =  $this->delete($query) ;		
+				$result =  $this->query($query) ;		
 				if($result == true)
 				{
 					Session::set('messege','Xóa thành công') ;	
@@ -146,7 +136,7 @@ class GroupModel extends Model
 		if($opption['task'] == 'add')
 		{
 			$query = "INSERT INTO `$this->_tableName` ( `name`, `group_acp`,`status`,`ordering` ) VALUES ('$name','$group_acp','$status','$ordering')" ;
-	     	$result = $this->insert($query) ; 
+	     	$result = $this->query($query) ; 
 			if($result == true)
 			{
 				Session::set('messege','Dữ liệu đã được thêm thành công') ;
@@ -156,7 +146,7 @@ class GroupModel extends Model
 		if($opption['task'] == 'edit')
 		{
 			$query = "UPDATE `$this->_tableName` SET `name` = '$name', `group_acp` = '$group_acp', `status` = '$status',`ordering` = '$ordering'  WHERE `id` = $id" ; 
-			$result = $this->update($query) ;
+			$result = $this->query($query) ;
 			if($result == true)
 			{
 				Session::set('messege','Edit dữ liệu thành công') ;
@@ -167,7 +157,9 @@ class GroupModel extends Model
 	public function infoItems($arrParam,$opption=null)
 	{	
 		$id = $arrParam['id'] ;
-     	$query = "SELECT `id` , `name` ,`group_acp`,`status` ,`ordering`  FROM `$this->_tableName` WHERE `id` = $id " ;
-		return $this->fetchRow($query) ;	
+     	$query = "SELECT `id` , `name` ,`status`,`group_acp` ,`ordering`  FROM `$this->_tableName` WHERE `id` = $id " ;
+		$result = $this->fetchRow($query) ;	
+		return $result ;
 	}
+	
 }

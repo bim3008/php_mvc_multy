@@ -39,7 +39,7 @@ class Validate
 		if (array_key_exists($element, $this->errors)) {
 			$this->errors[$element] .= ' - ' . $message;
 		} else {
-			$this->errors[$element] = '<b>' . ucwords($strElement) . ':</b> ' . $message;
+			$this->errors[$element] = '<b>' . strtoupper($strElement) . ':</b> ' . $message;
 		}
 	}
 
@@ -92,7 +92,7 @@ class Validate
 						$this->validateExistRecord($element, $value['options']);
 						break;
 					case 'notExistRecord':
-						$this->validateExistRecord($element, $value['options']);
+						$this->validateNotExistRecord($element, $value['options']);
 						break;
 					case 'string-notExistRecord':
 						$this->validateString($element, $value['options']['min'], $value['options']['max']);
@@ -235,13 +235,9 @@ class Validate
 	private function validateExistRecord($element, $options)
 	{
 		$database = $options['database'];
-		$query	  = $options['query'];	// SELECT * FROM user where id = 2
-		$result = mysqli_query($database,$query) ;
-		if ($row = mysqli_num_rows($result )) {
-			if($row >= 1 )
-			{
-				$this->setError($element, 'Giá trị này đã tồn tại');
-			}
+		$query	  = $options['query'];				// SELECT id FROM user where username = 'admin'
+		if($database->isExist($query) == false) {
+			$this->setError($element, 'Thông tin đăng nhập không chính xác! Hãy kiểm tra kỹ lại email và password của bạn!');
 		}
 	}
 
@@ -250,7 +246,7 @@ class Validate
 	{
 		$database = $options['database'];
 		$query	  = $options['query'];				// SELECT id FROM user where username = 'admin'
-		if ($database->isExist($query) === true) {
+		if ($database->isExist($query) == true) {
 			$this->setError($element, 'Giá trị này đã tồn tại');
 		}
 	}

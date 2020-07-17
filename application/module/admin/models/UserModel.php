@@ -7,45 +7,34 @@ class UserModel extends Model
 		$query[] = "SELECT count(`u`.`id`)  as `total` " ;
 		$query[] = " FROM $this->_tableName AS  `u` , `".DB_TABLE_GROUP."`  AS `g` ";
 		$query[] = " WHERE `u`.`group_id`  =  `g`.`id` " ;
-		if(isset($opption['task']) == null)
-		{	
-			$arrParam['status'] = isset($arrParam['status']) ? $arrParam['status'] : 'all';
-			{
-				if($arrParam['status']  == 'active')
-				{	
-					$query[] = "AND `u`.`status` = 0 ";
-				}
-				else if($arrParam['status']  == 'inactive')
-				{	
-					$query[] = "AND `u`.`status` = 1 ";
-				}		
-				else if($arrParam['status']  == 'all')
-				{	
-					$query[] = "";
-				}
-				if(!empty($arrParam['filter_search'])) {
-					$search = '"%'.$arrParam['filter_search'].'%"';
-					$query[]  = " AND ( `u`.`username` LIKE $search OR `u`.`email` LIKE $search ) " ;
-				}				
-				$query  = implode(" " ,$query) ;
-				return $this->fetchRow($query) ;
-			}
-		} 	
 
-		if($opption['task'] == 'active')
+		$arrParam['filter_status'] = isset($arrParam['filter_status']) ? ($arrParam['filter_status']) : '' ;
+		if(($arrParam['filter_status']) == 'active')
+		{
+			$query[]	= "AND `u`.`status` = 0 ";
+		}
+		if(($arrParam['filter_status']) == 'inactive')
+		{
+			$query[]		 = "AND `u`.`status` = 1 ";
+		}
+		//FILTER : KEYWORD
+		if(!empty($arrParam['filter_search'])){
+			$keyword	= '"%' . $arrParam['filter_search'] . '%"';
+			$query[]	= "AND `name` LIKE $keyword";
+		}
+		$opption['task'] = isset($opption['task']) ? $opption['task'] : '' ;
+		if(($opption['task']) == 'active')
 		{	
-			$query[] = "AND `u`.`status` = 0 ";
-			$query  = implode(" " ,$query) ;
-			return $this->fetchRow($query) ;
-		}	
-		if($opption['task'] == 'inactive')
+			$query[] =  "AND `u`.`status` =  0" ;
+		}
+
+		if( ($opption['task']) == 'inactive')
 		{	
-			$query[] = "AND `u`.`status` = 1 ";
-			$query  = implode(" " ,$query) ;
-			return $this->fetchRow($query) ;
-		}	
-	
-	}
+			$query[] =  "AND `u`.`status` =  1" ;
+		}
+		$query  = implode(" " ,$query) ;
+		return $this->fetchRow($query) ;
+	}	
 	public function listItems($arrParam, $opption = null)
 	{	
 
@@ -53,10 +42,10 @@ class UserModel extends Model
 		$query[] = " FROM $this->_tableName AS  `u` , `".DB_TABLE_GROUP."`  AS `g` ";
 		$query[] = " WHERE `u`.`group_id`  =  `g`.`id` " ;
 		
-		if(isset($arrParam['status'])&&$arrParam['status'] == 'active') {
+		if(isset($arrParam['filter_status'])&&$arrParam['filter_status'] == 'active') {
 			$query[]  = " AND  `u`.`status` = 0 ";
 		} 
-		if(isset($arrParam['status'])&&$arrParam['status'] == 'inactive') {
+		if(isset($arrParam['filter_status'])&&$arrParam['filter_status'] == 'inactive') {
 			$query[]  = " AND `u`.`status` = 1 ";
 		} 		
 		if(!empty($arrParam['filter_search'])) {
@@ -84,7 +73,7 @@ class UserModel extends Model
 			$id     = $arrParam['id'] ;
 			$query[]  = "SET `status` = $status WHERE `id` = '$id' " ;
 			$query = implode(" " ,$query) ;		
-			$result = $this->update($query) ;
+			$result = $this->query($query) ;
 			Session::set('messege','Thay đổi trạng thái Status thành công') ;
 		}
 		if($opption['task'] == 'ajax-change-group_acp')
@@ -93,7 +82,7 @@ class UserModel extends Model
 			$id     = $arrParam['id'] ;
 			$query[]  = "SET `group_acp` = $groupACP WHERE `id` = '$id' " ;
 			$query = implode(" " ,$query) ;
-			$result = $this->update($query) ;
+			$result = $this->query($query) ;
 			Session::set('messege','Thay đổi trạng thái Group ACP thành công') ;
 		}
 	}
@@ -107,7 +96,7 @@ class UserModel extends Model
 				$id = $arrParam['id'] ;
 				$query[] = " WHERE id = '$id' " ;
 				$query = implode(" " ,$query) ;	
-				$result =  $this->delete($query) ;		
+				$result =  $this->query($query) ;		
 				if($result == true)
 				{
 					Session::set('messege','Xóa thành công') ;	
@@ -148,8 +137,8 @@ class UserModel extends Model
 		$group_id  		=  $arrParam['group_id'] ;		
 		if($opption['task'] == 'add')
 		{
-		$query = "INSERT INTO `$this->_tableName` ( `username`, `password`,`fullname`,`email`,`status`,`ordering`,`group_id` ) VALUES ('$username','$password','$fullname','$email','$status','$ordering','$group_id')" ;
-	     	$result = $this->insert($query) ; 
+			$query = "INSERT INTO `$this->_tableName` ( `username`, `password`,`fullname`,`email`,`status`,`ordering`,`group_id` ) VALUES ('$username','$password','$fullname','$email','$status','$ordering','$group_id')" ;
+	     	$result = $this->query($query) ; 
 			if($result == true)
 			{
 				Session::set('messege','Dữ liệu đã được thêm thành công') ;
@@ -158,8 +147,8 @@ class UserModel extends Model
 		}
 		if($opption['task'] == 'edit')
 		{
-			$query = "UPDATE `$this->_tableName` SET `username` = '$username', `fullname` = '$fullname',`ordering` = '$ordering' , `email` = '$email',`status` = '$status',`group_id` = '$group_id' WHERE `id` = $id" ; 
-			$result = $this->update($query) ;
+			$query = "UPDATE `$this->_tableName` SET `username` = '$username',`fullname` = '$fullname',`ordering` = '$ordering' , `email` = '$email',`status` = '$status',`group_id` = '$group_id' WHERE `id` = $id" ; 
+			$result = $this->query($query) ;
 			if($result == true)
 			{
 				Session::set('messege','Edit dữ liệu thành công') ;
@@ -170,7 +159,7 @@ class UserModel extends Model
 	public function infoItems($arrParam,$opption=null)
 	{	
 		$id = $arrParam['id'] ;
-     	$query = "SELECT `id` , `username`, `password`  ,`fullname` ,`email` , `ordering` ,`status` , `group_id` FROM `$this->_tableName` WHERE `id` = $id " ;
+     	$query = "SELECT `id` , `username`,`fullname` ,`email` , `ordering` ,`status` , `group_id` FROM `$this->_tableName` WHERE `id` = $id " ;
 		return $this->fetchRow($query) ;	
 	}
 	public function itemsInSelectBox($arrParam,$opption=null)
@@ -180,5 +169,45 @@ class UserModel extends Model
 		$result['default']	= " <--Select Group --> " ;
 		ksort($result) ;
 		return $result ;
+	}
+	public function changePassword($arrParam,$opption=null)
+	{	
+			$id 	 	= $arrParam['id'] ;
+			$oldPass 	= $arrParam['old-password'] ;
+			$newPass 	= $arrParam['new-password'] ;
+			$rePass  	= $arrParam['re-password']  ;
+			$query 		= "SELECT `password` FROM `user` WHERE `id` = $id" ;
+			$result = $this->fetchRow($query) ; 
+			$getOldPass = $result['password'] ;
+			if($oldPass == '' || $newPass == '' || $rePass == '')
+			{
+				Session::set('errorChangePass','Vui lòng đéo được để rỗng') ;
+			}
+			else
+			{
+				if($oldPass != $getOldPass )
+				{
+					Session::set('errorChangePass','Mật khẩu cũ không đúng') ;
+				}
+				else
+				{
+					if($newPass != $rePass)
+					{
+						Session::set('errorChangePass','Mật khẩu không trùng khớp') ;
+					}
+					else
+					{
+						$queryUpdate  = "UPDATE `user` SET `password` = $newPass WHERE `id` = $id " ;
+						$resultUpdate = $this->query($queryUpdate) ;
+						if($resultUpdate == true)
+						{
+							Session::set('errorChangePass','Thay đổi mật khẩu thành công') ;
+						}
+						return $resultUpdate  ;
+					}
+				}
+				
+			}	
+			
 	}
 }

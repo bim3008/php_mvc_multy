@@ -9,8 +9,10 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                 <li class="nav-link" href="#" role="button">
-                    <a>Hi Lê Trương Định</a>
-                    <a href="<?php echo URL::createLink('admin', 'index', 'login') ?>" class="fas fa-sign-out-alt">Logout</a>
+                    <a style="color:red">  Hi ! <span><?php 
+                         echo Session::get('fullname') ;
+                    ?></span></a>
+                    <a href="<?php echo URL::createLink('admin', 'index', 'logout') ?>" class="fas fa-sign-out-alt">Logout</a>
                 </li>
                 </li>
             </ul>

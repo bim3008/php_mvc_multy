@@ -80,12 +80,11 @@ class Helper
     public static function notifyMessege($message)
     {
         $messge = Session::get($message);
-        Session::delete($message);
         if (!empty($messge)) {
             echo '<div class="alert alert-success "><span class="fas fa-check"></span> ' . $messge . '</div>';
+            Session::delete($message);
         }
     }
-
     public static function toolbarGroup($tblFiler, $tblSearch, $tblCRUD)
     {
         $xhtml = '
@@ -120,7 +119,6 @@ class Helper
 
         return $xhtml;
     }
-
     public static function cmsSelectMenuUser($lbName, $nameLb, $class, $arrValue, $keySelect = 'default', $style = null)
     {
         $xhtml =  '<label name="' . $lbName . '">' . $nameLb . '</label><select name="' . $lbName . '" class="' . $class . '" style="width:200px ;background-color: aquamarine;">  ';
@@ -134,13 +132,6 @@ class Helper
         $xhtml .= '</select>';
         return $xhtml;
     }
-
-
-    
-    /* 
-        small-box bg-info 
-    */
-
     public static function smallBoxIndexController($class,$total,$name,$link)
     {
         $xhtml = '
@@ -159,9 +150,6 @@ class Helper
         ';
         return $xhtml;
     }
-
-
-
     public static function cmsInputChangePassword($nameMain,$type,$nameInput,$placeholder,$value)
     {
         $xhtml = '
@@ -172,5 +160,20 @@ class Helper
         ' ;
         return $xhtml ;
 
+    }
+    public static function sidebarAdmin($link,$title)
+    {
+        $xhtml = '
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="'.$link.'" class="nav-link ">
+                        <i class="far fa-circle nav-icon"></i>
+                            <p>'.$title.'</p>
+                    </a>
+                </li>
+            </ul>
+        
+        ' ;
+        return $xhtml ;
     }
 }

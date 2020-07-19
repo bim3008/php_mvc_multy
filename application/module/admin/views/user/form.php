@@ -60,33 +60,25 @@
 
         $buttonInputChangePassword = $csmInputOldPassword . $csmInputNewPassword . $csmInputRePassword . $csmInputIdHidden   ;
 
-        if(!empty($lblId))
-        {
+        if(!empty($lblId)){
                 $content = $rowUsername . $rowFullname . $rowEmail . $rowslbStatus . $rowOrdering  . $rowslbGroupId . $groupid . $token  ; 
         }
-        else
-        {       
+        else{       
                 $content = $rowUsername .$rowPassword . $rowFullname . $rowEmail . $rowslbStatus . $rowOrdering  . $rowslbGroupId . $groupid ;         
         }     
-?>
-
-<?php 
-        echo Helper::notifyMessege('messege') ;   
-        echo Helper::notifyMessege('errorChangePass') ;   
-        $errors =  isset($this->errors) ? $this->errors : ''  ;  
+        $errors = isset($this->errors) ? $this->errors : ''  ;  
         echo  $errors = '<div  >'.$errors.'</div>' ;       
-   
+        Helper::notifyMessege('messege') ;   
         $linkChangePassword     = URL::createLink($lblModule, $lblController, 'form',array('id'=>$id));
-        $templateChangePassword = Form::formChangePassword($linkChangePassword,$buttonInputChangePassword ) ;       
-        $templateUser           = Form::Content('User Add',$content,$stringBtn) ;
-
-        if(empty($lblId))
-        {
+        $templateChangePassword = Form::formChangePassword($linkChangePassword,$buttonInputChangePassword ) ; 
+        $title = isset($this->arrParam['id'])  ? "User Edit" : "User Add"   ; 
+        $templateUser           = Form::Content($title,$content,$stringBtn) ;
+    
+        if(empty($lblId)){      
                 echo  $templateUser ;
         }        
-        else{
-                echo   $templateUser .=  $templateChangePassword ;
-                
+        else{               
+                echo   $templateUser .=  $templateChangePassword ;                
         }        
 ?>
 

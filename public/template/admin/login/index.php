@@ -15,7 +15,7 @@
         <div class="container-login100" style="background-image: url( '<?php echo $urlImages?>') ;">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
                     <?php
-                            require_once MODULE_PATH. $this->_moduleName . DS . 'views' . DS . $this->_fileView . '.php';
+                        require_once MODULE_PATH. $this->_moduleName . DS . 'views' . DS . $this->_fileView . '.php';
                     ?>          
             </div>
         </div>

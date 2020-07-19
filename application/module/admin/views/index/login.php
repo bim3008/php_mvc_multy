@@ -3,8 +3,12 @@
     $lblModule      = $this->arrParam['module'] ;
     $lblController  = $this->arrParam['controller'] ;
     $lblAction      = $this->arrParam['action'] ;
-    $linkURL = URL::createLink($lblModule,$lblController,'login') ; 
 
+
+    echo '<pre>';
+    print_r($_SESSION);
+    echo '</pre>';
+    $linkURL = URL::createLink($lblModule,$lblController,'login') ; 
     echo $error = isset($this->errors) ? $this->errors : '' ;
 ?> 
 
@@ -28,7 +32,7 @@
             </div>
 
             <div class="text-right p-t-8 p-b-31">
-                <a href="#">Forgot password?</a>
+             
             </div>
 
             <div class="container-login100-form-btn">
@@ -40,17 +44,20 @@
 
         <div class="txt1 text-center p-t-54 p-b-20">
             <span>
-            Or Sign Up Using
             </span>
         </div>
+        <?php
+            require_once 'config.php' ;
 
+            $redirectURL = ' ' ;
+            $redirectURL = 'http://localhost/php_mvc_multy/application/module/admin/views/index/fb-callback.php' ;
+            $permission  = ['email'];
+            $loginURL    = $helper->getLoginUrl($redirectURL,$permission) ; // link dev.facebook?
+        ?>   
         <div class="flex-c-m">
-            <a href="#" class="login100-social-item bg1">
-            <i class="fa fa-facebook"></i>
-            </a>
-            <a href="#" class="login100-social-item bg3">
-            <i class="fa fa-google"></i>
-            </a>
+                        <a  onclick="window.location ='<?php echo  $loginURL ;?>'" href="#" class="login100-social-item bg1">
+							<i class="fa fa-facebook"></i>
+						</a>
         </div>
         <div class="flex-col-c p-t-10">
             <span class="txt1 p-b-17">
@@ -61,3 +68,4 @@
             </a>
         </div>
 </form>
+    

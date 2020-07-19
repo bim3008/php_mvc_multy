@@ -14,22 +14,58 @@ class Bootstrap{
 		}
 	}	
 	// SET PARAMS
+	
 	public function setParam(){
 		$this->_params 	= array_merge($_GET, $_POST);
 		$this->_params['module'] 		= isset($this->_params['module']) 	  ? $this->_params['module'] : DEFAULT_MODULE;
 		$this->_params['controller'] 	= isset($this->_params['controller']) ? $this->_params['controller'] : DEFAULT_CONTROLLER;
 		$this->_params['action'] 		= isset($this->_params['action']) 	  ? $this->_params['action'] : DEFAULT_ACTION;
 	}	
+
 	// LOAD EXISTING CONTROLLER
 	private function loadExistingController($filePath, $controllerName){
 		require_once $filePath;
  	    $this->_controllerObject = new $controllerName($this->_params); 
 	}	 
+
 	// CALL METHODE
 	private function callMethod(){
 		$actionName = $this->_params['action'] . 'Action';
 		if(method_exists($this->_controllerObject, $actionName)==true){
-			$this->_controllerObject->$actionName(); 
+		//	Session::delete('user') ;
+			// $module 		= $this->_params['module'] ;
+			// $controller 	= $this->_params['controller'] ;
+			// $action 		= $this->_params['action'] ;
+			// $infomationUser = isset($_SESSION) ? Session::get('user') : ''   ;	
+			// $logged			= isset($infomationUser['login']) && (($infomationUser['time']) + 3600 >= time() );
+			// if($module == 'admin')
+			// {
+			// 	if($logged == true)
+			// 	{
+			// 		if($infomationUser['group_acp'] == 1){
+			// 			URL::redirect('admin','index','index') ;		
+			// 			$this->_controllerObject->$actionName(); 				
+			// 		}else{		
+			// 			Session::delete('user') ;
+			// 			URL::redirect('admin','index','login') ;										
+			// 		}
+			// 	}
+			// 	else{
+			// 		Session::delete('user') ;
+					
+			// 		require_once (MODULE_PATH . $module  . DS . 'controllers' . DS . 'IndexController.php') ;
+			// 		//echo MODULE_PATH . $module  . DS . 'controllers' . DS . 'IndexController.php' ;
+			// 		$indexController = new IndexController($this->_params) ;
+			// 		$indexController ->loginAction();
+
+			// 	}
+			// }
+			// else
+			// {
+
+			// }
+			$this->_controllerObject->$actionName(); 		
+
 		}else{
 			$this->_error();
 		}

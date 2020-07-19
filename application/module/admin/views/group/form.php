@@ -44,7 +44,8 @@
        
 <form  action="#" method="POST" id="addedit" name="addedit">    
         <?php 
-                echo  Form::Content('Group Add',$content,$stringBtn) ;
+                $title = isset($this->arrParam['id']) ? 'Group Edit' : 'Group Add' ; 
+                echo  Form::Content($title,$content,$stringBtn) ;
         ?>
 </form>
 

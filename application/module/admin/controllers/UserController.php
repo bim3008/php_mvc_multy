@@ -35,8 +35,6 @@ class UserController extends Controller
 			$this->_arrParam['form'] = $this->_model->infoItems($this->_arrParam, null); 
 			if(empty($this->_arrParam['form'])) URL::redirect('admin', $this->_arrParam['controller'], 'index');
 		}
-	
-	
 		if(isset($this->_arrParam['form']['token']) > 0 || isset($this->_arrParam['change'])) {
 
 			$requirePass = true ;
@@ -69,8 +67,8 @@ class UserController extends Controller
 					$this->_model->insertItemsUser($this->_arrParam['form'], array('task' => $task));
 					$type = $this->_arrParam['type'];
 					if ($type == 'save-close') URL::redirect('admin',  $this->_arrParam['controller'], 'index');
-					if ($type == 'save-new')   URL::redirect('admin',  $this->_arrParam['controller'], 'form');
-					if ($type == 'save')   	   URL::redirect('admin', $this->_arrParam['controller'], 'form',array('id'=> $this->_arrParam['form']['id']));
+					if ($type == 'save-new')   URL::redirect('admin',  $this->_arrParam['controller'], 'form' );
+					if ($type == 'save')   	   URL::redirect('admin', $this->_arrParam['controller'],  'form',array('id'=> $this->_arrParam['form']['id']));
 				}
 			}
 			else if(!empty($this->_arrParam['change-password']))

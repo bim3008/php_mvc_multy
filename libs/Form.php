@@ -33,8 +33,6 @@ class Form
             ';
         return $xhtml;
     }
-
-
     public static function formChangePassword($link, $buttonChangePass)
     {
 
@@ -70,9 +68,5 @@ class Form
             </form>      
             ';
         return $xhtml;
-    }
-
-    // <button type="submit" class="btn btn-primary" id="change-password">Change Password</button>      
+    }    
 }
-//
-// <input type="submit"  value="change password">

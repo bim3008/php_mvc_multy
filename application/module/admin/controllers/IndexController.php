@@ -5,7 +5,24 @@ class IndexController extends Controller{
 		parent::__construct($arrParams);
 	}
 	public function indexAction(){
+		$infomationUser = Session::get('user') ;
 
+		// echo '<pre>';
+		// print_r($_SESSION);
+		// echo '</pre>';
+		// if(isset($_SESSION['FBRLH_state']))
+		// {	
+		// 	Session::delete('FBRLH_state') ;
+		// 	URL::redirect('admin','index','index') ;
+		// }
+		// if ( $infomationUser['login'] == false || $infomationUser['group_acp'] != '1'){
+		// 	Session::delete('user') ;
+		// 	URL ::redirect('admin','index','login') ;
+		// }
+		//else if($_SESSION['FBRLH_state']){
+		// 	Session::destroy('FBRLH_state') ;
+		// 	URL ::redirect('admin','index','index') ;
+		// }
 		$this->_view->setTitle(ucfirst($this->_arrParam['action']) );
 		$this->_templateObj->setFolderTemplate('admin/adminlte/');
 		$this->_templateObj->setFileTemplate('index.php');
@@ -18,6 +35,10 @@ class IndexController extends Controller{
 	}
 	public function loginAction()
 	{
+		$infomationUser = Session::get('user') ;
+		if( isset($infomationUser['login']) &&  $infomationUser['time'] + 3600 >= time() ){
+			URL ::redirect('admin','index','index') ;
+		}
 		$this->_view->setTitle(ucfirst($this->_arrParam['action']) );
 		$this->_templateObj->setFolderTemplate('admin/login/');
 		$this->_templateObj->setFileTemplate('index.php');
@@ -33,8 +54,17 @@ class IndexController extends Controller{
 			$validate->run() ;
 			if($validate->isValid() == true)
 			{	
-				// echo '<h3>ok'.__METHOD__.'<h3>' ;
-					URL::redirect('admin', 'index', 'index');
+				$infoUser = $this->_model->inforItems($this->_arrParam['form']) ;
+					$arraySesssion = array(
+								'login' 	=> true,
+								'info'  	=> $infoUser ,
+								'time'		=> time() ,
+								'group_acp'	=> $infoUser['group_acp']
+					) ;
+				Session::set('user',$arraySesssion) ;	
+				Session::set('fullname',$arraySesssion['info']['fullname']) ;
+				URL::redirect('admin','index','index')	;
+				
 			}else
 			{
 				$this->_view->errors = $validate->showErrors() ;
@@ -43,4 +73,10 @@ class IndexController extends Controller{
 		$this->_view->render('index/login');
 		
 	}
+	public function logoutAction()
+	{
+		Session::delete('user') ;
+		URL::redirect('admin','index','login') ;
+	}
+
 } 

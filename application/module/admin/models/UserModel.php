@@ -181,19 +181,19 @@ class UserModel extends Model
 			$getOldPass = $result['password'] ;
 			if($oldPass == '' || $newPass == '' || $rePass == '')
 			{
-				Session::set('errorChangePass','Vui lòng đéo được để rỗng') ;
+				Session::set('messege','Vui lòng đéo được để rỗng') ;			
 			}
 			else
 			{
 				if($oldPass != $getOldPass )
 				{
-					Session::set('errorChangePass','Mật khẩu cũ không đúng') ;
+					Session::set('messege','Mật khẩu cũ không đúng') ;	
 				}
 				else
 				{
 					if($newPass != $rePass)
 					{
-						Session::set('errorChangePass','Mật khẩu không trùng khớp') ;
+						Session::set('messege','Mật khẩu không trùng khớp') ;			
 					}
 					else
 					{
@@ -201,7 +201,7 @@ class UserModel extends Model
 						$resultUpdate = $this->query($queryUpdate) ;
 						if($resultUpdate == true)
 						{
-							Session::set('errorChangePass','Thay đổi mật khẩu thành công') ;
+							Session::set('messege','Thay đổi mật khẩu thành công') ;							
 						}
 						return $resultUpdate  ;
 					}

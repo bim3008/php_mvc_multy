@@ -6,23 +6,20 @@ class IndexController extends Controller{
 	}
 	public function indexAction(){
 		$infomationUser = Session::get('user') ;
-
-		// echo '<pre>';
-		// print_r($_SESSION);
-		// echo '</pre>';
-		// if(isset($_SESSION['FBRLH_state']))
-		// {	
-		// 	Session::delete('FBRLH_state') ;
-		// 	URL::redirect('admin','index','index') ;
-		// }
-		// if ( $infomationUser['login'] == false || $infomationUser['group_acp'] != '1'){
-		// 	Session::delete('user') ;
-		// 	URL ::redirect('admin','index','login') ;
-		// }
-		//else if($_SESSION['FBRLH_state']){
-		// 	Session::destroy('FBRLH_state') ;
-		// 	URL ::redirect('admin','index','index') ;
-		// }
+		$loginFacebook	= Session::get('loginFacebook') ;
+		
+		if($infomationUser == false &&  $loginFacebook == false )
+		{
+			URL ::redirect('admin','index','login') ;
+		}
+		if(!empty($infomationUser))
+		{
+			if($infomationUser['group_acp'] != 1){
+				Session::delete('user') ;
+				URL ::redirect('admin','index','login') ;
+			}
+		}
+	
 		$this->_view->setTitle(ucfirst($this->_arrParam['action']) );
 		$this->_templateObj->setFolderTemplate('admin/adminlte/');
 		$this->_templateObj->setFileTemplate('index.php');
@@ -75,7 +72,7 @@ class IndexController extends Controller{
 	}
 	public function logoutAction()
 	{
-		Session::delete('user') ;
+		Session::destroy() ;
 		URL::redirect('admin','index','login') ;
 	}
 

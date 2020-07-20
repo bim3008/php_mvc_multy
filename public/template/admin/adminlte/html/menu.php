@@ -10,7 +10,9 @@
                 <li class="nav-item">
                 <li class="nav-link" href="#" role="button">
                     <a style="color:red">  Hi ! <span><?php 
-                         echo Session::get('fullname') ;
+                        $fullname  = isset($_SESSION['loginFacebook']) ? $_SESSION['loginFacebook']['name'] : '' ;
+                        $fullname .= isset($_SESSION['fullname']) ? $_SESSION['fullname']: '' ;
+                         echo $fullname ;
                     ?></span></a>
                     <a href="<?php echo URL::createLink('admin', 'index', 'logout') ?>" class="fas fa-sign-out-alt">Logout</a>
                 </li>

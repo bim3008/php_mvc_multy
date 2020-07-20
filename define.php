@@ -1,5 +1,5 @@
 <?php
-	
+	define('PI', 3.14);
 	// ====================== PATHS ===========================
 	define ('DS'				, '/');
 	define ('ROOT_PATH'			, dirname(__FILE__));						// Định nghĩa đường dẫn đến thư mục gốc

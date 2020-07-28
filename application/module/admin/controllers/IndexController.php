@@ -27,6 +27,8 @@ class IndexController extends Controller{
 		$this->_templateObj->load();
 		$this->_view->countItemsIndex[] = $this->_model->countItemsIndex($this->_arrParam,array('task' => 'group'));
 		$this->_view->countItemsIndex[] = $this->_model->countItemsIndex($this->_arrParam,array('task' => 'user'));
+		$this->_view->countItemsIndex[] = $this->_model->countItemsIndex($this->_arrParam,array('task' => 'category'));
+		$this->_view->countItemsIndex[] = $this->_model->countItemsIndex($this->_arrParam,array('task' => 'book'));
 		$this->_view->render('index/index');
 				
 	}

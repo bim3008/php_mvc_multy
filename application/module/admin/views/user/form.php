@@ -52,7 +52,6 @@
 
         // INPUT CHANGEPASSWORD
         // SHOW FORM 
-
         $csmInputOldPassword       = Helper::cmsInputChangePassword('Old Password','text','change[old-password]','Enter Old Password','') ;
         $csmInputNewPassword       = Helper::cmsInputChangePassword('New Password','text','change[new-password]','Enter New Password','') ;
         $csmInputRePassword        = Helper::cmsInputChangePassword('Re  Password','text','change[re-password]' ,'Enter Re Password' ,'') ;
@@ -66,9 +65,11 @@
         else{       
                 $content = $rowUsername .$rowPassword . $rowFullname . $rowEmail . $rowslbStatus . $rowOrdering  . $rowslbGroupId . $groupid ;         
         }     
+      
         $errors = isset($this->errors) ? $this->errors : ''  ;  
         echo  $errors = '<div  >'.$errors.'</div>' ;       
         Helper::notifyMessege('messege') ;   
+        
         $linkChangePassword     = URL::createLink($lblModule, $lblController, 'form',array('id'=>$id));
         $templateChangePassword = Form::formChangePassword($linkChangePassword,$buttonInputChangePassword ) ; 
         $title = isset($this->arrParam['id'])  ? "User Edit" : "User Add"   ; 

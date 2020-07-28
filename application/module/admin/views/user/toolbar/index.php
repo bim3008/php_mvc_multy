@@ -41,7 +41,6 @@
   $linkMultyDelete = URL::createLink($lblModule , $lblController, 'multydelete');
   $btnMultyDelete  = Helper::cmsButton("#", 'btn btn-danger btn-multydelete', 'fas fa-trash', 'btn-multydeleteUser', 'Delete');
   // SELECTBOX
-
     // $selectBoxGroup          = Helper::cmsSelectMenuUser('select_group','','form-control custom-select btn-danger',$this->selectBoxGroup) ;
   
   $btnCRUD = $btnAdd . $btnMultyDelete  ;

@@ -2,8 +2,13 @@
     $urlLink        =  URL::createLink('admin','index','index') ;
     $urlGroupAdd    =  URL::createLink('admin','group','form') ;
     $urlGroupList   =  URL::createLink('admin','group','index') ;
+
     $urlUserAdd        =  URL::createLink('admin','user','form') ;
     $urlUserList        =  URL::createLink('admin','user','index') ;
+
+    $urlCategoryAdd        =  URL::createLink('admin','category','form') ;
+    $urlCategoryList        =  URL::createLink('admin','category','index') ;
+
     $fullname  = isset($_SESSION['loginFacebook']) ? $_SESSION['loginFacebook']['name'] : '' ;
     $fullname .= isset($_SESSION['fullname']) ? $_SESSION['fullname']: '' ;
 
@@ -59,6 +64,19 @@
                     <?php                    
                             echo Helper::sidebarAdmin($urlUserList,'List') ;
                             echo Helper::sidebarAdmin($urlUserAdd,'Add') ;
+                    ?>
+                </li>
+                <li class="nav-item has-treeview menu-open">
+                    <a href="#" class="nav-link ">
+                        <i class="nav-icon fas fa-book-reader"></i>
+                        <p>
+                            CATEGORY
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <?php                    
+                            echo Helper::sidebarAdmin($urlCategoryList,'List') ;
+                            echo Helper::sidebarAdmin($urlCategoryAdd,'Add') ;
                     ?>
                 </li>
             </ul>

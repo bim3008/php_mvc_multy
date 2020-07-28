@@ -46,9 +46,7 @@
         }
         public static function menuUser()
         {
-            //<th class="sorting" rowspan="1" colspan="1" style="width: 12%;text-align: center;">Created</th>
-            // <th class="sorting" rowspan="1" colspan="1" style="width: 12%;text-align: center;">Modifiled </th>
-            // <th class="sorting" rowspan="1" colspan="1" style="width: 5%;text-align: center;">Register_ip</th>
+            
             $xhtml = '
              <div class="card-body">
             <form action="'.URL::createLink('admin','user','multydelete').'" method="POST" id="formListUser">
@@ -74,6 +72,72 @@
 
             return $xhtml ;
         }
+        public static function menuCategory()
+        {
+            $xhtml = '
+            <div class="card-body">
+            <form action="'.URL::createLink('admin','category','multydelete').'" method="POST" id="formListGroup">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th style="width: 5%">
+							<span class="custom-checkbox"><input type="checkbox" id="selectAll"></span>
+						</th>
+						<th style="width: 5%;text-align:center ">Id</th>
+						<th style="width: 25%;text-align:center ">Name</th>
+						<th style="width: 15% ;text-align:center " >Picture</th>
+						<th style="width: 5;text-align:center ">Status</th>
+						<th style="width: 10;text-align:center ">Ordering</th>
+						<th style="width: 12%;text-align:center ">Created</th>
+						<th style="width: 12%;text-align:center ">Modified</th>
+						<th style="width: 20%;text-align:center ">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+            ' ;
+
+            return $xhtml ;
+        }
+
+        public static function menuBook()
+        {
+            $xhtml = '
+            <div class="card-body">
+            <form action="'.URL::createLink('admin','category','multydelete').'" method="POST" id="formListGroup">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th style="width: 1%">
+							<span class="custom-checkbox"><input type="checkbox" id="selectAll"></span>
+						</th>
+						<th style="width: 1%;text-align:center  ">Id</th>
+						<th style="width: 14%;text-align:center ">Name</th>
+                        <th style="width: 14%;text-align:center ">Description</th>
+                        <th style="width: 14% ;text-align:center">Picture</th>
+                        <th style="width: 14% ;text-align:center">Category</th>
+						<th style="width: 16%;text-align:center ">Price</th>
+						<th style="width: 1%;text-align:center ">Special</th>
+						<th style="width: 1%;text-align:center   ">Status</th>
+						<th style="width: 1%;text-align:center  ">Ordering</th>
+						<th style="width: 11%;text-align:center ">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+            ' ;
+
+            return $xhtml ;
+        }
+
+        public static function inputDescription($value){
+
+            $xhtml = '
+                        <textarea class="form-control" name="form[description]" placeholder="Enter ..." value="'.$value.'">'.$value.'</textarea>  
+            ' ;
+            return $xhtml ;
+        }
 
 }
+
+?>
+
 

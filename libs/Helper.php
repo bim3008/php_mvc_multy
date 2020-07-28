@@ -29,7 +29,7 @@ class Helper
     }
     public static function cmsInput($type, $id, $name, $class, $value, $style = null)
     {
-        $xhtml = '<input  style = "' . $style . '" type="' . $type . '" id="' . $id . '" name="' . $name . '" class="' . $class . '" value="' . $value . '" > ';
+        $xhtml = '<input   type="' . $type . '" id="' . $id . '" name="' . $name . '" class="' . $class . '" value="' . $value . '"  style = "' . $style . '"> ';
         return $xhtml;
     }
     public static function cmsSelectbox($name, $class, $arrValue, $keySelect = 'default', $style = null)
@@ -63,9 +63,9 @@ class Helper
         $xhtml .= '</select></div>';
         return $xhtml;
     }
-    public static function product_price($priceFloat)
+    public static function formatVND($priceFloat)
     {
-        $symbol = 'vnđ';
+        $symbol = ' ' . 'VNĐ';
         $symbol_thousand = '.';
         $decimal_place = 0;
         $price = number_format($priceFloat, $decimal_place, '', $symbol_thousand);
@@ -85,7 +85,7 @@ class Helper
             Session::delete($message);
         }
     }
-    public static function toolbarGroup($tblFiler, $tblSearch, $tblCRUD)
+    public static function toolbar($tblFiler, $tblSearch, $tblCRUD)
     {
         $xhtml = '
         <div class="col-md-">
@@ -176,4 +176,24 @@ class Helper
         ' ;
         return $xhtml ;
     }
+    
+    public static function linkImage($link,$style=null)
+    {
+        $xhtml = '<img src="'.$link.'" alt="LOL" style= "'.$style.'" >' ;
+        return $xhtml ;
+    }
+    public static function cmsSpecial($special)
+    {
+        $special = ($special == 0) ? 'No' : 'Yes';     
+        return $special;
+    }
+
+    public static function textShorten($text, $limit = 400){    
+        $text = $text. " ";
+        $text = substr($text, 0, $limit);
+        $text = substr($text, 0, strrpos($text, ' '));
+        $text = $text.".....";
+        return $text;
+    }
+
 }

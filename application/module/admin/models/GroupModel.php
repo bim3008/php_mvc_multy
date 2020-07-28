@@ -132,7 +132,7 @@ class GroupModel extends Model
 		$name 		=  $arrParam['name'] ;
 		$ordering   =  $arrParam['ordering'] ;
 		$status 	=  $arrParam['status'] ;
-		$group_acp  =  $arrParam['groupacp'] ;		
+		$group_acp  =  $arrParam['group_acp'] ;		
 		if($opption['task'] == 'add')
 		{
 			$query = "INSERT INTO `$this->_tableName` ( `name`, `group_acp`,`status`,`ordering` ) VALUES ('$name','$group_acp','$status','$ordering')" ;

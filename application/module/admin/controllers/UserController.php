@@ -27,8 +27,6 @@ class UserController extends Controller
 	{
 		$this->_view->setTitle(ucfirst($this->_arrParam['controller']) . ' : Add');
 		$this->_view->selectBoxGroup  = $this->_model->itemsInSelectBox($this->_arrParam) ;
-		$task = (!empty($this->_arrParam['form']['id'])) ? 'edit' : 'add'; 
-
 		if (isset($this->_arrParam['id'])) {
 
 			$this->_view->setTitle('User : Edit');
@@ -48,11 +46,10 @@ class UserController extends Controller
 				$queryUserName  .= "AND `id`  <> '".$this->_arrParam['form']['id']."' " ;
 				$queryUserEmail .= "AND `id`  <> '".$this->_arrParam['form']['id']."' " ;
 			}
-			
 			if(!empty($this->_arrParam['type']))
 			{
 				$validate = new Validate($this->_arrParam['form']); 
-				$validate->addRule('username', 'string-notExistRecord', array('database'=>$this->_model, 'query' => $queryUserName ,'min' => 3 , 'max' => 50))
+				$validate->addRule('username', 'string-notExistRecord', array('database'=>$this->_model, 'query' => $queryUserName ,'min' => 2 , 'max' => 50))
 						->addRule('password', 'password',array('action' => $task) , $requirePass)
 						->addRule('email','email-notExistRecord', array('database'=>$this->_model, 'query' => $queryUserEmail))
 						->addRule('fullname', 'string', 	array('min' => 10, 'max' => 50))

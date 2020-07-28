@@ -23,7 +23,7 @@ class Validate
 	// Add rules
 	public function addRules($rules)
 	{
-		$this->rules = array_merge($rules, $this->rules);
+		$this->rules = array_merge($rules, $this->rrules);
 	}
 
 	// Get error
@@ -60,9 +60,9 @@ class Validate
 	public function run()
 	{
 		foreach ($this->rules as $element => $value) {
-			if ($value['required'] == true && trim($this->source[$element]) == null) {
+			if(($value['required'] == true) && trim($this->source[$element] == null)){ 
 				$this->setError($element, 'giá trị này không được rỗng!');
-			} else {
+			}else {
 				switch ($value['type']) {
 					case 'int':
 						$this->validateInt($element, $value['options']['min'], $value['options']['max']);
@@ -251,18 +251,20 @@ class Validate
 		}
 	}
 	// Validate File
-	private function validateFile($element, $options)
-	{
-		if ($this->source[$element]['name'] != null) {
-			if (!filter_var($this->source[$element]['size'], FILTER_VALIDATE_INT, array("options" => array("min_range" => $options['min'], "max_range" => $options['max'])))) {
-				$this->setError($element, 'kích thước không phù hợp');
-			}
+	private function validateFile($element, $options){
 
-			$ext = pathinfo($this->source[$element]['name'], PATHINFO_EXTENSION);
-			if (in_array($ext, $options['extension']) == false) {
-				$this->setError($element, 'phần mở rộng không phù hợp');
+			// // if($this->source[$element]['name'] == null)
+			// // {
+			// // 	$this->setError($element, 'Vui lòng chọn ảnh');
+			// }
+			if(($this->source[$element]['name']) != null ){
+				if(!filter_var($this->source[$element]['size'], FILTER_VALIDATE_INT, array("options"=>array("min_range"=>$options['min'],"max_range"=>$options['max'])))){
+					$this->setError($element, 'kích thước không phù hợp');
+				}
+				$ext = pathinfo($this->source[$element]['name'], PATHINFO_EXTENSION);
+				if(in_array($ext, $options['extension']) == false){
+					$this->setError($element, 'phần mở rộng không phù hợp');
+				}			
 			}
-		}
-	}
-	// Validate Count Numrow
+	}	
 }

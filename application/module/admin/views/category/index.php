@@ -5,20 +5,21 @@ echo	Helper::notifyMessege('messege');
 <?php
 
 echo Helper::toolbar($btnFillter, $formSearch, $btnCRUD);
-echo HTML::menuGroup() ?>
+echo HTML::menuCategory() ?>
 <?php
 foreach ($this->listItems as $key => $value) {
 	$id 			= $value['id'];
 	$name           = ($lblFilterSearch != null) ? preg_replace("/\p{L}*?" . preg_quote($lblFilterSearch) . "\p{L}*/ui", '<b style="background-color: yellow;">\\0</b>', $value['name']) : $value['name'];
 	$ordering		= $value['ordering'];
-	$group_acp 		= $value['group_acp'];
 	$status 		= $value['status'];
 	$created 		= $value['created'];
 	$created_by		= $value['created_by'];
 	$modified 		= $value['modified'];
 	$modified_by 	= $value['modified_by'];
-	$privilege_id 	= $value['privilege_id'];
 	$picture		= $value['picture'];
+	$linkImage      =  LINK_IMAGE_CATEGORY .$picture  ;                                 
+	$image          =  Helper::linkImage($linkImage,'width:110px;height:120px;')    ;
+	
 
 	$linkEdit     = URL::createLink($lblModule, $lblController, 'form', array('id' => $id));
 	$linkDelete   = URL::createLink($lblModule, $lblController,  'delete', array('id' => $id));
@@ -27,14 +28,14 @@ foreach ($this->listItems as $key => $value) {
 	$xhtml = '	
 	<tr>
 		<td><span class="custom-checkbox"><input type="checkbox" id="checkbox1" name="cid[]" value="' . $id . '"></span></td>
-		<td>' . $id . '</td>
-		<td>' . $name . '</td>
-		' . Helper::cmsGroupAcp($group_acp, URL::createLink($lblModule, $lblController,  'changeGroupAcp', array('id' => $id, 'group_acp' => $group_acp)), $id) . '
+		<td style="text-align:center ">' . $id . '</td>
+		<td style="text-align:center ">' . $name . '</td>
+		<td style="text-align:center ">' . $image . '</td>
 		' . Helper::cmsStatus  ($status,    URL::createLink($lblModule, $lblController,  'changeStatus',   array('id' => $id, 'status' => $status)), $id) . '
-		<td>' . $ordering . '</td>
-		<td>' . $created . '  </br>' . $created_by . '</td>
-		<td>' . $modified . ' </br>' . $modified_by . '</td>
-		<td>' . $buttonEdit . $buttonDelete . '</td>
+		<td style="text-align:center ">' . $ordering . '</td>
+		<td style="text-align:center ">' . $created . '  </br>' . $created_by . '</td>
+		<td style="text-align:center ">' . $modified . ' </br>' . $modified_by . '</td>
+		<td style="text-align:center ">' . $buttonEdit . $buttonDelete . '</td>
 	</tr> ';
 	echo $xhtml;
 }

@@ -43,7 +43,7 @@ foreach ($this->listItems as $key => $value) {
 				' . Helper::cmsStatus($status, URL::createLink($lblModule, $lblController,  'changeStatus', array('id' => $id, 'status' => $status)), $id) . '
 				<td style ="text-align: center;">' . $ordering . '</td>
 				<td style ="text-align: center;">' . $group_id . '</td>
-				<td>' .$buttonChangePassword. $buttonEdit . $buttonDelete . '</td>
+				<td>' .$buttonEdit . $buttonDelete . '</td>
 			</tr> ';
 	echo $xhtml;
 			// <td style ="text-align: center;">' . $created . '  </br>' . $created_by . '</td>

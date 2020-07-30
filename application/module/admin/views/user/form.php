@@ -20,7 +20,7 @@
         $valueGroup_id               =  isset($this->arrParam['form']['group_id'] )          ? $this->arrParam['form']['group_id'] : '' ; 
 
         //SHOW LINK    
-        $linkSave      = URL::createLink($lblModule, $lblController, 'form',array('type'=>'save'));
+        $linkSave      = URL::createLink($lblModule, $lblController, 'form',array('type'=>'save&id='.$lblId.''));
         $linkSaveNew   = URL::createLink($lblModule, $lblController, 'form',array('type'=>'save-new'));
         $linkSaveClose = URL::createLink($lblModule, $lblController, 'form',array('type'=>'save-close'));
         $linkCancel     = URL::createLink($lblModule, $lblController, 'index');
@@ -63,7 +63,7 @@
                 $content = $rowUsername . $rowFullname . $rowEmail . $rowslbStatus . $rowOrdering  . $rowslbGroupId . $groupid . $token  ; 
         }
         else{       
-                $content = $rowUsername .$rowPassword . $rowFullname . $rowEmail . $rowslbStatus . $rowOrdering  . $rowslbGroupId . $groupid ;         
+                $content = $rowUsername .$rowPassword . $rowFullname . $rowEmail . $rowslbStatus . $rowOrdering  . $rowslbGroupId . $groupid. $token  ;         
         }     
       
         $errors = isset($this->errors) ? $this->errors : ''  ;  
@@ -73,7 +73,7 @@
         $linkChangePassword     = URL::createLink($lblModule, $lblController, 'form',array('id'=>$id));
         $templateChangePassword = Form::formChangePassword($linkChangePassword,$buttonInputChangePassword ) ; 
         $title = isset($this->arrParam['id'])  ? "User Edit" : "User Add"   ; 
-        $templateUser           = Form::Content($title,$content,$stringBtn) ;
+        $templateUser           = Form::formContent($title,$content,$stringBtn) ;
     
         if(empty($lblId)){      
                 echo  $templateUser ;

@@ -1,6 +1,6 @@
 <?php
-  //LINK
 
+  //LINK
   $linkGroup          =  URL::createLink('admin', 'group',    'index');
   $linkUser           =  URL::createLink('admin', 'user',     'index');
   $linkCategory       =  URL::createLink('admin', 'category', 'index');

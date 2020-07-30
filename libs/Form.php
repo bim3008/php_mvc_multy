@@ -1,7 +1,7 @@
 <?php
 class Form
 {
-    public static function  Content($title, $content, $button)
+    public static function  formContent($title, $content, $button)
     {
         $xhtml = '
         <form  action="#" method="POST" id="addedit" name="addedit">  

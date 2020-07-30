@@ -1,7 +1,12 @@
 <?php
 class BookModel extends Model
 {
+	
 	protected $_tableName = DB_TABLE_BOOK ;
+	// public function __construct()
+	// {
+	// 	parent::__construct() ;
+	// }
 	public function countItems($arrParam,$opption = null)
 	{
 		$query[] = "SELECT count(`b`.`id`)  as `total` " ;
@@ -127,10 +132,10 @@ class BookModel extends Model
 	}
 	public function insertItems($arrParam,$opption=null)
 	{	
-
+		
 		$id				=  $arrParam['id'] ;
 		$name 			=  $arrParam['name'] ;
-		$description 	=  $arrParam['description'];
+		$description 	= $arrParam['description'] ; 
 		$price 			=  $arrParam['price'] ;
 		$special 		=  $arrParam['special'] ;
 		$saleOff 		=  $arrParam['sale_off'] ;
@@ -138,8 +143,8 @@ class BookModel extends Model
 		$status 		=  $arrParam['status'] ;
 		$category_id    =  $arrParam['category_id'] ;		
 		$picture   	 	=  $arrParam['picture'] ;	
-
 		require_once LIBRARY_EXT_PATH . 'Upload.php' ;
+
 		$uploadObj = new Upload();
 		
 		if($opption['task'] == 'add')
@@ -156,14 +161,17 @@ class BookModel extends Model
 		if($opption['task'] == 'edit')
 		{
 			if($arrParam['picture']['name'] == null){
-				$query = "UPDATE `$this->_tableName` SET `name` = '$name',`price`='$price',`sale_off`='$saleOff',`description` = '$description', `special` = '$special' , `ordering` = '$ordering' ,`status` = '$status',`category_id` = '$category_id' WHERE `id` = $id" ; 
+				$query = " UPDATE `$this->_tableName` SET `name` = '$name',`price`='$price',`sale_off`='$saleOff', `description` = '$description' , `special` = '$special' , `ordering` = '$ordering' ,`status` = '$status',`category_id` = '$category_id' WHERE `id` = $id " ; 		
+			
 			}
 			else
 			{
 				$uploadObj ->removeFile('book',$arrParam['picture_hidden']) ;			
 				$uploadObj ->removeFile('book', '720x560-'.$arrParam['picture_hidden']) ;
+
 				$picture = $uploadObj ->uploadFile($picture ,'book');
-			echo	$query = "UPDATE `$this->_tableName` SET `name` = '$name', `picture` = '$picture' ,`price`='$price',`sale_off`='$saleOff',`description` = '$description', `special` = '$special' , `ordering` = '$ordering' ,`status` = '$status',`category_id` = '$category_id' WHERE `id` = $id" ; 
+				$query = "UPDATE `$this->_tableName` SET `name` = '$name', `picture` = '$picture' ,`price`='$price',`sale_off`='$saleOff',`description` = '$description', `special` = '$special' , `ordering` = '$ordering' ,`status` = '$status',`category_id` = '$category_id' WHERE `id` = $id" ;		
+			
 			}
 			$result = $this->query($query) ;
 			if($result == true)

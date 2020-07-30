@@ -10,9 +10,9 @@ class Upload{
                 $uploadDir      = UPLOAD_PATH . $folderUpload . DS ;
                 $fileName       =  $this->randomString(8). '.'.pathinfo($fileObj['name'],PATHINFO_EXTENSION) ;  ;
                 @copy($fileObj['tmp_name'], $uploadDir . $fileName ) ; 
-                $thumb = PhpThumbFactory::create($uploadDir . $fileName  ) ;
-                $thumb ->adaptiveResize(720,560) ;
-                $thumb -> save( $uploadDir . '720x560-'. $fileName ) ;
+                $thumb = PhpThumbFactory::create($uploadDir . $fileName);
+                $thumb ->adaptiveResize(2022,1120) ;
+                $thumb -> save( $uploadDir . '2022x1120-'. $fileName ) ;
             }
         }
         return $fileName ;

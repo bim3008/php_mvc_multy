@@ -4,16 +4,16 @@ class IndexModel extends Model{
 	public function countItemsIndex($arrParam,$option = null){	 
 
 		if($option['task'] == 'group'){
-			$query[] = "SELECT count(`id`) as `total` FROM `".DB_TABLE_GROUP."` WHERE `id` > 0" ;
+			$query[] = "SELECT count(`id`) as `total` FROM `".DB_TABLE_GROUP."`    WHERE `id` > 0" ;
 		}
 		if($option['task'] == 'user'){
-			$query[] = "SELECT count(`id`) as `total` FROM `".DB_TABLE_USER."` 	WHERE `id` > 0" ;
+			$query[] = "SELECT count(`id`) as `total` FROM `".DB_TABLE_USER."`      WHERE `id` > 0" ;
 		}
 		if($option['task'] == 'category'){
-			$query[] = "SELECT count(`id`) as `total` FROM `".DB_TABLE_CATEGORY."` WHERE `id` > 0" ;
+			$query[] = "SELECT count(`id`) as `total` FROM `".DB_TABLE_CATEGORY."`  WHERE `id` > 0" ;
 		}
 		if($option['task'] == 'book'){
-			$query[] = "SELECT count(`id`) as `total` FROM `".DB_TABLE_BOOK."` 	WHERE `id` > 0" ;
+			$query[] = "SELECT count(`id`) as `total` FROM `".DB_TABLE_BOOK."` 		WHERE `id` > 0" ;
 		}
 		$query  = implode(" " ,$query) ;
 		$resutl =  $this->fetchRow($query) ;

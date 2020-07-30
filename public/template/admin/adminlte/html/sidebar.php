@@ -1,13 +1,16 @@
 <?php
-    $urlLink        =  URL::createLink('admin','index','index') ;
-    $urlGroupAdd    =  URL::createLink('admin','group','form') ;
-    $urlGroupList   =  URL::createLink('admin','group','index') ;
+    $urlLink            =  URL::createLink('admin','index','index') ;
+    $urlGroupAdd        =  URL::createLink('admin','group','form') ;
+    $urlGroupList       =  URL::createLink('admin','group','index') ;
 
-    $urlUserAdd        =  URL::createLink('admin','user','form') ;
+    $urlUserAdd         =  URL::createLink('admin','user','form') ;
     $urlUserList        =  URL::createLink('admin','user','index') ;
 
-    $urlCategoryAdd        =  URL::createLink('admin','category','form') ;
-    $urlCategoryList        =  URL::createLink('admin','category','index') ;
+    $urlCategoryAdd     =  URL::createLink('admin','category','form') ;
+    $urlCategoryList    =  URL::createLink('admin','category','index') ;
+
+    $urlBookAdd         =  URL::createLink('admin','book','form') ;
+    $urlBookList        =  URL::createLink('admin','book','index') ;
 
     $fullname  = isset($_SESSION['loginFacebook']) ? $_SESSION['loginFacebook']['name'] : '' ;
     $fullname .= isset($_SESSION['fullname']) ? $_SESSION['fullname']: '' ;
@@ -77,6 +80,19 @@
                     <?php                    
                             echo Helper::sidebarAdmin($urlCategoryList,'List') ;
                             echo Helper::sidebarAdmin($urlCategoryAdd,'Add') ;
+                    ?>
+                </li>
+                <li class="nav-item has-treeview menu-open">
+                    <a href="#" class="nav-link ">
+                        <i class="nav-icon fas fa-book-open"></i>
+                        <p>
+                            BOOK
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <?php                    
+                            echo Helper::sidebarAdmin($urlBookList,'List') ;
+                            echo Helper::sidebarAdmin($urlBookAdd,'Add') ;
                     ?>
                 </li>
             </ul>

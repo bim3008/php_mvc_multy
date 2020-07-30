@@ -103,6 +103,7 @@ class Validate
 						$this->validateNotExistRecord($element, $value['options']);
 						break;
 					case 'file':
+				
 						$this->validateFile($element, $value['options']);
 						break;
 				}
@@ -253,10 +254,11 @@ class Validate
 	// Validate File
 	private function validateFile($element, $options){
 
-			// // if($this->source[$element]['name'] == null)
-			// // {
-			// // 	$this->setError($element, 'Vui lòng chọn ảnh');
-			// }
+	
+			if($this->source[$element]['name'] == null)
+			{
+				$this->setError($element, 'Vui lòng chọn ảnh');
+			}
 			if(($this->source[$element]['name']) != null ){
 				if(!filter_var($this->source[$element]['size'], FILTER_VALIDATE_INT, array("options"=>array("min_range"=>$options['min'],"max_range"=>$options['max'])))){
 					$this->setError($element, 'kích thước không phù hợp');

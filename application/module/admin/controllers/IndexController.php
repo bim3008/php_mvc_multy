@@ -19,7 +19,6 @@ class IndexController extends Controller{
 				URL ::redirect('admin','index','login') ;
 			}
 		}
-	
 		$this->_view->setTitle(ucfirst($this->_arrParam['action']) );
 		$this->_templateObj->setFolderTemplate('admin/adminlte/');
 		$this->_templateObj->setFileTemplate('index.php');

@@ -21,24 +21,26 @@ class CategoryController extends Controller
 	}
 	public function formAction()
 	{	
-	
 		$task = (!empty($this->_arrParam['form']['id'])) ? 'edit' : 'add';
 		$this->_view->setTitle(ucfirst($this->_arrParam['controller']) . ' : Add');
 		if(!empty($_FILES)) $this->_arrParam['form']['picture'] = $_FILES['picture'];
 		
-		if (!empty($this->_arrParam['id'])) {
+		if (!empty($this->_arrParam['id']) && !(isset($this->_arrParam['form']['token'])) ) {
 			$this->_view->setTitle(ucfirst($this->_arrParam['controller']) . ': Edit');
 			$this->_arrParam['form'] = $this->_model->infoItems($this->_arrParam, null);
 			if (empty($this->_arrParam['form'])) URL::redirect('admin', $this->_arrParam['controller'], 'index');
 		}
 		if(isset($this->_arrParam['form']['token']) > 0) {	
+			
 			$validate = new Validate($this->_arrParam['form']);
 			$validate->addRule('name'    , 'string',  array('min' => 3, 'max' => 50))
-					 ->addRule('picture' , 'file',    array('min' => 100, 'max' => 1000000,'extension'=>array('jpg','png')),false)
 					 ->addRule('ordering', 'int',     array('min' => 1, 'max' => 100))
-					 ->addRule('status'  , 'status',  array('deny' => array('default')));
-					 
+					 ->addRule('status'  , 'status',  array('deny' => array('default')));			
+			if($task == 'add' || $this->_arrParam['form']['picture']['name'] != null) {
+				$validate->addRule('picture' , 'file',    array('min' => 100, 'max' => 1000000,'extension'=>array('jpg','png')),false) ;
+			}
 			$validate->run();
+
 			$this->_arrParam['form'] = $validate->getResult();
 			if ($validate->isValid() == false) {
 				$this->_view->errors = $validate->showErrors();
@@ -52,7 +54,7 @@ class CategoryController extends Controller
 		}
 	
 		$this->_view->arrParam =  $this->_arrParam;
-		$this->_view->render( $this->_arrParam['controller'] . DS .'form');
+		$this->_view->render($this->_arrParam['controller'] . DS .'form');
 	}
 	public function changeStatusAction()
 	{

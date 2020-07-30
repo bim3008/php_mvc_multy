@@ -144,20 +144,19 @@ class CategoryModel extends Model
 	}
 	public function insertItems($arrParam,$opption=null)
 	{	
-		$id				= $arrParam['id'] ;
+		$id				=  $arrParam['id'] ;
 		$name 			=  $arrParam['name'] ;
 		$ordering   	=  $arrParam['ordering'] ;
 		$status 		=  $arrParam['status'] ;
-		$picture   	 	=  $arrParam['picture'] ;		
-	//	$namePicture   	=  $arrParam['picture']['name'] ;	
+		$picture        =  $arrParam['picture'] ;
+	
 		require_once LIBRARY_EXT_PATH . 'Upload.php' ;
 		$uploadObj = new Upload();
 
 		if($opption['task'] == 'add')
 		{
 			// Upload Image
-			$picture = $uploadObj ->uploadFile($picture ,'category') ; 
-			
+			$picture = $uploadObj ->uploadFile($picture , DB_TABLE_CATEGORY) ; 
 			$query = "INSERT INTO `$this->_tableName` ( `name`, `picture`,`status`,`ordering` ) VALUES ('$name','$picture','$status','$ordering')" ;
   			$result = $this->query($query) ; 
 			if($result == true)
@@ -172,9 +171,9 @@ class CategoryModel extends Model
 				$query = "UPDATE `$this->_tableName` SET `name` = '$name', `status` = '$status',`ordering` = '$ordering'  WHERE `id` = $id" ; 
 			}
 			else{
-				$uploadObj ->removeFile('category',$arrParam['picture_hidden']) ;			
-				$uploadObj ->removeFile('category', '720x560-'.$arrParam['picture_hidden']) ;
-				$picture = $uploadObj ->uploadFile($picture ,'category');
+				$uploadObj ->removeFile(DB_TABLE_CATEGORY,$arrParam['picture_hidden']) ;			
+				$uploadObj ->removeFile(DB_TABLE_CATEGORY, '720x560-'.$arrParam['picture_hidden']) ;
+				$picture = $uploadObj ->uploadFile($picture ,DB_TABLE_CATEGORY);
 				$query = "UPDATE `$this->_tableName` SET `name` = '$name', `picture` = '$picture' ,`status` = '$status',`ordering` = '$ordering'  WHERE `id` = $id" ; 
 			}
 			$result = $this->query($query) ;
@@ -192,7 +191,6 @@ class CategoryModel extends Model
 		$result = $this->fetchRow($query) ;	
 		return $result ;
 	}
-
 	public function saveItem($arrParam, $option = null){
 		 require_once LIBRARY_EXT_PATH . 'Upload.php';
 		// require_once LIBRARY_EXT_PATH . 'XML.php';

@@ -8,22 +8,22 @@
     $lblFilterSearch    = isset($this->arrParam['filter_search']) ? $this->arrParam['filter_search'] : '';
 
     // ADD
-    $linkAdd  = URL::createLink($lblModule , $lblController, 'form');
-    $btnAdd   = Helper::cmsButton($linkAdd, 'btn  bg-warning', 'fas fa-plus', 'add', 'Add');
+    $linkAdd            = URL::createLink($lblModule , $lblController, 'form');
+    $btnAdd             = Helper::cmsButton($linkAdd, 'btn  bg-warning', 'fas fa-plus', 'add', 'Add');
     // Multy - Delete 
-    $linkMultyDelete = URL::createLink($lblModule , $lblController, 'multydelete');
-    $btnMultyDelete  = Helper::cmsButton("#", 'btn btn-danger btn-multydelete', 'fas fa-trash', 'btn-multydelete', 'Delete');
+    $linkMultyDelete    = URL::createLink($lblModule , $lblController, 'multydelete');
+    $btnMultyDelete     = Helper::cmsButton("#", 'btn btn-danger btn-multydelete', 'fas fa-trash', 'btn-multydelete', 'Delete');
     $btnCRUD = $btnAdd . $btnMultyDelete;
     //ALL
-    $linkAll         = URL::createLink($lblModule , $lblController, 'index', array('filter_status' => '' , 'filter_search' =>  $lblFilterSearch));
-    $btnAll          = Helper::cmsButton($linkAll, 'btn btn-info', '', 'all', 'All' . '(' . $this->countItems[0]['total'] . ')');
+    $linkAll            = URL::createLink($lblModule , $lblController, 'index', array('filter_status' => '' , 'filter_search' =>  $lblFilterSearch));
+    $btnAll             = Helper::cmsButton($linkAll, 'btn btn-info', '', 'all', 'All' . '(' . $this->countItems[0]['total'] . ')');
     // ACTIVE
-    $linkActive      = URL::createLink($lblModule , $lblController, 'index', array('filter_status' => 'active', 'filter_search' => $lblFilterSearch));
-    $btnActive       = Helper::cmsButton($linkActive, 'btn  bg-warning', '', 'ac', 'Active' . '(' . $this->countItems[1]['total'] . ')');
+    $linkActive         = URL::createLink($lblModule , $lblController, 'index', array('filter_status' => 'active', 'filter_search' => $lblFilterSearch));
+    $btnActive          = Helper::cmsButton($linkActive, 'btn  bg-warning', '', 'ac', 'Active' . '(' . $this->countItems[1]['total'] . ')');
     // INACTIVE
-    $linkInactive    = URL::createLink($lblModule , $lblController, 'index', array('filter_status' => 'inactive', 'filter_search' => $lblFilterSearch));
-    $btnInactive     = Helper::cmsButton($linkInactive, 'btn  btn-success', '', 'inac', 'Inactive' . '(' . $this->countItems[2]['total'] . ')');
-    $btnFillter      = $btnAll . $btnActive . $btnInactive;
+    $linkInactive       = URL::createLink($lblModule , $lblController, 'index', array('filter_status' => 'inactive', 'filter_search' => $lblFilterSearch));
+    $btnInactive        = Helper::cmsButton($linkInactive, 'btn  btn-success', '', 'inac', 'Inactive' . '(' . $this->countItems[2]['total'] . ')');
+    $btnFillter         = $btnAll . $btnActive . $btnInactive;
     $formSearch = '
         <form action="" method="get">
                 <p style ="display: inline-flex;">

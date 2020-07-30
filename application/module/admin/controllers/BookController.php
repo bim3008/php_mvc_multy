@@ -37,15 +37,18 @@ class BookController extends Controller
 		}
 		if(isset($this->_arrParam['form']['token']) > 0) {	
 			$validate = new Validate($this->_arrParam['form']);
-			$validate->addRule('name'       , 'string',  array('min' => 3, 'max' => 50))
+			$validate->addRule('name'       , 'string',  array('min' => 3, 'max' => 500))
 					 ->addRule('description', 'string',  array('min' => 3, 'max' => 5000))
-					 ->addRule('picture'    , 'file',    array('min' => 100, 'max' => 1000000,'extension'=>array('jpg','png')),false)
-					 ->addRule('price'      , 'int',     array('min' => 1, 'max' => 100))
+					//  ->addRule('picture'    , 'file',    array('min' => 100, 'max' => 1000000,'extension'=>array('jpg','png')),false)
+					 ->addRule('price'      , 'int',     array('min' => 1000, 'max' => 100000000))
 					 ->addRule('sale_off'   , 'int',     array('min' => 1, 'max' => 100))
 					 ->addRule('special'    , 'status',  array('deny' => array('default')))
 					 ->addRule('status'     , 'status',  array('deny' => array('default')))
 					 ->addRule('category_id', 'status',  array('deny' => array('default')))
 					 ->addRule('ordering'   , 'int',     array('min' => 1, 'max' => 1000)) ;
+					 if($task == 'add' || $this->_arrParam['form']['picture']['name'] != null) {
+						$validate->addRule('picture' , 'file',    array('min' => 100, 'max' => 1000000,'extension'=>array('jpg','png')),false) ;
+					}
 			$validate->run();
 			$this->_arrParam['form'] = $validate->getResult();
 			if ($validate->isValid() == false) {
@@ -58,7 +61,6 @@ class BookController extends Controller
 				if ($type == 'save') 	   URL::redirect('admin', $this->_arrParam['controller'], 'form', array('id' => $id));
 			}
 		}
-	
 		$this->_view->arrParam =  $this->_arrParam;
 		$this->_view->render( $this->_arrParam['controller'] . DS .'form');
 	}

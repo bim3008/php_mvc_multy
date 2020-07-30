@@ -4,6 +4,8 @@ class Model{
 	protected $database;
 	protected $table;
 	protected $resultQuery;
+
+	protected $link;
 	
 	// CONNECT DATABASE
 	public function __construct($params = null){

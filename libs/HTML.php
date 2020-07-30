@@ -114,7 +114,7 @@
 						<th style="width: 14%;text-align:center ">Name</th>
                         <th style="width: 14%;text-align:center ">Description</th>
                         <th style="width: 14% ;text-align:center">Picture</th>
-                        <th style="width: 14% ;text-align:center">Category</th>
+                        <th style="width: 12% ;text-align:center">Category</th>
 						<th style="width: 16%;text-align:center ">Price</th>
 						<th style="width: 1%;text-align:center ">Special</th>
 						<th style="width: 1%;text-align:center   ">Status</th>

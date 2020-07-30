@@ -12,7 +12,6 @@ class UserController extends Controller
 	}
 	public function indexAction()
 	{
-		
 		$this->_view->setTitle(ucfirst($this->_arrParam['controller']));
 		$this->_view->listItems      		= $this->_model->listItems($this->_arrParam);
 		$this->_view->selectBoxGroup        = $this->_model->itemsInSelectBox($this->_arrParam);
@@ -27,14 +26,13 @@ class UserController extends Controller
 	{
 		$this->_view->setTitle(ucfirst($this->_arrParam['controller']) . ' : Add');
 		$this->_view->selectBoxGroup  = $this->_model->itemsInSelectBox($this->_arrParam) ;
-		if (isset($this->_arrParam['id'])) {
-
+		
+		if (isset($this->_arrParam['id']) && !(isset($this->_arrParam['form']['token'])) ) {
 			$this->_view->setTitle('User : Edit');
 			$this->_arrParam['form'] = $this->_model->infoItems($this->_arrParam, null); 
 			if(empty($this->_arrParam['form'])) URL::redirect('admin', $this->_arrParam['controller'], 'index');
 		}
 		if(isset($this->_arrParam['form']['token']) > 0 || isset($this->_arrParam['change'])) {
-
 			$requirePass = true ;
 			$queryUserName  = "SELECT `id` FROM `".DB_TABLE_USER."` WHERE `username` = '".$this->_arrParam['form']['username']."'" ; 
 			$queryUserEmail = "SELECT `id` FROM `".DB_TABLE_USER."` WHERE  `email`   = '".$this->_arrParam['form']['email']."'" ; 
@@ -48,6 +46,7 @@ class UserController extends Controller
 			}
 			if(!empty($this->_arrParam['type']))
 			{
+				
 				$validate = new Validate($this->_arrParam['form']); 
 				$validate->addRule('username', 'string-notExistRecord', array('database'=>$this->_model, 'query' => $queryUserName ,'min' => 2 , 'max' => 50))
 						->addRule('password', 'password',array('action' => $task) , $requirePass)
@@ -57,9 +56,12 @@ class UserController extends Controller
 						->addRule('ordering', 'int', array('min' => 1, 'max' => 100))
 						->addRule('group_id',  'status',    array('deny' => array('default'))) ;
 				$validate->run();			 
+				
 				$this->_arrParam['form'] = $validate->getResult();
+				
 				if ($validate->isValid() == false) {
 					$this->_view->errors = $validate->showErrors();
+					
 				} else {
 					$this->_model->insertItemsUser($this->_arrParam['form'], array('task' => $task));
 					$type = $this->_arrParam['type'];

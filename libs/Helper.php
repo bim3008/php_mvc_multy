@@ -50,9 +50,9 @@ class Helper
         $xhtml = '<div class="form-group"><label name="' . $lbName . '">' . ucfirst($lbName) . '</label>' . $input . '</div> ';
         return $xhtml;
     }
-    public static function cmsSelectboxForm($lbName, $nameLb, $class, $arrValue, $keySelect = 'default', $style = null)
+    public static function cmsSelectboxForm($nameForm, $nameValue, $arrValue, $keySelect = 'default', $style = null)
     {
-        $xhtml =  '<div class="form-group"> <label name="' . $lbName . '">' . $nameLb . '</label><select name="' . $lbName . '" class="' . $class . '"> ';
+        $xhtml =  '<div class="form-group"> <label>' . $nameValue . '</label><select name="form['. $nameForm .']" class="form-control custom-select"> ';
         foreach ($arrValue as $key => $value) {
             if ($key == $keySelect && is_numeric($keySelect)) {
                 $xhtml .= '<option selected="selected" value = "' . $key . '">' . $value . '</option>';
@@ -194,6 +194,22 @@ class Helper
         $text = substr($text, 0, strrpos($text, ' '));
         $text = $text.".....";
         return $text;
+    }
+    
+    public static function cmsFormInputHidden(  $name, $value, $style = null)
+    {
+        $xhtml = '<input  type="hidden" id="'.$name.'" name="form[' .$name .']" class="form-control" value="' . $value . '"  style = "' . $style . '"> ';
+        return $xhtml;
+    }
+    public static function cmsFormInputText(  $name, $value, $style = null)
+    {
+        $xhtml = '<input  type="text" id="'.$name.'" name="form['. $name .']" class="form-control" value="' . $value . '"  style = "' . $style . '"> ';
+        return $xhtml;
+    }
+    public static function cmsFormInputFile($name, $value, $style = null)
+    {
+        $xhtml = '<input  type="file" id="'.$name.'" name="'. $name .'" class="form-control" value="' . $value . '"  style = "' . $style . '"> ';
+        return $xhtml;
     }
 
 }

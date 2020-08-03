@@ -1,6 +1,4 @@
 <?php
-
-
     require_once 'Facebook/autoload.php';
     $FB = new \Facebook\Facebook([
             'app_id'      => '550537108941720' ,

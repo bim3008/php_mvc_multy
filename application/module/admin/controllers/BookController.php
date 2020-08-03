@@ -15,7 +15,7 @@ class BookController extends Controller
 		
 		$this->_view->setTitle(ucfirst($this->_arrParam['controller']));
 		$this->_view->listItems      		= $this->_model->listItems($this->_arrParam);
-		$this->_view->selectBoxGroup        = $this->_model->itemsInSelectBox($this->_arrParam);
+		$this->_view->selectBox             = $this->_model->itemsInSelectBox($this->_arrParam);
 		$this->_view->countItems[]			= $this->_model->countItems($this->_arrParam);
 		$this->_view->countItems[]   		= $this->_model->countItems($this->_arrParam, array('task' => 'active'));
 		$this->_view->countItems[]   		= $this->_model->countItems($this->_arrParam, array('task' => 'inactive'));

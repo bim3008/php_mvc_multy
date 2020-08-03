@@ -31,8 +31,8 @@ foreach ($this->listItems as $key => $value) {
 
 	$linkEdit     = URL::createLink($lblModule, $lblController, 'form', array('id' => $id));
 	$linkDelete   = URL::createLink($lblModule, $lblController,  'delete', array('id' => $id));
-	$buttonEdit   = Helper::cmsButton($linkEdit, 'btn btn-warning btn-sm', 'fa fa-edit', 'edit', '',);
-	$buttonDelete = Helper::cmsButton($linkDelete, 'btn btn-danger btn-sm btn-delete', 'fa fa-trash', 'delete', '');
+	$buttonEdit   = Helper::cmsButtonEdit($linkEdit,'');
+	$buttonDelete = Helper::cmsButtonDelete($linkDelete,'');
 	$xhtml = '	
 	<tr>
 		<td><span class="custom-checkbox"><input type="checkbox" id="checkbox1" name="cid[]" value="' . $id . '"></span></td>

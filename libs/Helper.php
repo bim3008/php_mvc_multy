@@ -2,15 +2,27 @@
 class Helper
 {
 
-    public static function cmsButton($link, $class, $icon, $id, $name, $type = 'new')
+    public static function cmsButton($link, $class, $icon, $id, $name, $type = 'new',$style = null)
     {
         if ($type == 'new') {
-            $xhtml = ' <a href="' . $link . '" " class="' . $class . '" id="' . $id . '"  > <span class="' . $icon . '" ></span> ' . $name . '</a> ';
+            $xhtml = ' <a  style="'.$style.'" href="' . $link . '" " class="' . $class . '" id="' . $id . '"  > <span class="' . $icon . '" ></span> ' . $name . '</a> ';
         } else if ($type == 'submit') {
             $xhtml = ' <a href="#"  onclick="javascript:submitForm(\'' . $link . '\')" class="' . $class . '"> <span class="' . $icon . '"></span> ' . $name . '</a> ';
         } else if ($type == 'submitDelete') {
             $xhtml = ' <a href="#"  onclick="javascript:submitMultyDelete(\'' . $link . '\')" class="' . $class . '"> <span class="' . $icon . '"></span> ' . $name . '</a> ';
         }
+        return $xhtml;
+    }
+    public static function cmsButtonEdit($link, $name)
+    {
+            $xhtml = ' <a href="' . $link . '" " class="btn btn-warning btn-sm" id="edit"  > <span class="fa fa-edit" ></span> ' . $name . '</a> ';
+
+        return $xhtml;
+    }
+    public static function cmsButtonDelete($link, $name)
+    {
+            $xhtml = ' <a href="' . $link . '" " class="btn btn-danger btn-sm btn-delete" id="delete"  > <span class="fa fa-trash" ></span> ' . $name . '</a> ';
+
         return $xhtml;
     }
     public static function cmsStatus($status, $link, $id)
@@ -32,9 +44,9 @@ class Helper
         $xhtml = '<input   type="' . $type . '" id="' . $id . '" name="' . $name . '" class="' . $class . '" value="' . $value . '"  style = "' . $style . '"> ';
         return $xhtml;
     }
-    public static function cmsSelectbox($name, $class, $arrValue, $keySelect = 'default', $style = null)
+    public static function cmsSelectbox($name, $arrValue, $keySelect = 'default', $style = null)
     {
-        $xhtml = '<select style="' . $style . '" name="' . $name . '" class="' . $class . '" >';
+        $xhtml = '<select style="' . $style . '" name="' . $name . '" id = "'.$name.'" class="form-control custom-select bg-warning '.$name.'" >';
         foreach ($arrValue as $key => $value) {
             if ($key == $keySelect && is_numeric($keySelect)) {
                 $xhtml .= '<option selected="selected" value = "' . $key . '">' . $value . '</option>';
@@ -85,7 +97,7 @@ class Helper
             Session::delete($message);
         }
     }
-    public static function toolbar($tblFiler, $tblSearch, $tblCRUD)
+    public static function toolbar($tblFiler, $tblSearch, $tblCRUD,$selectBox = null)
     {
         $xhtml = '
         <div class="col-md-">
@@ -93,8 +105,8 @@ class Helper
             <div class="card-header">
                 <div class="row">
                     <div class="col-sm-4">' . $tblFiler . '</div>
-                    <div class="col-sm-5">' . $tblSearch . '</div>
-                    <div class="col-sm-3">' . $tblCRUD . '</div>
+                    <div class="col-sm-4">' . $tblSearch . '</div>
+                    <div class="col-sm-4">' . $tblCRUD .  $selectBox .'</div>
                 </div>
             </div>
         
@@ -150,12 +162,12 @@ class Helper
         ';
         return $xhtml;
     }
-    public static function cmsInputChangePassword($nameMain,$type,$nameInput,$placeholder,$value)
+    public static function cmsInputChangePassword($nameMain,$nameInput,$placeholder)
     {
         $xhtml = '
         <div class="form-group">
             <label for="exampleInputEmail1">'.$nameMain.'</label>
-            <input type="'.$type.'" class="form-control" name="'.$nameInput.'" placeholder="'.$placeholder.'" value="'.$value.'">
+            <input type="password" class="form-control" name="change['.$nameInput.']" placeholder="'.$placeholder.'" >
         </div>
         ' ;
         return $xhtml ;
@@ -212,4 +224,9 @@ class Helper
         return $xhtml;
     }
 
+    public static function cmsFormInputPassword($name, $value, $style = null)
+    {
+        $xhtml = '<input  type="password" id="'.$name.'" name="form['. $name .']" class="form-control" value="' . $value . '"  style = "' . $style . '"> ';
+        return $xhtml;
+    }
 }

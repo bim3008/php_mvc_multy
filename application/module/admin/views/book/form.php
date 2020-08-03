@@ -1,8 +1,5 @@
 <?php   
         // GET PARAMS CONTROLLE//
-        echo '<pre>';
-        print_r($this->arrParam);
-        echo '</pre>';
         $lblId                = isset($this->arrParam['id']) ? $this->arrParam['id'] : null;
         $lblModule            = isset($this->arrParam['module']) ? $this->arrParam['module'] : 'admin';
         $lblController        = isset($this->arrParam['controller']) ? $this->arrParam['controller'] : 'book';
@@ -17,26 +14,14 @@
         $valueStatus          =  isset($dataForm ['status'] )           ? $dataForm ['status'] : '' ;   
         $valueOrdering        =  isset($dataForm ['ordering'] )         ? $dataForm ['ordering'] : '' ;   
         $valuePicture         =  isset($dataForm ['picture'])           ? $dataForm ['picture'] : '' ;      
-        $valueCategoryId      =  isset($dataForm ['category_id'] )      ? $dataForm ['category_id'] : '' ;     
-  
+        $valueCategoryId      =  isset($dataForm ['category_id'] )      ? $dataForm ['category_id'] : '' ; 
+        $valuePictureHidden   =  isset( $dataForm['picture_hidden'])  ?  $dataForm['picture_hidden'] : '' ;    
+        // Chỉ lấy hình ảnh ở dạng chuỗi
         if(is_array($valuePicture)){
                 $valuePicture = '' ;
         }
         // CREATE BUTTON CRUD
-        $linkSave        = URL::createLink($lblModule, $lblController, 'form',array('type'=>'save'));
-        $btnSave         = Helper::cmsButton($linkSave, 'btn btn-success ', '', 'save', 'Save','submit');
-        // SAVE NEW
-        $linkSaveNew     = URL::createLink($lblModule, $lblController, 'form',array('type'=>'save-new'));
-        $btnSaveNew      = Helper::cmsButton($linkSaveNew, 'btn btn-success ', '', 'savenew', 'Save & New','submit');
-        // SAVE LOSE
-        $linkSaveClose   = URL::createLink($lblModule, $lblController, 'form',array('type'=>'save-close'));
-        $btnSaveClose    = Helper::cmsButton($linkSaveClose, 'btn btn-danger ', '', 'inac', 'Save & Close','submit');
-        //CANCEL
-        $linkCancel      = URL::createLink($lblModule, $lblController, 'index');
-        $btnCancel       = Helper::cmsButton($linkCancel, 'btn btn-info', '', 'cancel', 'Cancel');
-
-        $stringBtn       = $btnSave . $btnSaveNew . $btnSaveClose . $btnCancel;
-   
+        $buttonForm         = Form::formButton($lblModule, $lblController) ;
         // CREATE INPUT
         $inputDescription    =  HTML::inputDescription($valueDescription);
         $inputName           =  Helper::cmsFormInputText( 'name',$valueName);
@@ -46,8 +31,8 @@
         $inputPicture        =  Helper::cmsFormInputFile( 'picture',$valuePicture,'padding-top: 1px;padding-left: 1px;height: 34px');
         $inputid             =  Helper::cmsFormInputHidden('id',$id );
         $pictureHidden       =  Helper::cmsFormInputHidden('picture_hidden',$valuePicture);
-
-        $namePicture        = !empty($valuePicture) ? $valuePicture : $dataForm['picture_hidden'] ;
+        // Giữ hình ảnh khi tồn tại validate(lỗi khi edit)
+        $namePicture        = !empty($valuePicture) ? $valuePicture : $valuePictureHidden ;
         $linkImage          =  LINK_IMAGE_BOOK . $namePicture  ;                                 
         $image              =  Helper::linkImage($linkImage,'width:300')    ;
         //CREATE ROW
@@ -58,27 +43,23 @@
         $rowSaleOff         = Helper::cmsRowInput('sale off', $inputSaleOff);
         $rowPicture         = Helper::cmsRowInput('picture', $inputPicture);
         $rowOrdering        = Helper::cmsRowInput('ordering', $inputOrdering );
-        $rowSelectStatus    = Helper::cmsSelectboxForm('status',     'Status'  , array('default'=>'Select status','0'=>'Active','1'=>'Inactive'),$valueStatus) ;
-        $rowSelectSpecial   = Helper::cmsSelectboxForm('special',    'Special' , array('default'=>'Select Special','0'=>'Không','1'=>'Có'),$valueSpecial) ;
+        $rowSelectStatus    = Helper::cmsSelectboxForm('status',  'Status'  , array('default'=>'Select stat                us','0'=>'Active','1'=>'Inactive'),$valueStatus) ;
+        $rowSelectSpecial   = Helper::cmsSelectboxForm('special', 'Special' , array('default'=>'Select Special','0'=>'Không','1'=>'Có'),$valueSpecial) ;
         $rowslbCategoryId   = Helper::cmsSelectboxForm('category_id','Category', $this->selectBoxCategory,$valueCategoryId) ;
-       
-
-        if($id > 0){
-                $content = $rowName . $rowDescription . $rowPicture . $image  . $rowPrice . $rowSaleOff .  $rowSelectSpecial . $rowSelectStatus . $rowslbCategoryId . $rowOrdering . $inputid . $rowPictureHidden;
+        // FORM ADD AND EDIT
+        if($id > 0){$content = $rowName . $rowDescription . $rowPicture . $image  . $rowPrice . $rowSaleOff .  $rowSelectSpecial . $rowSelectStatus . $rowslbCategoryId . $rowOrdering . $inputid . $rowPictureHidden;
         }
-        else{
-                $content = $rowName . $rowDescription . $rowPicture . $rowPrice . $rowSaleOff .  $rowSelectSpecial . $rowSelectStatus . $rowslbCategoryId . $rowOrdering.$rowPictureHidden ;
+        else       {$content = $rowName . $rowDescription . $rowPicture . $rowPrice . $rowSaleOff .  $rowSelectSpecial . $rowSelectStatus . $rowslbCategoryId . $rowOrdering.$rowPictureHidden ;
         }
-
-        echo Helper::notifyMessege('messege') ;   
+        echo Helper::notifyMessege('messege') ;        // In ra thông báo
         $errors =  isset($this->errors) ? $this->errors : ''  ;  
-        echo  $errors = '<div  >'.$errors.'</div>' ;       
+        echo  $errors = '<div  >'.$errors.'</div>' ;   // In ra lỗi
 ?>  
        
 <form  action="#" method="POST" id="addedit" name="addedit" enctype="multipart/form-data">    
         <?php 
                 $title = isset($this->arrParam['id']) ? 'Book Edit' : 'Book Add' ; 
-                echo  Form::formContent($title,$content,$stringBtn) ;
+                echo  Form::formContent($title,$content,$buttonForm) ;
         ?>
 </form>
 

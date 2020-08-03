@@ -64,7 +64,7 @@
                         <th class="sorting" rowspan="1" colspan="1" style="width: 5%;text-align: center;">Status</th>
                         <th class="sorting" rowspan="1" colspan="1" style="width: 3%;text-align: center;">Ordering</th>
                         <th class="sorting" rowspan="1" colspan="1" style="width: 20%;text-align: center;">Group</th>
-                        <th class="sorting" rowspan="2" colspan="2" style="width: 10%;text-align: center;">Action</th>
+                        <th class="sorting" rowspan="2" colspan="2" style="width: 20%;text-align: center;">Action</th>
 		            </tr>
                 </thead>
                 
@@ -103,7 +103,7 @@
         {
             $xhtml = '
             <div class="card-body">
-            <form action="'.URL::createLink('admin','category','multydelete').'" method="POST" id="formListGroup">
+            <form action="'.URL::createLink('admin','book','multydelete').'" method="POST" id="formListGroup">
 			<table class="table table-striped">
 				<thead>
 					<tr>

@@ -7,13 +7,10 @@ class IndexController extends Controller{
 	public function indexAction(){
 		$infomationUser = Session::get('user') ;
 		$loginFacebook	= Session::get('loginFacebook') ;
-		
-		if($infomationUser == false &&  $loginFacebook == false )
-		{
+		if($infomationUser == false &&  $loginFacebook == false ){
 			URL ::redirect('admin','index','login') ;
 		}
-		if(!empty($infomationUser))
-		{
+		if(!empty($infomationUser)){
 			if($infomationUser['group_acp'] != 1){
 				Session::delete('user') ;
 				URL ::redirect('admin','index','login') ;
@@ -46,7 +43,7 @@ class IndexController extends Controller{
 		{
 			$validate = new Validate($this->_arrParam['form']) ;
 			$username = $this->_arrParam['form']['username'] ;
-			$password = $this->_arrParam['form']['password'] ;
+		    $password = md5($this->_arrParam['form']['password']) ; 
 		 	$query    = "SELECT `id` FROM `".DB_TABLE_USER."` WHERE `username` = '$username' AND  `password` = '$password'" ;
 			$validate->addRule('username', 'existRecord' , array('database' => $this->_model , 'query'=> $query )) ;
 			$validate->run() ;

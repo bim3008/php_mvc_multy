@@ -1,5 +1,4 @@
 function submitForm(url) {
-
     $('#addedit').attr('action', url).submit();
 }
 
@@ -8,8 +7,6 @@ $('#btn-multydelete').click(function() {
 });
 $('#btn-multydeleteUser').click(function() {
     $('#formListUser').submit();
-    // alert(1);
-
 });
 
 function changePage(page) {
@@ -42,15 +39,11 @@ $(document).ready(function() {
         }
     });
 
-    $('#form-group a[name=tagSearch]').click(function() {
-        // $('#searchForm').submit(); 
-        // alert('Hello')
-    });
-
     $(".btn-change-password").click(function() {
-
         $('#changePasswod').submit();
-        // alert(1);
     });
 
+    // $(".filter_category_id").change(function() {
+    //     $('#formBox').submit();
+    // });
 })

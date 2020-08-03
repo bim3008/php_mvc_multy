@@ -3,10 +3,6 @@ class BookModel extends Model
 {
 	
 	protected $_tableName = DB_TABLE_BOOK ;
-	// public function __construct()
-	// {
-	// 	parent::__construct() ;
-	// }
 	public function countItems($arrParam,$opption = null)
 	{
 		$query[] = "SELECT count(`b`.`id`)  as `total` " ;
@@ -117,7 +113,7 @@ class BookModel extends Model
 				$ids = 	$this->createWhereDeleteSQL($id) ;
 				$query[] = "WHERE id IN ($ids) " ;
 				$query = implode(" " ,$query) ;		
-				$result =  $this->delete($query) ;		
+				$result =  $this->query($query) ;		
 				if($result == true)
 				{
 					Session::set('messege','Xóa thành công') ;	

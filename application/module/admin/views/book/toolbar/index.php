@@ -1,18 +1,19 @@
 
 <?php
 
-    $lblModule          = isset($this->arrParam['module']) ? $this->arrParam['module'] : 'admin';
-    $lblController      = isset($this->arrParam['controller']) ? $this->arrParam['controller'] : 'category';
-    $lblAction          = isset($this->arrParam['action']) ? $this->arrParam['action'] : 'index';
-    $lblStatus          = isset($this->arrParam['filter_status']) ? $this->arrParam['filter_status'] : '';
-    $lblFilterSearch    = isset($this->arrParam['filter_search']) ? $this->arrParam['filter_search'] : '';
+    $lblModule          = isset($this->arrParam['module'])             ? $this->arrParam['module'] : 'admin';
+    $lblController      = isset($this->arrParam['controller'])         ? $this->arrParam['controller'] : 'category';
+    $lblAction          = isset($this->arrParam['action'])             ? $this->arrParam['action'] : 'index';
+    $lblStatus          = isset($this->arrParam['filter_status'])      ? $this->arrParam['filter_status'] : '';
+    $lblFilterSearch    = isset($this->arrParam['filter_search'])      ? $this->arrParam['filter_search'] : '';
+  //  $lblFilterCategory  = isset($this->arrParam['filter_category_id']) ? $this->arrParam['filter_category_id'] : '';
 
     // ADD
     $linkAdd  = URL::createLink($lblModule , $lblController, 'form');
     $btnAdd   = Helper::cmsButton($linkAdd, 'btn  bg-warning', 'fas fa-plus', 'add', 'Add');
     // Multy - Delete 
     $linkMultyDelete = URL::createLink($lblModule , $lblController, 'multydelete');
-    $btnMultyDelete  = Helper::cmsButton("#", 'btn btn-danger btn-multydelete', 'fas fa-trash', 'btn-multydelete', 'Delete');
+    $btnMultyDelete  = Helper::cmsButton("#",'btn btn-danger btn-multydelete', 'fas fa-trash', 'btn-multydelete', 'Delete');
     $btnCRUD = $btnAdd . $btnMultyDelete;
     //ALL
     $linkAll         = URL::createLink($lblModule , $lblController, 'index', array('filter_status' => '' , 'filter_search' =>  $lblFilterSearch));
@@ -25,7 +26,7 @@
     $btnInactive     = Helper::cmsButton($linkInactive, 'btn  btn-success', '', 'inac', 'Inactive' . '(' . $this->countItems[2]['total'] . ')');
     $btnFillter      = $btnAll . $btnActive . $btnInactive;
     $formSearch = '
-        <form action="" method="get">
+        <form action="" method="get" id="formBox">
                 <p style ="display: inline-flex;">
                     <input type="hidden"  name="module"           value="'.$lblModule.'">
                     <input type="hidden"  name="controller"       value="'.$lblController.'" >
@@ -36,5 +37,8 @@
                     <a  style="margin-left:5px" href="'.URL::createLink($lblModule,$lblController,'index').'"  class="btn btn-info float-right" > Clear</a>   
                 </p>
         </form>    ';
+
+  //  $slectBoxCategory = Helper::cmsSelectbox('filter_category_id',$this->selectBox,'','width:180') ;
+    
 
 ?>

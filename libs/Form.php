@@ -36,8 +36,8 @@ class Form
     public static function formChangePassword($link, $buttonChangePass)
     {
 
+        $linkCancel     = URL::createLink('admin', 'user', 'index');
         $xhtml = '
-
             <form action ="#" id="changePasswod" method="POST">
                 <section class="content">
                     <div class="container-fluid">
@@ -54,9 +54,9 @@ class Form
                                             ' . $buttonChangePass . '
                                         </div>
                                         <div class="card-footer">
-                                                    <a href="#" class="btn btn-primary btn-change-password">Change Password</a>  
-                                        </div>
-                                                
+                                                    <a href="#" class="btn btn-primary btn-change-password">Change Password</a> 
+                                                    <a style="margin-left:80%" href="'.$linkCancel .'" class="btn btn-primary btn-change-password">Back</a>            
+                                        </div>       
                                         <div> 
                                             <input type="hidden" name="change-password" value="change-password">
                                         </div>            
@@ -69,4 +69,23 @@ class Form
             ';
         return $xhtml;
     }    
+
+    public static function formButton($moudel,$controller)
+    {
+        $linkSave        = URL::createLink($moudel,$controller, 'form',array('type'=>'save'));
+        $btnSave         = Helper::cmsButton($linkSave, 'btn btn-success ', '', 'save', 'Save','submit');
+        // SAVE NEW
+        $linkSaveNew     = URL::createLink($moudel,$controller,  'form',array('type'=>'save-new'));
+        $btnSaveNew      = Helper::cmsButton($linkSaveNew, 'btn btn-success ', '', 'savenew', 'Save & New','submit');
+        // SAVE LOSE
+        $linkSaveClose   = URL::createLink($moudel,$controller,  'form',array('type'=>'save-close'));
+        $btnSaveClose    = Helper::cmsButton($linkSaveClose, 'btn btn-danger ', '', 'inac', 'Save & Close','submit');
+        //CANCEL
+        $linkCancel      = URL::createLink($moudel,$controller, 'index');
+        $btnCancel       = Helper::cmsButton($linkCancel, 'btn btn-info', '', 'cancel', 'Cancel');
+
+        $button       = $btnSave . $btnSaveNew . $btnSaveClose . $btnCancel;
+
+        return $button;
+    }
 }

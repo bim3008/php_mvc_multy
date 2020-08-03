@@ -3,7 +3,6 @@ require_once 'toolbar/index.php';
 	echo	Helper::notifyMessege('messege');
 ?>
 <?php
- 
 	echo Helper::toolbarUser($btnFillter, $formSearch, $btnCRUD);
 	echo HTML::menuUser() ?>
 <?php
@@ -28,9 +27,9 @@ foreach ($this->listItems as $key => $value) {
 	// LINK AND BUTTON
 	$linkEdit     				= URL::createLink($lblModule, $lblController, 'form', array('id' => $id));
 	$linkDelete   				= URL::createLink($lblModule, $lblController,  'delete', array('id' => $id));
-	$linkChangePass   			= URL::createLink($lblModule, $lblController,  'form', array('id' => $id,'type'=> 'change-pass'));
-	$buttonEdit   				= Helper::cmsButton($linkEdit ,'', 'far fa-edit', 'edit',' ');
-	$buttonDelete 				= Helper::cmsButton($linkDelete, '', 'fas fa-trash', 'delete', '');
+	$linkChangePass   			= URL::createLink($lblModule, $lblController,  'form', array('type'=> 'change-pass','id' => $id));
+	$buttonEdit   				= Helper::cmsButtonEdit($linkEdit ,'');
+	$buttonDelete 				= Helper::cmsButtonDelete($linkDelete,'');
 	$buttonChangePassword		= Helper::cmsButton($linkChangePass, '', 'fas fa-key', 'change-pass', '');
 	//
 	$xhtml = '
@@ -43,7 +42,7 @@ foreach ($this->listItems as $key => $value) {
 				' . Helper::cmsStatus($status, URL::createLink($lblModule, $lblController,  'changeStatus', array('id' => $id, 'status' => $status)), $id) . '
 				<td style ="text-align: center;">' . $ordering . '</td>
 				<td style ="text-align: center;">' . $group_id . '</td>
-				<td>' .$buttonEdit . $buttonDelete . '</td>
+				<td>'. $buttonChangePassword .$buttonEdit . $buttonDelete . '</td>
 			</tr> ';
 	echo $xhtml;
 			// <td style ="text-align: center;">' . $created . '  </br>' . $created_by . '</td>

@@ -1,7 +1,6 @@
 <?php
 class Validate
 {
-
 	// Error array
 	private $errors	= array();
 
@@ -157,11 +156,11 @@ class Validate
 	{
 		$xhtml = '';
 		if (!empty($this->errors)) {
-			$xhtml .= '<dl class="btn-danger" "><dt class="error"> CẢNH BÁO </dt><dd class="error message"><ul>';
+			$xhtml .= '<div><dl class="btn-danger" "><dt class="error"> CẢNH BÁO </dt><dd class="error message"><ul>';
 			foreach ($this->errors as $key => $value) {
 				$xhtml .= '<li>' . $value . ' </li>';
 			}
-			$xhtml .=  '</ul></dd></dl>';
+			$xhtml .=  '</ul></dd></dl></div>';
 		}
 		return $xhtml;
 	}

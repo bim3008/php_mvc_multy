@@ -6,17 +6,14 @@ class BookModel extends Model
 	public function countItems($arrParam,$opption = null)
 	{
 		$query[] = "SELECT count(`b`.`id`)  as `total` " ;
-		$query[] = " FROM `$this->_tableName` AS  `b`  "; //, `".DB_TABLE_CATEGORY."`  AS `c`
-		$query[] = " WHERE `b`.`id` > 0 " ;  //=  `c`.`id`
-		
+		$query[] = " FROM `$this->_tableName` AS `b` , `".DB_TABLE_CATEGORY."`  AS `c` " ; //
+		$query[] = " WHERE  `b`.`category_id` = `c`.`id` " ; 
+
 		$arrParam['filter_status'] = isset($arrParam['filter_status']) ? ($arrParam['filter_status']) : '' ;
-		
-		if(($arrParam['filter_status']) == 'active')
-		{
+		if(($arrParam['filter_status']) == 'active'){
 			$query[]	= "AND `b`.`status` = 0 ";
 		}
-		if(($arrParam['filter_status']) == 'inactive')
-		{
+		if(($arrParam['filter_status']) == 'inactive'){
 			$query[]	= "AND `b`.`status` = 1 ";
 		}
 		//FILTER : KEYWORD
@@ -25,15 +22,12 @@ class BookModel extends Model
 			$query[]	= "AND (`b`.`name` LIKE $keyword  ) ";
 		}
 		$opption['task'] = isset($opption['task']) ? $opption['task'] : '' ;
-		if(($opption['task']) == 'active')
-		{	
+		if(($opption['task']) == 'active'){	
 			$query[] =  "AND `b`.`status` =  0" ;
 		}
-		if( ($opption['task']) == 'inactive')
-		{	
+		if( ($opption['task']) == 'inactive'){	
 			$query[] =  "AND `b`.`status` =  1" ;
 		}
-	
 	    $query  = implode(" " ,$query) ;
 		return $this->fetchRow($query) ;
 	}	
@@ -75,16 +69,7 @@ class BookModel extends Model
 			$query[]  = "SET `status` = $status WHERE `id` = '$id' " ;
 			$query = implode(" " ,$query) ;		
 			$result = $this->query($query) ;
-			Session::set('messege','Thay đổi trạng thái Status thành công') ;
-		}
-		if($opption['task'] == 'ajax-change-group_acp')
-		{
-			$groupACP = ($arrParam['group_acp'] == 0 ) ? 1 : 0  ;
-			$id     = $arrParam['id'] ;
-			$query[]  = "SET `group_acp` = $groupACP WHERE `id` = '$id' " ;
-			$query = implode(" " ,$query) ;
-			$result = $this->query($query) ;
-			Session::set('messege','Thay đổi trạng thái Group ACP thành công') ;
+			Session::set('messege',SUCCESS_STATUS) ;
 		}
 	}
 	public function deleteItem($arrParam,$opption=null)
@@ -100,7 +85,7 @@ class BookModel extends Model
 				$result =  $this->query($query) ;		
 				if($result == true)
 				{
-					Session::set('messege','Xóa thành công') ;	
+					Session::set('messege',SUCCESS_DELETE) ;	
 				}								
 				return $result ;	
 			}
@@ -116,13 +101,13 @@ class BookModel extends Model
 				$result =  $this->query($query) ;		
 				if($result == true)
 				{
-					Session::set('messege','Xóa thành công') ;	
+					Session::set('messege',SUCCESS_DELETE) ;	
 				}			
 				return $result ;					
 			}
 			else
 			{
-				Session::set('messege','Vui lòng chọn phần tử để xóa') ;
+				Session::set('messege',ERROR_DELETE) ;
 			}
 		}
 	}
@@ -139,40 +124,37 @@ class BookModel extends Model
 		$status 		=  $arrParam['status'] ;
 		$category_id    =  $arrParam['category_id'] ;		
 		$picture   	 	=  $arrParam['picture'] ;	
+
 		require_once LIBRARY_EXT_PATH . 'Upload.php' ;
 
 		$uploadObj = new Upload();
 		
 		if($opption['task'] == 'add')
 		{
-			$picture = $uploadObj ->uploadFile($picture ,'book') ; 		
+			$picture = $uploadObj ->uploadFile($picture ,$this->$_tableName) ; 		
 			$query = "INSERT INTO `$this->_tableName` ( `name`,`description`,`picture`,`sale_off`,`price`,`special`,`status`,`ordering`,`category_id` ) VALUES ('$name','$description','$picture','$saleOff','$price','$special','$status','$ordering','$category_id')" ;
 	     	$result = $this->query($query) ; 
 			if($result == true)
 			{
-				Session::set('messege','Dữ liệu đã được thêm thành công') ;
+				Session::set('messege',SUCCESS_ADD) ;
 			}			
 			return $this->lastID() ;
 		}
 		if($opption['task'] == 'edit')
 		{
 			if($arrParam['picture']['name'] == null){
-				$query = " UPDATE `$this->_tableName` SET `name` = '$name',`price`='$price',`sale_off`='$saleOff', `description` = '$description' , `special` = '$special' , `ordering` = '$ordering' ,`status` = '$status',`category_id` = '$category_id' WHERE `id` = $id " ; 		
-			
+				$query = " UPDATE `$this->_tableName` SET `name` = '$name',`price`='$price',`sale_off`='$saleOff', `description` = '$description' , `special` = '$special' , `ordering` = '$ordering' ,`status` = '$status',`category_id` = '$category_id' WHERE `id` = $id " ; 			
 			}
-			else
-			{
-				$uploadObj ->removeFile('book',$arrParam['picture_hidden']) ;			
-				$uploadObj ->removeFile('book', '720x560-'.$arrParam['picture_hidden']) ;
+			else{
+				$uploadObj ->removeFile($this->_tableName,$arrParam['picture_hidden']) ;			
+				$uploadObj ->removeFile($this->_tableName, '2022x1120-'.$arrParam['picture_hidden']) ;
+				$picture = $uploadObj ->uploadFile($picture ,$this->_tableName);
 
-				$picture = $uploadObj ->uploadFile($picture ,'book');
 				$query = "UPDATE `$this->_tableName` SET `name` = '$name', `picture` = '$picture' ,`price`='$price',`sale_off`='$saleOff',`description` = '$description', `special` = '$special' , `ordering` = '$ordering' ,`status` = '$status',`category_id` = '$category_id' WHERE `id` = $id" ;		
-			
 			}
 			$result = $this->query($query) ;
-			if($result == true)
-			{
-				Session::set('messege','Edit dữ liệu thành công') ;
+			if($result == true){
+				Session::set('messege',SUCCESS_EDIT) ;
 			}			
 			return $id ;
 		}
@@ -191,45 +173,6 @@ class BookModel extends Model
 		ksort($result) ;
 		return $result ;
 	}
-	public function changePassword($arrParam,$opption=null)
-	{	
-			$id 	 	= $arrParam['id'] ;
-			$oldPass 	= $arrParam['old-password'] ;
-			$newPass 	= $arrParam['new-password'] ;
-			$rePass  	= $arrParam['re-password']  ;
-			$query 		= "SELECT `password` FROM `bser` WHERE `id` = $id" ;
-			$result = $this->fetchRow($query) ; 
-			$getOldPass = $result['password'] ;
-			if($oldPass == '' || $newPass == '' || $rePass == '')
-			{
-				Session::set('messege','Vui lòng đéo được để rỗng') ;			
-			}
-			else
-			{
-				if($oldPass != $getOldPass )
-				{
-					Session::set('messege','Mật khẩu cũ không đúng') ;	
-				}
-				else
-				{
-					if($newPass != $rePass)
-					{
-						Session::set('messege','Mật khẩu không trùng khớp') ;			
-					}
-					else
-					{
-						$queryUpdate  = "UPDATE `bser` SET `password` = $newPass WHERE `id` = $id " ;
-						$resultUpdate = $this->query($queryUpdate) ;
-						if($resultUpdate == true)
-						{
-							Session::set('messege','Thay đổi mật khẩu thành công') ;							
-						}
-						return $resultUpdate  ;
-					}
-				}
-				
-			}	
-			
-	}
+
 
 }

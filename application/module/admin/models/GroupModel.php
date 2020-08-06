@@ -7,15 +7,12 @@ class GroupModel extends Model
 		$query[] =  "SELECT count(`id`) as `total` " ;
 		$query[] =  "FROM `$this->_tableName`" ;	
 		$query[] =  "WHERE `id` > 0" ;
-
 		//FILTER : KEYWORD
 		$arrParam['filter_status'] = isset($arrParam['filter_status']) ? ($arrParam['filter_status']) : '' ;
-		if(($arrParam['filter_status']) == 'active')
-		{
+		if(($arrParam['filter_status']) == 'active'){
 			$query[]		 = "AND `status` = 0 ";
 		}
-		if(($arrParam['filter_status']) == 'inactive')
-		{
+		if(($arrParam['filter_status']) == 'inactive'){
 			$query[]		 = "AND `status` = 1 ";
 		}
 		//FILTER : KEYWORD
@@ -24,13 +21,10 @@ class GroupModel extends Model
 			$query[]	= "AND `name` LIKE $keyword";
 		}
 		$opption['task'] = isset($opption['task']) ? $opption['task'] : '' ;
-		if(($opption['task']) == 'active')
-		{	
+		if(($opption['task']) == 'active'){	
 			$query[] =  "AND `status` =  0" ;
 		}
-
-		if( ($opption['task']) == 'inactive')
-		{	
+		if( ($opption['task']) == 'inactive'){	
 			$query[] =  "AND `status` =  1" ;
 		}
 		$query  = implode(" " ,$query) ;
@@ -75,7 +69,7 @@ class GroupModel extends Model
 			$query[]  = "SET `status` = $status WHERE `id` = '$id' " ;
 			$query = implode(" " ,$query) ;		
 			$result = $this->query($query) ;
-			Session::set('messege','Thay đổi trạng thái Status thành công') ;
+			Session::set('messege',SUCCESS_STATUS) ;
 		}
 		if($opption['task'] == 'ajax-change-group_acp')
 		{
@@ -84,7 +78,7 @@ class GroupModel extends Model
 			$query[]  = "SET `group_acp` = $groupACP WHERE `id` = '$id' " ;
 			$query = implode(" " ,$query) ;
 			$result = $this->query($query) ;
-			Session::set('messege','Thay đổi trạng thái Group ACP thành công') ;
+			Session::set('messege',SUCCESS_GROUP_ACP) ;
 		}
 	}
 	public function deleteItem($arrParam,$opption=null)
@@ -100,7 +94,7 @@ class GroupModel extends Model
 				$result =  $this->query($query) ;		
 				if($result == true)
 				{
-					Session::set('messege','Xóa thành công') ;	
+					Session::set('messege',SUCCESS_DELETE) ;	
 				}								
 				return $result ;	
 			}
@@ -116,13 +110,13 @@ class GroupModel extends Model
 				$result =  $this->query($query) ;		
 				if($result == true)
 				{
-					Session::set('messege','Xóa thành công') ;	
+					Session::set('messege',SUCCESS_DELETE) ;	
 				}			
 				return $result ;					
 			}
 			else
 			{
-				Session::set('messege','Vui lòng chọn phần tử để xóa') ;
+				Session::set('messege',ERROR_DELETE) ;
 			}
 		}
 	}
@@ -139,7 +133,7 @@ class GroupModel extends Model
 	     	$result = $this->query($query) ; 
 			if($result == true)
 			{
-				Session::set('messege','Dữ liệu đã được thêm thành công') ;
+				Session::set('messege',SUCCESS_ADD) ;
 			}			
 			return $result ;
 		}
@@ -149,7 +143,7 @@ class GroupModel extends Model
 			$result = $this->query($query) ;
 			if($result == true)
 			{
-				Session::set('messege','Edit dữ liệu thành công') ;
+				Session::set('messege',SUCCESS_EDIT) ;
 			}			
 			return $result ;
 		}

@@ -61,7 +61,6 @@ class CategoryController extends Controller
 		$result = $this->_model->changeStatus($this->_arrParam, array('task' => 'ajax-change-status'));
 		URL::redirect($this->_arrParam['module'], $this->_arrParam['controller'], 'index');
 	}
-	
 	public function deleteAction()
 	{
 

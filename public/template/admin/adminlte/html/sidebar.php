@@ -52,8 +52,8 @@
                         </p>
                     </a>
                     <?php                    
-                            echo Helper::sidebarAdmin($urlGroupList,'List') ;
-                            echo Helper::sidebarAdmin($urlGroupAdd,'Add') ;
+                            echo HelperAdmin::sidebarAdmin($urlGroupList,'List') ;
+                            echo HelperAdmin::sidebarAdmin($urlGroupAdd,'Add') ;
                     ?>
                 </li>
                 <li class="nav-item has-treeview menu-open">
@@ -65,8 +65,8 @@
                         </p>
                     </a>
                     <?php                    
-                            echo Helper::sidebarAdmin($urlUserList,'List') ;
-                            echo Helper::sidebarAdmin($urlUserAdd,'Add') ;
+                            echo HelperAdmin::sidebarAdmin($urlUserList,'List') ;
+                            echo HelperAdmin::sidebarAdmin($urlUserAdd,'Add') ;
                     ?>
                 </li>
                 <li class="nav-item has-treeview menu-open">
@@ -78,8 +78,8 @@
                         </p>
                     </a>
                     <?php                    
-                            echo Helper::sidebarAdmin($urlCategoryList,'List') ;
-                            echo Helper::sidebarAdmin($urlCategoryAdd,'Add') ;
+                            echo HelperAdmin::sidebarAdmin($urlCategoryList,'List') ;
+                            echo HelperAdmin::sidebarAdmin($urlCategoryAdd,'Add') ;
                     ?>
                 </li>
                 <li class="nav-item has-treeview menu-open">
@@ -91,8 +91,8 @@
                         </p>
                     </a>
                     <?php                    
-                            echo Helper::sidebarAdmin($urlBookList,'List') ;
-                            echo Helper::sidebarAdmin($urlBookAdd,'Add') ;
+                            echo HelperAdmin::sidebarAdmin($urlBookList,'List') ;
+                            echo HelperAdmin::sidebarAdmin($urlBookAdd,'Add') ;
                     ?>
                 </li>
             </ul>

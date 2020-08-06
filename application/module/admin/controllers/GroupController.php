@@ -21,10 +21,11 @@ class GroupController extends Controller
 	}
 	public function formAction()
 	{	
-		$this->_view->setTitle(ucfirst($this->_arrParam['controller']) . ' : Add');
+		$title = ucfirst($this->_arrParam['controller']) ;   // Group
+		$this->_view->setTitle($title . ' : Add');
 		$task = (!empty($this->_arrParam['form']['id'])) ? 'edit' : 'add';
 		if (!empty($this->_arrParam['id'])) {
-			$this->_view->setTitle('Group : Edit');
+			$this->_view->setTitle($title . ' : Edit');
 			$this->_arrParam['form'] = $this->_model->infoItems($this->_arrParam, null);
 			if (empty($this->_arrParam['form'])) URL::redirect('admin', $this->_arrParam['controller'], 'index');
 		}
@@ -60,14 +61,13 @@ class GroupController extends Controller
 	}
 	public function deleteAction()
 	{
-
 		$this->_model->deleteItem($this->_arrParam, array('task' => 'delete'));
 		URL::redirect($this->_arrParam['module'], $this->_arrParam['controller'], 'index');
 	}
 	public function multyDeleteAction()
 	{
 		$this->_model->deleteItem($this->_arrParam, array('task' => 'multy-delete'));
-		URL::redirect('admin', $this->_arrParam['controller'], 'index');
+		URL::redirect($this->_arrParam['module'], $this->_arrParam['controller'], 'index');
 	}
 	public function orderingAction()
 	{

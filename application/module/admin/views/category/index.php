@@ -1,42 +1,48 @@
 <?php
-require_once 'toolbar/index.php';
-echo	Helper::notifyMessege('messege');
+require_once 'submenu/index.php';
+echo	HelperAdmin::notifyMessege('messege');
 ?>
 <?php
 
-echo Helper::toolbar($btnFillter, $formSearch, $btnCRUD);
-echo HTML::menuCategory() ?>
+echo HelperAdmin::toolbar($btnFillter, $formSearch, $btnCRUD);
+echo HTMLAdmin::menuCategory() ?>
 <?php
-foreach ($this->listItems as $key => $value) {
-	$id 			= $value['id'];
-	$name           = ($lblFilterSearch != null) ? preg_replace("/\p{L}*?" . preg_quote($lblFilterSearch) . "\p{L}*/ui", '<b style="background-color: yellow;">\\0</b>', $value['name']) : $value['name'];
-	$ordering		= $value['ordering'];
-	$status 		= $value['status'];
-	$created 		= $value['created'];
-	$created_by		= $value['created_by'];
-	$modified 		= $value['modified'];
-	$modified_by 	= $value['modified_by'];
-	$picture		= $value['picture'];
-	$linkImage      =  LINK_IMAGE_CATEGORY .$picture  ;                                 
-	$image          =  Helper::linkImage($linkImage,'width:110px;height:120px;')    ;
-
-	$linkEdit     = URL::createLink($lblModule, $lblController, 'form', array('id' => $id));
-	$linkDelete   = URL::createLink($lblModule, $lblController,  'delete', array('id' => $id));
-	$buttonEdit   = Helper::cmsButtonEdit($linkEdit,'Edit',);
-	$buttonDelete = Helper::cmsButtonDelete($linkDelete,'Delete');
-	$xhtml = '	
-	<tr>
-		<td><span class="custom-checkbox"><input type="checkbox" id="checkbox1" name="cid[]" value="' . $id . '"></span></td>
-		<td style="text-align:center ">' . $id . '</td>
-		<td style="text-align:center ">' . $name . '</td>
-		<td style="text-align:center ">' . $image . '</td>
-		' . Helper::cmsStatus  ($status,    URL::createLink($lblModule, $lblController,  'changeStatus',   array('id' => $id, 'status' => $status)), $id) . '
-		<td style="text-align:center ">' . $ordering . '</td>
-		<td style="text-align:center ">' . $created . '  </br>' . $created_by . '</td>
-		<td style="text-align:center ">' . $modified . ' </br>' . $modified_by . '</td>
-		<td style="text-align:center ">' . $buttonEdit . $buttonDelete . '</td>
-	</tr> ';
-	echo $xhtml;
+if(isset($this->listItems)){
+	foreach ($this->listItems as $key => $value) {
+		// VALUE
+		$id 			= $value['id'];
+		$name           = HelperAdmin::highLightSearch($lblFilterSearch ,$value['name']) ;
+		$ordering		= $value['ordering'];
+		$status 		= $value['status'];
+		$created 		= $value['created'];
+		$created_by		= $value['created_by'];
+		$modified 		= $value['modified'];
+		$modified_by 	= $value['modified_by'];
+		$picture		= $value['picture'];
+		$linkImage      =  LINK_IMAGE_CATEGORY .$picture  ;                                 
+		$image          =  HelperAdmin::linkImage($linkImage,'width:110px;height:120px;')    ;
+		// LINK AND BUTTON
+		$buttonSelectAllSelectBox = HelperAdmin::selectAllSelectBox($id);
+		$linkEdit     = URL::createLink($lblModule, $lblController, 'form', array('id' => $id));
+		$linkDelete   = URL::createLink($lblModule, $lblController,  'delete', array('id' => $id));
+		$buttonEdit   = HelperAdmin::cmsButtonEdit($linkEdit,'Edit',);
+		$buttonDelete = HelperAdmin::cmsButtonDelete($linkDelete,'Delete');
+		$buttonStatus =  HelperAdmin::cmsStatus  ($status,    URL::createLink($lblModule, $lblController,  'changeStatus',   array('id' => $id, 'status' => $status)), $id);
+		
+		$xhtml = '	
+		<tr>
+			<td>'.$buttonSelectAllSelectBox.'</td>
+			<td style="text-align:center ">' . $id . '</td>
+			<td style="text-align:center ">' . $name . '</td>
+			<td style="text-align:center ">' . $image . '</td>
+			' .$buttonStatus . '
+			<td style="text-align:center ">' . $ordering . '</td>
+			<td style="text-align:center ">' . $created . '  </br>' . $created_by . '</td>
+			<td style="text-align:center ">' . $modified . ' </br>' . $modified_by . '</td>
+			<td style="text-align:center ">' . $buttonEdit . $buttonDelete . '</td>
+		</tr> ';
+		echo $xhtml;
+	}
 }
 ?>
 </tbody>

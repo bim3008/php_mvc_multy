@@ -7,7 +7,7 @@ class Upload{
         if($opption == null){
             if($fileObj['tmp_name'] != null )
             {
-                $uploadDir      = UPLOAD_PATH . $folderUpload . DS ;
+                $uploadDir      = UPLOAD_PATH . $folderUpload . DS  ; 
                 $fileName       =  $this->randomString(8). '.'.pathinfo($fileObj['name'],PATHINFO_EXTENSION) ;  ;
                 @copy($fileObj['tmp_name'], $uploadDir . $fileName ) ; 
                 $thumb = PhpThumbFactory::create($uploadDir . $fileName);
@@ -15,6 +15,7 @@ class Upload{
                 $thumb -> save( $uploadDir . '2022x1120-'. $fileName ) ;
             }
         }
+        
         return $fileName ;
     }
 

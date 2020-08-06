@@ -3,16 +3,12 @@ class Controller{
 	
 	// View Object
 	protected $_view;
-	
 	// Model Object
 	protected $_model;
-	
 	// Template object
 	protected $_templateObj;
-	
 	// Params (GET - POST)
 	protected $_arrParam;
-
 	// Pagination
 	protected $_pagination	= array(
 				'totalItemsPerPage'	=> 4, // Tổng số phần tử một trang

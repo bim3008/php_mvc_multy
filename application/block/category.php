@@ -1,0 +1,3 @@
+<?php
+    $module = new Model() ;
+?>

@@ -1,10 +1,13 @@
 <?php   
         // GET PARAMS CONTROLLER
-        $lblId                  = isset($this->arrParam['id']) ? $this->arrParam['id'] : null;
-        $lblModule              = isset($this->arrParam['module']) ? $this->arrParam['module'] : 'admin';
-        $lblController          = isset($this->arrParam['controller']) ? $this->arrParam['controller'] : 'category';
+
+        $lblModule              =  $this->arrParam['module'];
+        $lblController          =  $this->arrParam['controller'];
+
+  
         // GET VALUE
         $dataForm               =  isset($this->arrParam['form'])       ? $this->arrParam['form'] : '';
+        
         $valueId                =  isset( $dataForm['id'] )             ?  $dataForm['id'] : '' ;   
         $valueName              =  isset( $dataForm['name'] )           ?  $dataForm['name'] : '' ;   
         $valueStatus            =  isset( $dataForm['status'] )         ?  $dataForm['status'] : '' ;   
@@ -12,39 +15,42 @@
         $valuePicture           =  isset( $dataForm['picture'])         ?  $dataForm['picture'] : '' ;  
         $valuePictureHidden     =  isset( $dataForm['picture_hidden'])  ?  $dataForm['picture_hidden'] : '' ;  
         if(is_array($valuePicture)){
-                $valuePicture = '' ;
+                $valuePicture   = '' ;
         }
         // CREATE BUTTON
-        $buttonForm         = Form::formButton($lblModule, $lblController) ;
+        $buttonForm             = Form::formButton($lblModule, $lblController) ;
         // CREATE INPUT
-        $inputName           =  Helper::cmsFormInputText('name',$valueName);
-        $inputOrdering       =  Helper::cmsFormInputText('ordering',$valueOrdering);
-        $inputPicture        =  Helper::cmsFormInputFile('picture',$valuePicture,'padding-top: 1px;padding-left: 1px;height: 34px');
-        $inputCategoryId     =  Helper::cmsFormInputHidden('id',   $valueId );
-        $inputPictureHidden  =  Helper::cmsFormInputHidden('picture_hidden', $valuePicture);
+        $inputName              =  HelperAdmin::cmsFormInputText('name',$valueName);
+        $inputOrdering          =  HelperAdmin::cmsFormInputText('ordering',$valueOrdering);
+        $inputPicture           =  HelperAdmin::cmsFormInputFile('picture',$valuePicture,'padding-top: 1px;padding-left: 1px;height: 34px');
+        $inputCategoryId        =  HelperAdmin::cmsFormInputHidden('id',   $valueId );
+        $inputPictureHidden     =  HelperAdmin::cmsFormInputHidden('picture_hidden', $valuePicture);
          // Giữ hình ảnh khi tồn tại validate(lỗi khi edit)
-        $namePicture        = !empty($valuePicture) ? $valuePicture :  $valuePictureHidden ;
-        $linkImage          =  LINK_IMAGE_CATEGORY . $namePicture  ;                                 
-        $image              =  Helper::linkImage($linkImage,'width:300')    ;
+        $namePicture            = !empty($valuePicture) ? $valuePicture :  $valuePictureHidden ;
+        $linkImage              =  LINK_IMAGE_CATEGORY . $namePicture  ;                                 
+        $image                  =  HelperAdmin::linkImage($linkImage,'width:300')    ;
         // CREATE ROW
-        $rowPictureHidden   = Helper::cmsRowInput('', $inputPictureHidden);
-        $rowName            = Helper::cmsRowInput('name', $inputName);
-        $rowPicture         = Helper::cmsRowInput('picture', $inputPicture);
-        $rowOrdering        = Helper::cmsRowInput('ordering', $inputOrdering );
-        $rowStatus          = Helper::cmsSelectboxForm('status', 'Status', array('default'=>'Select status','0'=>'Active','1'=>'Inactive'),$valueStatus) ;
+        $rowPictureHidden       = HelperAdmin::cmsRowInput('', $inputPictureHidden);
+        $rowName                = HelperAdmin::cmsRowInput('name', $inputName);
+        $rowPicture             = HelperAdmin::cmsRowInput('picture', $inputPicture);
+        $rowOrdering            = HelperAdmin::cmsRowInput('ordering', $inputOrdering );
+        $rowStatus              = HelperAdmin::cmsSelectboxForm('status', 'Status',znv_define_status,$valueStatus) ;
+        // CONTENT NỘI DUNG CỦA FORM(INPUT)
         if(!empty($valueId)){
-                $content = $rowName . $rowPicture . $image . $rowStatus . $rowOrdering . $inputCategoryId . $rowPictureHidden ;
+                $content        = $rowName . $rowPicture . $image . $rowStatus . $rowOrdering . $inputCategoryId . $rowPictureHidden ;
         }
         else{
-                $content = $rowName . $rowPicture . $rowStatus . $rowOrdering . $inputCategoryId ;
+                $content        = $rowName . $rowPicture . $rowStatus . $rowOrdering . $inputCategoryId ;
         }
-        echo Helper::notifyMessege('messege') ;   
-        $errors =  isset($this->errors) ? $this->errors : ''  ;  
-        echo  $errors = '<div>'.$errors.'</div>' ;       
+        echo HelperAdmin::notifyMessege('messege') ;                         // In thông báo
+        echo $errors =  isset($this->errors) ? $this->errors : ''  ;    // In lỗi
+        // Kiểm tra tiêu đề
+        $title                  = ucfirst($lblController ) . ' ' ;
+        $title                  = !empty($valueId > 0)  ? ''.$title.' Edit' : ''.$title.'Add' ; 
+       
 ?>    
 <form  action="#" method="POST" id="addedit" name="addedit" enctype="multipart/form-data">    
         <?php 
-                $title = isset($this->arrParam['id']) ? 'Category Edit' : 'Category Add' ; 
                 echo  Form::formContent($title,$content,$buttonForm) ;
         ?>
 </form>

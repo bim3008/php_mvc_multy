@@ -21,15 +21,17 @@ class UserController extends Controller
 		$this->_view->render($this->_arrParam['controller'] . DS . 'index');
 	}
 	public function formAction(){
+
+		$title = ucfirst($this->_arrParam['controller']) ;
 		if(isset($this->_arrParam['type'])=='change-pass'){
 			if(!empty($this->_arrParam['change'])){
 				$this->_model->changePassword($this->_arrParam['change']) ;
 			}		
 		}
-		$this->_view->setTitle(ucfirst($this->_arrParam['controller']) . ' : Add');
+		$this->_view->setTitle($title. ': Add');
 		$this->_view->selectBoxGroup  = $this->_model->itemsInSelectBox($this->_arrParam) ;
 		if (isset($this->_arrParam['id']) && !(isset($this->_arrParam['form']['token']))){
-			$this->_view->setTitle('User : Edit');
+			$this->_view->setTitle($title. ' : Edit');
 			$this->_arrParam['form'] = $this->_model->infoItems($this->_arrParam, null); 
 			if(empty($this->_arrParam['form'])) URL::redirect('admin', $this->_arrParam['controller'], 'index');
 		}

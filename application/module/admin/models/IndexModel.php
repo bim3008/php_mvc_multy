@@ -24,12 +24,12 @@ class IndexModel extends Model{
 
 		if($option == null)
 		{
-			$username 	=  $arrParam['username'] ;
-			$password 	=  md5($arrParam['password']) ;
+			echo $username 	=  $arrParam['username'] ;
+			echo $password 	=  md5($arrParam['password']) ;
 		 	$query[]    = "SELECT `u`.`id` , `u`.`fullname` , `u`.`email` , `u`.`group_id` , `g`.`group_acp`";
 			$query[]    = "FROM `".DB_TABLE_USER."` AS `u` , `".DB_TABLE_GROUP."` AS `g` " ;
 			$query[] 	= "WHERE `u`.`group_id` = `g`.`id` AND `username` = '$username' AND  `password` = '$password'" ;
-			$query  = implode(" " ,$query) ;
+		 	$query  = implode(" " ,$query) ; 
 			$resutl =  $this->fetchRow($query) ;
 			return $resutl ;
 		}

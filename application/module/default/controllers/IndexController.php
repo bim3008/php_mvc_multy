@@ -8,8 +8,12 @@ class IndexController extends Controller{
 		$this->_templateObj->setFileConfig('template.ini');
 		$this->_templateObj->load();
 	}
-	
 	public function indexAction(){
+		$this->_view->setTitle('Trang chủ');
+		$this->_view->render($this->_arrParam['controller'] . DS . 'index');
 	}
-	
+	public function detailsAction(){
+		$this->_view->setTitle('Chi tiết');
+		$this->_view->render($this->_arrParam['controller'] . DS . 'details');
+	}
 }

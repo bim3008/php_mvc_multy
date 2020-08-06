@@ -1,66 +1,70 @@
 <?php   
         // PARAMS
-        $lblModule              = isset($this->arrParam['module']) ? $this->arrParam['module'] : 'admin';
-        $lblController          = isset($this->arrParam['controller']) ? $this->arrParam['controller'] : 'group';
-        $lblAction              = isset($this->arrParam['action']) ? $this->arrParam['action'] : 'index';
-        $lblStatus              = isset($this->arrParam['status']) ? $this->arrParam['status'] : '';     
-        $lblFilterSearch        = isset($this->arrParam['filter_search']) ? $this->arrParam['filter_search'] : '';
-        $lblId                  = isset($this->arrParam['id']) ? $this->arrParam['id'] : '';     
-        $lblType                = isset($this->arrParam['type']) ? $this->arrParam['type'] : '';     
-        // VALIDATE
-        $id                          =  isset($this->arrParam['form']['id'] )                ? $this->arrParam['form']['id'] : '' ; 
-        $valueOldPassword            =  isset($this->arrParam['change']['old-password'])       ? $this->arrParam['change']['old-password'] : '' ;    
-        $valueNewPassword            =  isset($this->arrParam['change']['new-password'])       ? $this->arrParam['change']['new-password'] : '' ;    
-        $valueRepassword             =  isset($this->arrParam['change']['re-password'])        ? $this->arrParam['change']['re-password'] : '' ;    
-        $valueUsername               =  isset($this->arrParam['form']['username'] )          ? $this->arrParam['form']['username'] : '' ;   
-        $valuePassword               =  isset($this->arrParam['form']['password'] )          ? $this->arrParam['form']['password'] : '' ;   
-        $valueFullname               =  isset($this->arrParam['form']['fullname'] )          ? $this->arrParam['form']['fullname'] : '' ;   
-        $valueEmail                  =  isset($this->arrParam['form']['email'] )             ? $this->arrParam['form']['email'] : '' ;   
-        $valueStatus                 =  isset($this->arrParam['form']['status'] )            ? $this->arrParam['form']['status'] : '' ;   
-        $valueOrdering               =  isset($this->arrParam['form']['ordering'] )          ? $this->arrParam['form']['ordering'] : '' ;   
-        $valueGroup_id               =  isset($this->arrParam['form']['group_id'] )          ? $this->arrParam['form']['group_id'] : '' ; 
+        $lblModule        =  $this->arrParam['module'];
+        $lblController    =  $this->arrParam['controller'];
+
+        $lblId            = isset($this->arrParam['id']) ? $this->arrParam['id'] : '';     
+        $lblType          = isset($this->arrParam['type']) ? $this->arrParam['type'] : '';     
+        // VALIDATE 
+        $dataForm         = isset($this->arrParam['form'])   ? $this->arrParam['form'] : '' ;
+        $dataChange       = isset($this->arrParam['change']) ? $this->arrParam['change'] : '' ;
+
+        $id               = isset($dataForm['id'] )                ? $this->arrParam['form']['id'] : '' ;
+        $valueUsername    = isset($dataForm['username'] )          ? $dataForm['username'] : '' ;   
+        $valuePassword    = isset($dataForm['password'] )          ? $dataForm['password'] : '' ;   
+        $valueFullname    = isset($dataForm['fullname'] )          ? $dataForm['fullname'] : '' ;   
+        $valueEmail       = isset($dataForm['email'] )             ? $dataForm['email'] : '' ;   
+        $valueStatus      = isset($dataForm['status'] )            ? $dataForm['status'] : '' ;   
+        $valueOrdering    = isset($dataForm['ordering'] )          ? $dataForm['ordering'] : '' ;   
+        $valueGroup_id    = isset($dataForm['group_id'] )          ? $dataForm['group_id'] : '' ; 
+
+        $valueOldPassword =  isset($dataChange['old-password'])    ? $dataChange['old-password'] : '' ;    
+        $valueNewPassword =  isset($dataChange['new-password'])    ? $dataChange['new-password'] : '' ;    
+        $valueRepassword  =  isset($dataChange['re-password'])     ? $dataChange['re-password'] : '' ;    
         //INPUT CRUD
-        $buttonForm         = Form::formButton($lblModule, $lblController) ;
+        $buttonForm       = Form::formButton($lblModule, $lblController) ; // SAVE - SAVE NEW - SAVE CLOSE - CACEL
        // INPUT VALUE           
-        $groupid             =  Helper::cmsFormInputHidden('id' ,$id);
-        $token               =  Helper::cmsFormInputHidden('token','199');
-        $inputUsername         =  Helper::cmsFormInputText('username' ,$valueUsername);
-        $inputPassword         =  Helper::cmsFormInputPassword('password',$valuePassword);
-        $inputFullname         =  Helper::cmsFormInputText('fullname' ,$valueFullname);
-        $inputEmail            =  Helper::cmsFormInputText('email'   ,$valueEmail);
-        $inputOrdering         =  Helper::cmsFormInputText('ordering' ,$valueOrdering);
-        $inputGroup_id         =  Helper::cmsFormInputText('group_id' ,$valueGroup_id);
+        $groupidHidden    =  HelperAdmin::cmsFormInputHidden('id' ,$id);
+        $token            =  HelperAdmin::cmsFormInputHidden('token','199');
+        $inputUsername    =  HelperAdmin::cmsFormInputText('username' ,$valueUsername);
+        $inputPassword    =  HelperAdmin::cmsFormInputPassword('password',$valuePassword);
+        $inputFullname    =  HelperAdmin::cmsFormInputText('fullname' ,$valueFullname);
+        $inputEmail       =  HelperAdmin::cmsFormInputText('email'   ,$valueEmail);
+        $inputOrdering    =  HelperAdmin::cmsFormInputText('ordering' ,$valueOrdering);
+        $inputGroup_id    =  HelperAdmin::cmsFormInputText('group_id' ,$valueGroup_id);
         //ROW
-        $rowUsername            = Helper::cmsRowInput('Username', $inputUsername);
-        $rowPassword            = Helper::cmsRowInput('Password', $inputPassword );
-        $rowFullname            = Helper::cmsRowInput('Fullname', $inputFullname );
-        $rowEmail               = Helper::cmsRowInput('Email',    $inputEmail );
-        $rowslbStatus           = Helper::cmsSelectboxForm('status','Status',array('default'=>'Select status','0'=>'Active','1'=>'Inactive'),$valueStatus) ;
-        $rowOrdering            = Helper::cmsRowInput('Ordering',    $inputOrdering );
-        $rowslbGroupId          = Helper::cmsSelectboxForm('group_id','Group',$this->selectBoxGroup,$valueGroup_id) ;
+        $rowUsername            = HelperAdmin::cmsRowInput('Username', $inputUsername);
+        $rowPassword            = HelperAdmin::cmsRowInput('Password', $inputPassword );
+        $rowFullname            = HelperAdmin::cmsRowInput('Fullname', $inputFullname );
+        $rowEmail               = HelperAdmin::cmsRowInput('Email',    $inputEmail );
+        $rowslbStatus           = HelperAdmin::cmsSelectboxForm('status','Status',znv_define_status,$valueStatus) ;
+        $rowOrdering            = HelperAdmin::cmsRowInput('Ordering',    $inputOrdering );
+        $rowslbGroupId          = HelperAdmin::cmsSelectboxForm('group_id','Group',$this->selectBoxGroup,$valueGroup_id) ;
 
         // INPUT CHANGEPASSWORD
         // SHOW FORM 
-        $csmInputOldPassword       = Helper::cmsInputChangePassword('Old Password','old-password','Enter Old Password') ;
-        $csmInputNewPassword       = Helper::cmsInputChangePassword('New Password','new-password','Enter New Password') ;
-        $csmInputRePassword        = Helper::cmsInputChangePassword('Re  Password','re-password' ,'Enter Re Password') ;
-        $csmInputIdHidden          = Helper::cmsInput('hidden','hidden','change[id]' ,'' ,$lblId) ;
+        $csmInputOldPassword       = HelperAdmin::cmsInputChangePassword('Old Password','old-password','Enter Old Password') ;
+        $csmInputNewPassword       = HelperAdmin::cmsInputChangePassword('New Password','new-password','Enter New Password') ;
+        $csmInputRePassword        = HelperAdmin::cmsInputChangePassword('Re  Password','re-password' ,'Enter Re Password') ;
+        $csmInputIdHidden          = HelperAdmin::cmsInput('hidden','hidden','change[id]' ,'' ,$lblId) ;
 
-        $buttonInputChangePassword = $csmInputOldPassword . $csmInputNewPassword . $csmInputRePassword . $csmInputIdHidden   ;
+        $formChangePassword = $csmInputOldPassword . $csmInputNewPassword . $csmInputRePassword . $csmInputIdHidden   ;
 
         if(!empty($lblId)){
-                $content = $rowUsername . $rowFullname . $rowEmail . $rowslbStatus . $rowOrdering  . $rowslbGroupId . $groupid . $token  ; 
+                $content = $rowUsername . $rowFullname . $rowEmail . $rowslbStatus . $rowOrdering  . $rowslbGroupId . $groupidHidden . $token  ; 
         }
         else{       
-                $content = $rowUsername .$rowPassword . $rowFullname . $rowEmail . $rowslbStatus . $rowOrdering  . $rowslbGroupId . $groupid. $token  ;         
+                $content = $rowUsername .$rowPassword . $rowFullname . $rowEmail . $rowslbStatus . $rowOrdering  . $rowslbGroupId . $groupidHidden. $token  ;         
         }     
-        $errors = isset($this->errors) ? $this->errors : ''  ;  
-        echo  $errors = '<div  >'.$errors.'</div>' ;       
-        Helper::notifyMessege('messege') ;   
-        
+        echo HelperAdmin::notifyMessege('messege') ;                         // In thông báo
+        echo $errors =  isset($this->errors) ? $this->errors : ''  ;    // In lỗi
+         // Kiểm tra tiêu đề
+        $title = ucfirst($lblController ) . ' ' ;
+        $title = !empty($id > 0)  ? ''.$title.' Edit' : ''.$title.'Add' ; 
+        // CHANGE PASSS
         $linkChangePassword     = URL::createLink($lblModule, $lblController, 'form',array('id'=>$id));
-        $templateChangePassword = Form::formChangePassword($linkChangePassword,$buttonInputChangePassword ) ; 
-        $title = isset($this->arrParam['id'])  ? "User Edit" : "User Add"   ; 
+        $templateChangePassword = Form::formChangePassword($linkChangePassword,$formChangePassword ) ; 
+
         $templateUser           = Form::formContent($title,$content,$buttonForm) ;
         if(empty($lblId) && $lblType == null){      
                 echo  $templateUser ;

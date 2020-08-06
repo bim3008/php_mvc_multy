@@ -5,6 +5,7 @@ class IndexController extends Controller{
 		parent::__construct($arrParams);
 	}
 	public function indexAction(){
+		// Kiểm tra đăng nhập
 		$infomationUser = Session::get('user') ;
 		$loginFacebook	= Session::get('loginFacebook') ;
 		if($infomationUser == false &&  $loginFacebook == false ){
@@ -44,7 +45,7 @@ class IndexController extends Controller{
 			$validate = new Validate($this->_arrParam['form']) ;
 			$username = $this->_arrParam['form']['username'] ;
 		    $password = md5($this->_arrParam['form']['password']) ; 
-		 	$query    = "SELECT `id` FROM `".DB_TABLE_USER."` WHERE `username` = '$username' AND  `password` = '$password'" ;
+			$query    = "SELECT `id` FROM `".DB_TABLE_USER."` WHERE `username` = '$username' AND  `password` = '$password'" ; 
 			$validate->addRule('username', 'existRecord' , array('database' => $this->_model , 'query'=> $query )) ;
 			$validate->run() ;
 			if($validate->isValid() == true)

@@ -1,37 +1,38 @@
 <?php   
-        // GET PARAMS
-        $lblModule       = isset($this->arrParam['module']) ? $this->arrParam['module'] : 'admin';
-        $lblController   = isset($this->arrParam['controller']) ? $this->arrParam['controller'] : 'group';
-        $lblAction       = isset($this->arrParam['action']) ? $this->arrParam['action'] : 'index';
-        $lblStatus       = isset($this->arrParam['status']) ? $this->arrParam['status'] : '';    
-        $lblFilterSearch = isset($this->arrParam['filter_search']) ? $this->arrParam['filter_search'] : '';
+        // GET CONTROLLER
+        $lblModule        =  $this->arrParam['module'];
+        $lblController    =  $this->arrParam['controller'];
+        $title            = ucfirst($lblController ) ;
         // GET VALUE
-        $id                     =  isset($this->arrParam['form']['id'] )        ? $this->arrParam['form']['id'] : '' ;   
-        $name                   =  isset($this->arrParam['form']['name'] )      ? $this->arrParam['form']['name'] : '' ;   
-        $status                 =  isset($this->arrParam['form']['status'] )    ? $this->arrParam['form']['status'] : '' ;   
-        $ordering               =  isset($this->arrParam['form']['ordering'] )  ? $this->arrParam['form']['ordering'] : '' ;   
-        $group_acp              =  isset($this->arrParam['form']['group_acp'] ) ? $this->arrParam['form']['group_acp'] : '' ;          
-        // CREATE BUTTON
-        $buttonForm         = Form::formButton($lblModule, $lblController) ;
-        // CREATE INPUT
-        $groupName          =  Helper::cmsFormInputText('name',$name);
-        $groupOrdering      =  Helper::cmsFormInputText('ordering',$ordering);
-        $groupid            =  Helper::cmsFormInputHidden('id',$id);
-        //CREATE ROW
-        $rowGroup           = Helper::cmsRowInput('name', $groupName);
-        $rowOrdering        = Helper::cmsRowInput('ordering', $groupOrdering );
-        $rowSelectStatus    = Helper::cmsSelectboxForm('status', 'Status', array('default'=>'Select status','0'=>'Active','1'=>'Inactive'),$status) ;
-        $rowSelectGroupAcp  = Helper::cmsSelectboxForm('group_acp','Group_ACP', array('default'=>'Select group','0'=>'No','1'=>'Yes'),$group_acp) ;
-        $content = $rowGroup .$rowSelectStatus . $rowSelectGroupAcp . $rowOrdering .$groupid ;
+        $formData         =  isset($this->arrParam['form']) ? $this->arrParam['form'] : '';
 
-        echo Helper::notifyMessege('messege') ;   
-        $errors =  isset($this->errors) ? $this->errors : ''  ;  
-        echo  $errors = '<div  >'.$errors.'</div>' ;       
+        $id               =  isset($formData['id'] )        ? $formData['id'] : '' ;   
+        $name             =  isset($formData['name'] )      ? $formData['name'] : '' ;   
+        $status           =  isset($formData['status'] )    ? $formData['status'] : '' ;   
+        $ordering         =  isset($formData['ordering'] )  ? $formData['ordering'] : '' ;   
+        $group_acp        =  isset($formData['group_acp'] ) ? $formData['group_acp'] : '' ;          
+        // CREATE BUTTON
+        $buttonForm       = Form::formButton($lblModule, $lblController) ;  // SAVE - SAVE NEW - SAVE CLOSE - CANCEL
+        // CREATE INPUT
+        $inputName        =  HelperAdmin::cmsFormInputText('name',$name);
+        $inputOrdering    =  HelperAdmin::cmsFormInputText('ordering',$ordering);
+        $inputId          =  HelperAdmin::cmsFormInputHidden('id',$id);
+        //CREATE ROW
+        $rowGroup           = HelperAdmin::cmsRowInput('name', $inputName);
+        $rowOrdering        = HelperAdmin::cmsRowInput('ordering', $inputOrdering );
+        $rowSelectStatus    = HelperAdmin::cmsSelectboxForm('status',   'Status',znv_define_status,$status) ;
+        $rowSelectGroupAcp  = HelperAdmin::cmsSelectboxForm('group_acp','Group_ACP',znv_define_group_acp,$group_acp) ;
+        // CREATE FORM
+        $content           = $rowGroup .$rowSelectStatus . $rowSelectGroupAcp . $rowOrdering .$inputId ;
+        echo HelperAdmin::notifyMessege('messege') ;                       // In thông báo
+        echo $errors =  isset($this->errors) ? $this->errors : ''  ;  // In lỗi
+        // Kiểm tra tiêu đề
+        $title = ucfirst($lblController ) . ' ' ;
+        $title = !empty($id > 0)  ? ''.$title.' Edit' : ''.$title.'Add' ; 
 ?>  
        
 <form  action="#" method="POST" id="addedit" name="addedit">    
         <?php 
-                $title = isset($this->arrParam['id']) ? 'Group Edit' : 'Group Add' ; 
                 echo  Form::formContent($title,$content,$buttonForm ) ;
         ?>
 </form>

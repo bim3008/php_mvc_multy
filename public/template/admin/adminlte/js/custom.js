@@ -3,7 +3,7 @@ function submitForm(url) {
 }
 
 $('#btn-multydelete').click(function() {
-    $('#formListGroup').submit();
+    $('#formList').submit();
 });
 $('#btn-multydeleteUser').click(function() {
     $('#formListUser').submit();

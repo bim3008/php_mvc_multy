@@ -12,10 +12,10 @@
 ?>  
 <div class="row">
     <?php 
-          echo  Helper::smallBoxIndexController('small-box bg-info'   , $totalGroup,    'GROUP',$linkGroup)  ;
-          echo  Helper::smallBoxIndexController('small-box bg-warning', $totalUser,     'USER',$linkUser)  ; 
-          echo  Helper::smallBoxIndexController('small-box bg-success', $totalCategory, 'CATEGORY',$linkCategory)  ; 
-          echo  Helper::smallBoxIndexController('small-box bg-danger' , $totalBook,     'BOOK',$linkBook)  ; 
+          echo  HelperAdmin::smallBoxIndexController('small-box bg-info'   , $totalGroup,    'GROUP',$linkGroup)  ;
+          echo  HelperAdmin::smallBoxIndexController('small-box bg-warning', $totalUser,     'USER',$linkUser)  ; 
+          echo  HelperAdmin::smallBoxIndexController('small-box bg-success', $totalCategory, 'CATEGORY',$linkCategory)  ; 
+          echo  HelperAdmin::smallBoxIndexController('small-box bg-danger' , $totalBook,     'BOOK',$linkBook)  ; 
     ?>  
 </div>
 </div>

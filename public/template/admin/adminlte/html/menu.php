@@ -1,3 +1,6 @@
+<?php
+    $linkDefault = URL::createLink('default','index','index');
+?>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -5,6 +8,9 @@
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
+            </ul>
+            <ul class="navbar-nav">
+                    <a class="nav-link"  href="<?php echo $linkDefault ;?>" role="button"><i class="fas fa-eye"></i></a>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">

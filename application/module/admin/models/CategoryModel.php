@@ -53,7 +53,7 @@ class CategoryModel extends Model
 			$search = '"%'.$arrParam['filter_search'].'%"';
 			$query[]  = "AND `name` LIKE $search ";
 		}
-		
+		$query[] = "ORDER BY `id` DESC" ;
 		$pagination = $arrParam['pagination'] ;
 		$totalItemsPerPage = $pagination['totalItemsPerPage'] ;
 		if($totalItemsPerPage > 0 )
@@ -61,8 +61,8 @@ class CategoryModel extends Model
 			$position = ($pagination['currentPage'] - 1) * $totalItemsPerPage ;
 			$query[]  = " LIMIT $position, $totalItemsPerPage " ;
 		}
-
-		$query = implode(" " ,$query) ;
+		
+		$query = implode(" " ,$query) ; 
 		return $this->fetchAll($query) ;
 	}
 	public function changeStatus($arrParam, $opption = null)
@@ -76,7 +76,7 @@ class CategoryModel extends Model
 			$query[]  = "SET `status` = $status WHERE `id` = '$id' " ;
 			$query = implode(" " ,$query) ;		
 			$result = $this->query($query) ;
-			Session::set('messege','Thay đổi trạng thái Status thành công') ;
+			Session::set('messege',SUCCESS_STATUS) ;
 		}
 	}
 	public function deleteItem($arrParam,$opption=null)
@@ -105,7 +105,7 @@ class CategoryModel extends Model
 				$result =  $this->query($query) ;		
 				if($result == true)
 				{
-					Session::set('messege','Xóa thành công') ;	
+					Session::set('messege',SUCCESS_DELETE) ;	
 				}								
 				return $result ;	
 			}
@@ -132,13 +132,13 @@ class CategoryModel extends Model
 				$result   =  $this->query($query) ;		
 				if($result == true)
 				{
-					Session::set('messege','Xóa thành công') ;	
+					Session::set('messege',SUCCESS_DELETE) ;	
 				}			
 				return $result ;					
 			}
 			else
 			{
-				Session::set('messege','Vui lòng chọn phần tử để xóa') ;
+				Session::set('messege',ERROR_DELETE) ;
 			}
 		}
 	}
@@ -156,12 +156,12 @@ class CategoryModel extends Model
 		if($opption['task'] == 'add')
 		{
 			// Upload Image
-			$picture = $uploadObj ->uploadFile($picture , DB_TABLE_CATEGORY) ; 
+			$picture = $uploadObj ->uploadFile($picture , $this->_tableName) ; 
 			$query = "INSERT INTO `$this->_tableName` ( `name`, `picture`,`status`,`ordering` ) VALUES ('$name','$picture','$status','$ordering')" ;
   			$result = $this->query($query) ; 
 			if($result == true)
 			{
-				Session::set('messege','Dữ liệu đã được thêm thành công') ;
+				Session::set('messege',SUCCESS_ADD) ;
 			}			
 			return $this->lastID() ;
 		}
@@ -171,15 +171,15 @@ class CategoryModel extends Model
 				$query = "UPDATE `$this->_tableName` SET `name` = '$name', `status` = '$status',`ordering` = '$ordering'  WHERE `id` = $id" ; 
 			}
 			else{
-				$uploadObj ->removeFile(DB_TABLE_CATEGORY,$arrParam['picture_hidden']) ;			
-				$uploadObj ->removeFile(DB_TABLE_CATEGORY, '720x560-'.$arrParam['picture_hidden']) ;
-				$picture = $uploadObj ->uploadFile($picture ,DB_TABLE_CATEGORY);
+				$uploadObj ->removeFile($this->_tableName,$arrParam['picture_hidden']) ;			
+				$uploadObj ->removeFile($this->_tableName, '2022x1120-'.$arrParam['picture_hidden']) ;
+				$picture = $uploadObj ->uploadFile($picture ,$this->_tableName);
 				$query = "UPDATE `$this->_tableName` SET `name` = '$name', `picture` = '$picture' ,`status` = '$status',`ordering` = '$ordering'  WHERE `id` = $id" ; 
 			}
 			$result = $this->query($query) ;
 			if($result == true)
 			{
-				Session::set('messege','Edit dữ liệu thành công') ;
+				Session::set('messege',SUCCESS_EDIT) ;
 			}			
 			return $id ;
 		}

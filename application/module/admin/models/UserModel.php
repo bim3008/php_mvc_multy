@@ -70,7 +70,7 @@ class UserModel extends Model
 			$query[]  = "SET `status` = $status WHERE `id` = '$id' " ;
 			$query = implode(" " ,$query) ;		
 			$result = $this->query($query) ;
-			Session::set('messege','Thay đổi trạng thái Status thành công') ;
+			Session::set('messege',SUCCESS_STATUS) ;
 		}
 		if($opption['task'] == 'ajax-change-group_acp')
 		{
@@ -79,7 +79,7 @@ class UserModel extends Model
 			$query[]  = "SET `group_acp` = $groupACP WHERE `id` = '$id' " ;
 			$query = implode(" " ,$query) ;
 			$result = $this->query($query) ;
-			Session::set('messege','Thay đổi trạng thái Group ACP thành công') ;
+			Session::set('messege',SUCCESS_GROUP_ACP) ;
 		}
 	}
 	public function deleteItem($arrParam,$opption=null)
@@ -95,7 +95,7 @@ class UserModel extends Model
 				$result =  $this->query($query) ;		
 				if($result == true)
 				{
-					Session::set('messege','Xóa thành công') ;	
+					Session::set('messege',SUCCESS_DELETE) ;	
 				}								
 				return $result ;	
 			}
@@ -112,13 +112,13 @@ class UserModel extends Model
 				$result =  $this->query($query) ;		
 				if($result == true)
 				{
-					Session::set('messege','Xóa thành công') ;	
+					Session::set('messege',SUCCESS_DELETE) ;	
 				}			
 				return $result ;					
 			}
 			else
 			{
-				Session::set('messege','Vui lòng chọn phần tử để xóa') ;
+				Session::set('messege',ERROR_DELETE) ;
 			}
 		}
 	}
@@ -138,7 +138,7 @@ class UserModel extends Model
 			$query = "INSERT INTO `$this->_tableName` ( `username`, `password`,`fullname`,`email`,`status`,`ordering`,`group_id` ) VALUES ('$username','$password','$fullname','$email','$status','$ordering','$group_id')" ;
 	     	$result = $this->query($query) ; 
 			if($result == true){
-				Session::set('messege','Dữ liệu đã được thêm thành công') ;
+				Session::set('messege',SUCCESS_ADD) ;
 			}			
 			return $result ;
 		}
@@ -147,7 +147,7 @@ class UserModel extends Model
 			$query = "UPDATE `$this->_tableName` SET `username` = '$username',`fullname` = '$fullname',`ordering` = '$ordering' , `email` = '$email',`status` = '$status',`group_id` = '$group_id' WHERE `id` = $id" ; 
 			$result = $this->query($query) ;
 			if($result == true){
-				Session::set('messege','Edit dữ liệu thành công') ;
+				Session::set('messege',SUCCESS_EDIT) ;
 			}			
 			return $result ;
 		}
@@ -172,7 +172,7 @@ class UserModel extends Model
 			$oldPass 	= md5($arrParam['old-password']) ;
 			$newPass 	= md5($arrParam['new-password']) ;
 			$rePass  	= md5($arrParam['re-password'])  ;
-			$query 		= "SELECT `password` FROM `user` WHERE `id` = $id" ; 
+			$query 		= "SELECT `password` FROM `$this->_tableName` WHERE `id` = $id" ; 
 			$result = $this->fetchRow($query) ; 
 			$getOldPass = $result['password'] ; 
 			if($oldPass == '' || $newPass == '' || $rePass == ''){
@@ -188,7 +188,7 @@ class UserModel extends Model
 						Session::set('messege','Mật khẩu không trùng khớp') ;			
 					}
 					else{
-						$queryUpdate  = "UPDATE `user` SET `password` = '$newPass' WHERE `id` = $id " ;
+						$queryUpdate  = "UPDATE `$this->_tableName` SET `password` = '$newPass' WHERE `id` = $id " ;
 					 	$resultUpdate = $this->query($queryUpdate) ;  
 						if($resultUpdate == true){
 							Session::set('messege','Thay đổi mật khẩu thành công') ;							

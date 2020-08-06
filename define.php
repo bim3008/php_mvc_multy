@@ -10,6 +10,7 @@
 	define ('UPLOAD_PATH'			, PUBLIC_PATH  . 'files' . DS);				// Định nghĩa đường dẫn đến thư mục public							
 	define ('APPLICATION_PATH'		, ROOT_PATH . DS . 'application' . DS);		// Định nghĩa đường dẫn đến thư mục application
 	define ('MODULE_PATH'			, APPLICATION_PATH . 'module' . DS);		// Định nghĩa đường dẫn đến thư mục module														
+	define ('BLOCK_PATH'			, APPLICATION_PATH . 'block' . DS);		// Định nghĩa đường dẫn đến thư mục block														
 	define ('TEMPLATE_PATH'			, PUBLIC_PATH . 'template' . DS);			// Định nghĩa đường dẫn đến thư mục template							
 	
 	define	('ROOT_URL'				, DS . 'php_mvc_multy' . DS);

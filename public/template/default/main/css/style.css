@@ -1512,7 +1512,8 @@ body {
 }
 
 .product-img a img {
-    width: 100%;
+    width: 197px;
+    height: 253px;
 }
 
 .quick-view {
@@ -1586,7 +1587,7 @@ body {
     color: #f07c29;
     font-size: 20px;
     font-weight: 600;
-    font-family: 'Rufina', serif;
+    font-family: "Times New Roman", Times, serif;
     font-style: italic;
 }
 
@@ -2026,9 +2027,10 @@ body {
 /*  7. Banner static area
 /*----------------------------------------*/
 
-.banner-static-area {
-    background: rgba(0, 0, 0, 0) url("img/banner/7.jpg") repeat scroll center center;
-}
+
+/* .banner-static-area {
+    background: rgba(0, 0, 0, 0) url("") repeat scroll center center;
+} */
 
 
 /*----------------------------------------*/
@@ -2143,7 +2145,7 @@ body {
 }
 
 .block-newsletter {
-    background: #f07c29 url("img/banner/10.jpg") no-repeat scroll center top;
+    /* background: #f07c29 url("img/banner/10.jpg") no-repeat scroll center top; */
     padding: 45px 25px 25px;
     position: relative;
     text-align: center;
@@ -4362,15 +4364,10 @@ nav.menu .cr-dropdown ul {
     width: 100%;
 }
 
-.left-title h4 {
-    color: #3f3f3f;
-    display: block;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 24px;
-    position: relative;
-    text-transform: uppercase;
-    margin-bottom: 0;
+.left-title span {
+    font-size: 50px;
+    font-family: cursive;
+    color: darkgrey;
 }
 
 .left-menu ul li {
@@ -4391,8 +4388,10 @@ nav.menu .cr-dropdown ul {
     position: relative;
     text-transform: capitalize;
     text-decoration: none;
-    font-family: 'Rufina', serif;
+    font-family: "Times New Roman", Times, serif;
     font-weight: 400;
+    /* font-family: serif; */
+    font-size: large;
 }
 
 .left-menu ul li a:hover {
@@ -4400,7 +4399,6 @@ nav.menu .cr-dropdown ul {
 }
 
 .left-menu ul li a:before {
-    content: "?";
     display: inline-block;
     font-family: "FontAwesome";
     font-size: 16px;
@@ -4412,6 +4410,11 @@ nav.menu .cr-dropdown ul {
     display: inline-block;
     font-size: 14px;
     float: right;
+}
+
+.left-menu ul li a.active {
+    color: red;
+    text-decoration-line: revert;
 }
 
 .color-menu ul.color li {
@@ -5113,7 +5116,7 @@ nav.menu .cr-dropdown ul {
     color: #f07c29;
     font-size: 25px;
     font-weight: 400;
-    font-family: 'Rufina', serif;
+    font-family: "Times New Roman", Times, serif;
     font-weight: 400;
 }
 
@@ -7474,6 +7477,15 @@ p.lost-password a:hover {
     opacity: 1;
 }
 
-#delete ul li a::before {
-    content: unset !important;
+.shop-main-area #th .row {
+    text-align: center;
+    font-size: 32px;
+    color: orangered;
 }
+
+
+/* #delete ul li a::before {
+    font-family: serif;
+    font-size: large;
+    content: unset !important;
+} */

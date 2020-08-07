@@ -11,11 +11,9 @@ class CategoryController extends Controller
 	}
 	public function indexAction()
 	{
-		$this->_view->setTitle(ucfirst($this->_arrParam['controller']) );
+		$this->_view->setTitle("Danh mục");
 		$this->_view->listItems  = $this->_model->listItems($this->_arrParam);
-		$this->_view->topSelling = $this->_model->listItems($this->_arrParam,array('task'=>'top-selling'));
 		$this->_view->render($this->_arrParam['controller'] .DS.'index');
-	}
-	
+	}	
 	
 }

@@ -1,4 +1,5 @@
-<div class="banner-area banner-res-large ptb-35">
+        <!-- INTRO -->
+        <div class="banner-area banner-res-large ptb-35">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
@@ -48,8 +49,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- banner-area-end -->
-		<!-- slider-area-start -->
+        <!--  SLIDER -->
 		<div class="slider-area">
 			<div class="slider-active owl-carousel">
 				<div class="single-slider pt-125 pb-130 bg-img" style="background-image:url('<?php echo $urlImages.'/1.jpg'?>');">
@@ -78,8 +78,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- slider-area-end -->
-		<!-- product-area-start -->
+		<!-- TOP INTERESTING -->
 		<div class="product-area pt-95 xs-mb">
 			<div class="container">
 				<div class="row">
@@ -964,8 +963,7 @@
 				<!-- tab-area-end -->
 			</div>
 		</div>
-		<!-- product-area-end -->
-		<!-- banner-area-start -->
+
 		<div class="banner-area-5 mtb-95">
 			<div class="container">
 				<div class="row">

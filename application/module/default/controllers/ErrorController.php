@@ -1,5 +1,5 @@
 <?php
-class IndexController extends Controller{
+class ErrorController extends Controller{
 	
 	public function __construct($arrParams){
 		parent::__construct($arrParams);
@@ -9,11 +9,8 @@ class IndexController extends Controller{
 		$this->_templateObj->load();
 	}
 	public function indexAction(){
-		$this->_view->setTitle('Trang chủ');
-		$this->_view->render($this->_arrParam['controller'] . DS . 'index');
+		$this->_view->setTitle('Error');
+		$this->_view->render($this->_arrParam['controller'] . DS . 'index',false);
 	}
-	// public function detailsAction(){
-	// 	$this->_view->setTitle('Chi tiết');
-	// 	$this->_view->render($this->_arrParam['controller'] . DS . 'details');
-	// }
+
 }

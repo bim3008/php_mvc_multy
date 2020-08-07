@@ -116,7 +116,7 @@ class BookModel extends Model
 		
 		$id				=  $arrParam['id'] ;
 		$name 			=  $arrParam['name'] ;
-		$description 	= $arrParam['description'] ; 
+		$description    =  mysqli_real_escape_string($this->connect,$arrParam['description']) ; 
 		$price 			=  $arrParam['price'] ;
 		$special 		=  $arrParam['special'] ;
 		$saleOff 		=  $arrParam['sale_off'] ;
@@ -126,9 +126,7 @@ class BookModel extends Model
 		$picture   	 	=  $arrParam['picture'] ;	
 
 		require_once LIBRARY_EXT_PATH . 'Upload.php' ;
-
 		$uploadObj = new Upload();
-		
 		if($opption['task'] == 'add')
 		{
 			$picture = $uploadObj ->uploadFile($picture ,$this->$_tableName) ; 		

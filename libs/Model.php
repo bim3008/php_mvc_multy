@@ -4,9 +4,8 @@ class Model{
 	protected $database;
 	protected $table;
 	protected $resultQuery;
-
-	protected $link;
 	
+	public $link ;
 	// CONNECT DATABASE
 	public function __construct($params = null){
 		if($params == null){

@@ -5,4 +5,8 @@
     define('SUCCESS_EDIT'      , 'Cập nhập liệu thành công') ;
     define('SUCCESS_DELETE'    , 'Xóa phần tử thành công') ;
     define('ERROR_DELETE'      , 'Vui lòng chọn phần tử để xóa') ;
+    define('UPDATING_DATA'     , 'Dữ liệu đang được cập nhập') ;
+    
+    
+
 ?>

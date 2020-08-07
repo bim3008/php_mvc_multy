@@ -7,12 +7,10 @@
                   <ul>
                      <li>
                         <a href="<?php echo $linkHome ;?>">Home<i class="fa fa-angle-down"></i></a>
-                        <div class="sub-menu">
-                        </div>
                      </li>
                      <li>
                         <a href="<?php echo $linkCategory ;?>">Category<i class="fa fa-angle-down"></i></a>
-                        <div class="mega-menu">
+                        <!-- <div class="mega-menu">
                            <span>
                            <a href="#" class="title">Jackets</a>
                            <a href="shop.php">Tops & Tees</a>
@@ -45,11 +43,11 @@
                            <a href="shop.php">Hoodies</a>
                            <a href="shop.php">Jackets</a>
                            </span>
-                        </div>
+                        </div> -->
                      </li>
                      <li>
-                        <a href="product-details.php">Audio books<i class="fa fa-angle-down"></i></a>
-                        <div class="mega-menu">
+                        <a href="<?php echo $linkBook ;?>">Book<i class="fa fa-angle-down"></i></a>
+                        <!-- <div class="mega-menu">
                            <span>
                            <a href="#" class="title">Shirts</a>
                            <a href="shop.php">Tops & Tees</a>
@@ -78,7 +76,7 @@
                            <a href="shop.php">Graphic T-Shirts</a>
                            <a href="shop.php">Hoodies</a>
                            </span>
-                        </div>
+                        </div> -->
                      </li>
                      <li>
                         <a href="product-details.php">children’s books<i class="fa fa-angle-down"></i></a>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 03, 2020 at 12:26 PM
+-- Generation Time: Aug 07, 2020 at 01:45 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -49,16 +49,15 @@ CREATE TABLE `book` (
 --
 
 INSERT INTO `book` (`id`, `name`, `description`, `price`, `special`, `sale_off`, `picture`, `created`, `created_by`, `modified`, `modified_by`, `status`, `ordering`, `category_id`) VALUES
-(12, 'UnrealScript Game Programming Cookbook', ' Designed for high-level game programming, UnrealScript is used in tandem with the Unreal Engine to provide a scripting language that is ideal for ', '2500000', 1, 20, 'gt48z0w1.jpg', '2013-12-12', 'admin', '2013-12-25', 'admin', 1, 3, 2),
-(13, 'Functional Programming in Scala', 'Functional programming (FP) is a programming style emphasizing functions that return consistent and predictable results regardless of a program\'s state. As a result, functional code is easier to test and reuse, simpler to parallelize, and less prone to bugs. Scala is an emerging JVM language that offers strong support for FP. Its familiar syntax and transparent interoperability with existing Java libraries make Scala a great place to start learning FP ', '35000', 1, 3, 'aw1tkgn0.jpg', '2013-12-12', 'admin', '2013-12-13', 'admin', 1, 1, 5),
-(14, 'iOS 7 Programming Fundamentals', 'Sinh viên không vi phạm qui chế thi', '45000', 1, 0, 'ywhp70fj.jpg', '2013-12-12', 'admin', '2013-12-12', 'admin', 0, 2, 2),
-(16, 'Advanced Programming in the UNIX Environment, 3rd Edition', ' He also thoroughly covers threads and multithreaded programming, and socket-based IPC.', '36000', 1, 2, 'wd6f4nlr.jpg', '2013-12-12', 'admin', '2013-12-13', 'admin', 0, 3, 1),
-(17, 'jMonkeyEngine 3.0 Beginner', ' Progressing from elementary concepts to advanced effects, budding game developers will have their first game up and running by the end of this book.', '36000', 0, 12, 'x5h6onws.jpg', '2013-12-12', 'admin', '2013-12-12', 'admin', 1, 3, 2),
-(18, 'Scala Cookbook', '\r\nAuthor Alvin Alexander (creator of DevDaily.com) provides solutions based on his experience using Scala for highly scalable, component-based applications that support concurrency and distribution.', '46000', 0, 0, 'lsary56t.jpg', '2013-12-12', 'admin', '2013-12-12', 'admin', 1, 10, 4),
-(19, 'PostgreSQL Server Programming', 'PostgreSQL Server Programming will show you that PostgreSQL is so much more than a database server. In fact, it could even be seen as an application development framework, with the added bonuses of transaction support, massive data storage, journaling, recovery and a host of other features that the PostgreSQL engine provides.', '54000', 0, 5, 'lgr9kpbs.jpg', '2013-12-12', 'admin', '2013-12-12', 'admin', 1, 3, 6),
-(20, 'Programming Drupal 7 Entities', 'Programming Drupal 7 Entities is a practical, hands-on guide that provides you with a thorough knowledge of Drupal entity paradigm and a number of clear step-by-step exercises, which will help you take advantage of the real power that is available when developing using entities.', '58000', 0, 4, 'rfl1qdst.jpg', '2013-12-12', 'admin', '2013-12-12', 'admin', 1, 3, 2),
-(21, 'Moving from C to C++', 'The author says it best, I hope to move you, a little at a time,from understanding C to the point where C++ becomes your mindset. This remarkable book is designed to streamline the process of learning C++ in a way that discusses programming problems, why they exist, and the approach C++ has taken to solve such problems.\r\n\r\nYou cant just look at C++ as a collection of features; some of the features make no sense in isolation. You can only use the sum of the parts if you are thinking about design, not simply coding. To understand C++, you must understand the problems with C and with programming in general. This book discusses programming problems, why they are problems, and the approach C++ has taken to solve such problems. Thus, the set of features that I explain in each chapter will be based on the way that I see a particular type of problem being solved in C++.', '36000', 0, 3, '0lzxvrag.jpg', '2013-12-12', 'admin', '2013-12-12', 'admin', 0, 3, 8),
-(22, 'C Programming for Arduino', 'Physical computing allows us to build interactive physical systems by using software & hardware in order to sense and respond to the real world. C Programming for Arduino will show you how to harness powerful capabilities like sensing, feedbacks, programming and even wiring and developing your own autonomous systems.\r\n\r\nC Programming for Arduino contains everything you need to directly start wiring and coding your own electronic project. You will learn C and how to code several types of firmware for your Arduino, and then move on to design small typical systems to understand how handling buttons, leds, LCD, network modules and much more.', '38000', 1, 0, '6qzesvax.jpg', '2013-12-12', 'admin', '2013-12-13', 'admin', 1, 2, 3);
+(12, 'Harry Potter', 'Functional ', '250000', 1, 20, 'fbt8ewui.jpg', '2013-12-12', 'admin', '2013-12-25', 'admin', 0, 3, 5),
+(13, 'Driven Backpack', 'Functional programming ', '35000', 1, 25, '851kij7x.jpg', '2013-12-12', 'admin', '2013-12-13', 'admin', 0, 1, 11),
+(14, 'Wayfarer Messenger Bag', 'Sinh viên không vi phạm qui chế thi', '45000', 1, 20, '1v7ejuf6.jpg', '2013-12-12', 'admin', '2013-12-12', 'admin', 0, 2, 2),
+(16, 'Chaz Kangeroo Hoodie', ' He also thoroughly covers threads and multithreaded programming, and socket-based IPC.', '36000', 1, 2, 'zl6xv14n.jpg', '2013-12-12', 'admin', '2013-12-13', 'admin', 0, 3, 7),
+(17, 'Joust Duffle Bag', ' Progressing from elementary concepts to advanced effects, budding game developers will have their first game up and running by the end of this book.', '36000', 1, 12, 'wkz5yor6.jpg', '2013-12-12', 'admin', '2013-12-12', 'admin', 0, 3, 11),
+(18, 'Scala Cookbook', 'Author Alvin Alexander (creator of DevDaily.com) provides solutions based on his experience using Scala for highly scalable, component-based applications that support concurrency and distribution.', '46000', 1, 0, '3snefz65.jpg', '2013-12-12', 'admin', '2013-12-12', 'admin', 0, 10, 2),
+(19, 'PostgreSQL Server', 'PostgreSQL Server Programming will show you that PostgreSQL is so much more than a database server. In fact, it could even be seen as an application development framework, with the added bonuses of transaction support, massive data storage, journaling, recovery and a host of other features that the PostgreSQL engine provides.', '54000', 1, 5, 'yelwfxzt.jpg', '2013-12-12', 'admin', '2013-12-12', 'admin', 0, 3, 2),
+(20, 'Entities', 'Programming Drupal 7 Entities is a practical, hands-on guide that provides you with a thorough knowledge of Drupal entity paradigm and a number of clear step-by-step exercises, which will help you take advantage of the real power that is available when developing using entities.', '58000', 1, 4, 'fo43krbc.jpg', '2013-12-12', 'admin', '2013-12-12', 'admin', 0, 3, 2),
+(21, 'Fusion Backpack', 'The author says it best, I hope to move you, a little at a time,from understanding C to the point where C++ becomes your mindset. This remarkable book is designed to streamline the process of learning C++ in a way that discusses programming problems, why they exist, and the approach C++ has taken to solve such problems.\r\n\r\nYou cant just look at C++ as a collection of features; some of the features make no sense in isolation. You can only use the sum of the parts if you are thinking about design, not simply coding. To understand C++, you must understand the problems with C and with programming in general. This book discusses programming problems, why they are problems, and the approach C++ has taken to solve such problems. Thus, the set of features that I explain in each chapter will be based on the way that I see a particular type of problem being solved in C++.', '36000', 1, 0, '3kb2zmn5.jpg', '2013-12-12', 'admin', '2013-12-12', 'admin', 0, 3, 10);
 
 -- --------------------------------------------------------
 
@@ -111,14 +110,18 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `name`, `picture`, `created`, `created_by`, `modified`, `modified_by`, `status`, `ordering`) VALUES
-(1, 'Văn học', 'ojl2evrg.jpg', '0000-00-00', NULL, '0000-00-00', NULL, 1, 10),
-(2, 'Kỹ năng sống', 'ta3neb87.jpg', '0000-00-00', NULL, '0000-00-00', NULL, 0, 10),
-(3, 'Thiếu nhi', '2bndk634.jpg', '0000-00-00', NULL, '0000-00-00', NULL, 1, 10),
-(4, 'Kinh tế', 'hqx2y0is.jpg', '0000-00-00', NULL, '0000-00-00', NULL, 0, 10),
-(5, 'Y học', 'x2tfjy63.jpg', '0000-00-00', NULL, '0000-00-00', NULL, 1, 10),
-(6, 'Lịch sử', '1d3r506i.jpg', '0000-00-00', NULL, '0000-00-00', NULL, 0, 10),
-(7, 'Khoa học - Kỹ thuật', '13dj2ugh.jpg', '0000-00-00', NULL, '0000-00-00', NULL, 1, 10),
-(8, 'Công nghệ thông tin', '83yoeq25.jpg', '0000-00-00', NULL, '0000-00-00', NULL, 1, 10);
+(1, 'Văn học', 'doin260r.jpg', '0000-00-00', NULL, '0000-00-00', NULL, 0, 12),
+(2, 'Kỹ năng sống', '6hp5s4we.jpg', '0000-00-00', NULL, '0000-00-00', NULL, 0, 10),
+(3, 'Thiếu nhi', 'vje7b8a0.jpg', '0000-00-00', NULL, '0000-00-00', NULL, 0, 10),
+(4, 'Kinh tế', '5bqyul1o.jpg', '0000-00-00', NULL, '0000-00-00', NULL, 0, 12),
+(5, 'Y học', '486ktwb3.jpg', '0000-00-00', NULL, '0000-00-00', NULL, 0, 10),
+(6, 'Lịch sử', 'tomjvxf2.jpg', '0000-00-00', NULL, '0000-00-00', NULL, 0, 10),
+(7, 'Khoa học - Kỹ thuật', 'rakl9pcy.jpg', '0000-00-00', NULL, '0000-00-00', NULL, 0, 10),
+(8, 'Khoa học & đời sống', '6y5edgs0.jpg', '0000-00-00', NULL, '0000-00-00', NULL, 0, 41),
+(9, 'Gia đình ', '2ejvb4dw.jpg', '0000-00-00', NULL, '0000-00-00', NULL, 0, 12),
+(10, 'Trí tuệ', 'g1qdj3rf.jpg', '0000-00-00', NULL, '0000-00-00', NULL, 0, 21),
+(11, 'Tình cảm', '27p4rcuy.jpg', '0000-00-00', NULL, '0000-00-00', NULL, 0, 100),
+(12, 'Khám phá', 'phvo481k.jpg', '0000-00-00', NULL, '0000-00-00', NULL, 0, 100);
 
 -- --------------------------------------------------------
 
@@ -172,8 +175,7 @@ CREATE TABLE `group` (
 
 INSERT INTO `group` (`id`, `name`, `group_acp`, `created`, `created_by`, `modified`, `modified_by`, `status`, `ordering`, `privilege_id`, `picture`) VALUES
 (1, 'Admin', 1, '0000-00-00', NULL, '0000-00-00', NULL, 0, 2, '', ''),
-(2, 'Manager', 0, '0000-00-00', NULL, '0000-00-00', NULL, 1, 41, '', ''),
-(3, 'Member', 0, '0000-00-00', NULL, '0000-00-00', NULL, 1, 12, '', '');
+(2, 'Manager', 0, '0000-00-00', NULL, '0000-00-00', NULL, 1, 41, '', '');
 
 -- --------------------------------------------------------
 
@@ -233,9 +235,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `email`, `fullname`, `password`, `created`, `created_by`, `modified`, `modified_by`, `register_date`, `register_ip`, `status`, `ordering`, `group_id`) VALUES
-(2, 'nvana', 'nvana@gmail.com', 'Dinh Dam Dao', 'c6c9e80333513b4dd71a81cf133fb9c8', '0000-00-00', '1', '0000-00-00', NULL, '0000-00-00 00:00:00', NULL, 0, 40, 3),
+(2, 'nvana', 'nvana@gmail.com', 'Dinh Dam Dao', 'c6c9e80333513b4dd71a81cf133fb9c8', '0000-00-00', '1', '0000-00-00', NULL, '0000-00-00 00:00:00', NULL, 0, 40, 2),
 (24, 'admin01', 'boyhotboy1299@gmail.com', 'Lê Trương Định', 'c33367701511b4f6020ec61ded352059', '0000-00-00', NULL, '0000-00-00', NULL, '0000-00-00 00:00:00', NULL, 1, 21, 2),
-(27, 'admin', 'admin123@gmail.com', 'Lê Trương Định', 'e10adc3949ba59abbe56e057f20f883e', '0000-00-00', NULL, '0000-00-00', NULL, '0000-00-00 00:00:00', NULL, 0, 12, 1);
+(27, 'admin', 'admin123@gmail.com', 'Hắc Bạch Công Tử', 'e10adc3949ba59abbe56e057f20f883e', '0000-00-00', NULL, '0000-00-00', NULL, '0000-00-00 00:00:00', NULL, 0, 12, 1);
 
 --
 -- Indexes for dumped tables
@@ -297,7 +299,7 @@ ALTER TABLE `book`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT for table `faq`

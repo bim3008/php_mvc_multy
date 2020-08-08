@@ -15,60 +15,44 @@
                }else{
                   $xhtmlNameCategory .= '<li><a href="'.$link.'">'. $name.'<span></span></a></li>';
                }
-            
             }
       }
-   // HIỂN THỊ TOP SELLING
-      $querySelling = 'SELECT `id`, `name`, `picture`, `price` , `sale_off` FROM `'.DB_TABLE_BOOK.'` WHERE `sale_off` > 0 ORDER BY `sale_off` DESC LIMIT 3' ; 
-      $resultSelling = $module->fetchAll($querySelling) ;
-      if (!empty($resultSelling)) {
-      $xhtmlTopSelling = '' ;
-            foreach ($resultSelling as $keySelling => $valueSelling) {
-               $name = ucfirst($valueSelling['name']);
-               $cost = $valueSelling['price'];
-               $sale = $valueSelling['sale_off'];
-               $priceSale = $cost - ($cost * $sale / 100);
-               $picture = LINK_IMAGE_BOOK . $valueSelling['picture'];
-               $xhtmlTopSelling .= HTMLDefault::categoryTopSelling($picture, $name, HelperAdmin::formatVND($cost), HelperAdmin::formatVND($priceSale));
-            }
-      }
-?>         <div class="breadcrumbs-area mb-30">
-           </div>
-               <div class="shop-main-area mb-10">
-                  <div class="container">
-                     <div class="row">
-            <!-- SLIDER LEFT -->
-            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
-               <div class="shop-left">
-                  <div class="section-title-5 mb-30">
-                     <h2>Shopping Options</h2>
-                  </div>
-                  <div class="left-title mb-8">
-                     <span>Category</span>
-                  </div>
-                  <div class="left-menu mb-30" id="delete">
-                     <ul>
-                        <?php echo $xhtmlNameCategory; ?>
-                     </ul>
-                  </div>
-                  <div class="left-title mb-20">
-                     <span>Top Selling</span>
-                  </div>
-                  <div class="random-area mb-30">
-                     <div class="product-active-2 owl-carousel">
-                        <!-- TOP SELLING -->
-                        <div class="product-total-2">
-                           <?php echo $xhtmlTopSelling; ?>
-                        </div>
-                     </div>
-
-                  </div>
-                  <!-- BANNER  -->
-                  <?php
-                     if(empty($this->arrParam['category_id']) && $this->arrParam['controller'] == 'book')
-                     {
-                        require_once BLOCK_PATH . 'banner.php' ;
-                     }
-                  ?>
+?>        
+   <?php 
+         if($this->arrParam['controller'] != 'index')
+         echo HTMLDefault::classRowContent(); 
+   ?>
+   <!-- SLIDER LEFT -->
+   <div class="breadcrumbs-area mb-30">
+   </div>
+   <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+      <div class="shop-left">
+         <div style ="margin-top:-25px" class="left-title mb-8">
+            <span>Category</span>
+         </div>
+         <div class="left-menu mb-5" id="delete">
+            <ul>
+               <?php echo $xhtmlNameCategory; ?>
+            </ul>
+         </div>
+         <?php
+               if($this->arrParam['controller'] != 'index')
+               echo HTMLDefault::titleTopSelling(); ?>
+         <div class="random-area mb-30">
+            <div class="product-active-2 owl-carousel">
+               <!-- TOP SELLING -->
+               <div class="product-total-2">
+                  <?php  
+                  if($this->arrParam['controller'] != 'index')
+                     require_once BLOCK_PATH . 'topselling.php' ; ?>
                </div>
             </div>
+         </div>
+         <!-- BANNER  -->
+         <?php
+            if(empty($this->arrParam['category_id']) && $this->arrParam['controller'] == 'book'){
+               require_once BLOCK_PATH . 'banner.php' ;
+            }
+         ?>
+      </div>
+   </div>

@@ -45,19 +45,17 @@ class HTMLDefault
     public static function categoryTopSelling($picture,$name,$cost,$sale)
     {
         $xhtml = '<div class="single-most-product bd mb-18">
-                    <div class="most-product-img">
-                    <a href="#"><img src="'.$picture.'" alt="book" /></a>
+                    <div class="most-product-img"><a href="#"><img src="'.$picture.'" alt="book" /></a></div>
+                        <div class="most-product-content">
+                            <h4><a href="#">'.$name.'</a></h4>
+                        <div class="product-price">
+                            <ul>
+                                <li style="font-family: none ,serif;">'.$sale.'</li>
+                                <li class="old-price">'.$cost.'</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="most-product-content">
-                    <h4><a href="#">'.$name.'</a></h4>
-                    <div class="product-price">
-                        <ul>
-                            <li style="font-family: none ,serif;">'.$sale.'</li>
-                            <li class="old-price">'.$cost.'</li>
-                        </ul>
-                    </div>
-                    </div>
-                    </div>' ;
+                </div>' ;
         return $xhtml ;
 
     }
@@ -124,7 +122,6 @@ class HTMLDefault
         ' ;
         return $xhtml ;
     }
-
     public static function bookInCategory($link,$img,$sale_off,$name,$price)
     {
         $xhtml = '
@@ -245,5 +242,63 @@ class HTMLDefault
         ' ;
         return $xhtml ;
     }
+    public static function titleTopSelling(){
+        $xhtml  = '
+        <div class="left-title mb-20">
+            <span>Top Selling</span>
+        </div>
+        ';
+        return $xhtml ;
+    }
 
+    public static function classRowContent(){
+        $xhtml  = '
+        <div class="shop-main-area mb-10">
+            <div class="container">
+            <div class="row">
+        ';
+        return $xhtml ;
+    }
+    public static function bookReletive($link,$img,$name,$price)
+    {
+        $xhtml = '
+        <div class="product-wrapper">
+                <div class="product-img">
+                    <a href="'.$link.'"><img src="'.$img.'" alt="book" class="primary" /></a>
+                    <div class="product-flag">
+                        <ul>
+                            <li><span class="sale">new</span></li>
+                            <li><span class="discount-percentage">-5%</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="product-details text-center">
+                    <h4><a href="'.$link.'">'.$name.'</a></h4>
+                    <div class="product-price">
+                        <ul>
+                            <li>'.$price.'</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="product-link">
+                    <div class="product-button">
+                        <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                    </div>
+                    <div class="add-to-link">
+                        <ul>
+                            <li><a href="product-details.html" title="Details"><i
+                                        class="fa fa-external-link"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+        </div>   
+        ';
+        return $xhtml ;
+    }
+    public static function categoryChil($link,$name){
+        $xhtml = ' <span>
+                    <a href="'.$link.'" class="title">'.$name.'</a>
+                   </span>';
+        return $xhtml ;
+    }
 }

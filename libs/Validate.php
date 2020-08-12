@@ -102,7 +102,6 @@ class Validate
 						$this->validateNotExistRecord($element, $value['options']);
 						break;
 					case 'file':
-				
 						$this->validateFile($element, $value['options']);
 						break;
 				}
@@ -118,7 +117,7 @@ class Validate
 	// Validate Integer
 	private function validateInt($element, $min = 0, $max = 0)
 	{
-		if ($this->source[$element] != 0 && !filter_var($this->source[$element], FILTER_VALIDATE_FLOAT, array("options" => array("min_range" => $min, "max_range" => $max)))) {
+			if ($this->source[$element] != 0 && !filter_var($this->source[$element], FILTER_VALIDATE_FLOAT, array("options" => array("min_range" => $min, "max_range" => $max)))) {
 			$this->setError($element, 'is an invalid number');
 		}
 	}

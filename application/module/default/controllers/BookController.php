@@ -12,10 +12,10 @@ class BookController extends Controller
 	public function indexAction()
 	{
 		$this->_view->setTitle("List Book");
-		$this->_view->getBookInCate    = $this->_model->listItems($this->_arrParam,array('task'=>'book-in-cate'));
-		$this->_view->getNewBook       = $this->_model->listItems($this->_arrParam,array('task'=>'get-new-book'));
-		$this->_view->getFeaturedBook  = $this->_model->listItems($this->_arrParam,array('task'=>'get-featured-book'));
-		$this->_view->getCatName       = $this->_model->inforItem($this->_arrParam,array('task'=>'get-cat-name'));
+		$this->_view->getBookInCate    = $this->_model->listItems($this->_arrParam,['task'=>'book-in-cate']);
+		$this->_view->getNewBook       = $this->_model->listItems($this->_arrParam,['task'=>'get-new-book']);
+		$this->_view->getFeaturedBook  = $this->_model->listItems($this->_arrParam,['task'=>'get-featured-book']);
+		$this->_view->getCatName       = $this->_model->inforItem($this->_arrParam,['task'=>'get-cat-name']);
 		$this->_view->render($this->_arrParam['controller'] .DS.'index');
 	}	
 	public function detailsAction()
@@ -25,8 +25,8 @@ class BookController extends Controller
 			URL::redirect('default','error','index');
 		}
 		$this->_view->setTitle("Chi tiết");
-		$this->_view->getBookDetails  = $this->_model->listItems($this->_arrParam,array('task'=>'get-details-book'));
-		$this->_view->getBookReletive = $this->_model->listItems($this->_arrParam,array('task'=>'get-reletive-book'));
+		$this->_view->getBookDetails  = $this->_model->listItems($this->_arrParam,['task'=>'get-details-book']);
+		$this->_view->getBookReletive = $this->_model->listItems($this->_arrParam,['task'=>'get-reletive-book']);
 		$this->_view->render($this->_arrParam['controller'] .DS.'details');
 	}	
 	

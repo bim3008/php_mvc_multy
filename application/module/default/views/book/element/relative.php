@@ -1,3 +1,4 @@
+    
 <?php
     // SẢN PHẨM LIÊN QUAN
     if(!empty($this->getBookReletive)){
@@ -15,11 +16,7 @@
             $special     = $value['special'];
             $picture     = $value['picture'];
             $imageURL    = LINK_IMAGE_BOOK . $picture ;
-            $xhtml .= HTMLDefault::bookReletive($link,$imageURL,$name,$cost) ;
+            $xhtml .= HTMLDefault::bookReletive($link,$imageURL,$name,$cost,$sale) ;
         }
-    }
-    else
-    {   $xhtml = '' ;
-        echo '<p style="font-size: 30px;text-align: center;color: red;">SẢN PHẨM ĐANG CẬP NHẬP</p>' ;
     }
 ?>

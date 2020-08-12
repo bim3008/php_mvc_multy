@@ -47,8 +47,8 @@
         $rowSaleOff         = HelperAdmin::cmsRowInput('sale off', $inputSaleOff);
         $rowPicture         = HelperAdmin::cmsRowInput('picture', $inputPicture);
         $rowOrdering        = HelperAdmin::cmsRowInput('ordering', $inputOrdering );
-        $rowSelectStatus    = HelperAdmin::cmsSelectboxForm('status',  'Status'  , array('default'=>'Select stat                us','0'=>'Active','1'=>'Inactive'),$valueStatus) ;
-        $rowSelectSpecial   = HelperAdmin::cmsSelectboxForm('special', 'Special' , array('default'=>'Select Special','0'=>'Không','1'=>'Có'),$valueSpecial) ;
+        $rowSelectStatus    = HelperAdmin::cmsSelectboxForm('status',  'Status'  , znv_define_status,$valueStatus) ;
+        $rowSelectSpecial   = HelperAdmin::cmsSelectboxForm('special', 'Special' , znv_define_special,$valueSpecial) ;
         $rowslbCategoryId   = HelperAdmin::cmsSelectboxForm('category_id','Category', $this->selectBoxCategory,$valueCategoryId) ;
         // FORM ADD AND EDIT
         if($id > 0){$content = $rowName . $rowDescription . $rowPicture . $image  . $rowPrice . $rowSaleOff .  $rowSelectSpecial . $rowSelectStatus . $rowslbCategoryId . $rowOrdering . $inputid . $rowPictureHidden;

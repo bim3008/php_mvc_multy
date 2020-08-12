@@ -32,7 +32,7 @@
             $status     = $value['status'];
             $special    = $value['special'];
             $imageURL   = LINK_IMAGE_BOOK . $picture ;
-            $xhtmlNewBook    .= HTMLDefault::newBook($link,$imageURL,$name,$price) ;
+            $xhtmlNewBook    .= HTMLDefault::newBook($link,$imageURL,$name,$price,$sale_off) ;
         }
     }
     // FEATURED BOOK
@@ -48,16 +48,16 @@
             $status     = $value['status'];
             $special    = $value['special'];
             $imageURL   = LINK_IMAGE_BOOK . $picture ;
-            $xhtmlFeaturedBook   .= HTMLDefault::featuredBook($link,$imageURL,$name,$price) ;
+            $xhtmlFeaturedBook   .= HTMLDefault::featuredBook($link,$imageURL,$name,$price,$sale_off) ;
         }
     }
     // CÓ ID VÀ KHÔNG ID
     if(!empty($this->arrParam['category_id'])){
-        echo HTMLDefault::listBook($this->getCatName,$xhtml) ;
+        echo HTMLDefault::listBook($this->getCatName,$xhtml) ; // BOOK IN CATEGORY
     }
     else{
         echo HTMLDefault::welcomBook();
-        echo HTMLDefault::indexBook('Sách Mới',$xhtmlNewBook);
+        echo HTMLDefault::indexBook('Sách Mới'    ,$xhtmlNewBook);
         echo HTMLDefault::indexBook('Sách Nổi Bật',$xhtmlFeaturedBook);
     }
 ?>         

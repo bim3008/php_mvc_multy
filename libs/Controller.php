@@ -11,7 +11,7 @@ class Controller{
 	protected $_arrParam;
 	// Pagination
 	protected $_pagination	= array(
-				'totalItemsPerPage'	=> 4, // Tổng số phần tử một trang
+				'totalItemsPerPage'	=> 10, // Tổng số phần tử một trang
 				'pageRange'			=> 3, // Trang hiển thị 	
 	);
 	public function __construct($arrParams){

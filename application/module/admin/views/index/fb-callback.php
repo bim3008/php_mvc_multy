@@ -18,15 +18,15 @@ if (isset($_GET['state'])) {
         echo "SDK Exceptions" . $e->getMessage() ;
         exit();
     }
-    if(!$accessToken)
+    if($accessToken == false)
     {
-        URL::redirect('index','index','login') ;
+        header('location:http://localhost/php_mvc_multy/index.php?module=admin&controller=index&action=index') ;
         exit();
     }
     $oAuth2Client = $FB->getOAuth2Client();
     if(!$accessToken ->isLongLived())
         $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken) ;
-    $response = $FB->get("me?fields=id,name,email,location",$accessToken->getValue()) ;
+    $response = $FB->get("me?fields=id,name,email,location,picture",$accessToken->getValue()) ;
     $userData = $response->getGraphNode()->asArray() ;
     Session::set('loginFacebook',$userData);
     header('location:http://localhost/php_mvc_multy/index.php?module=admin&controller=index&action=index') ;

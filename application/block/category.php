@@ -51,7 +51,7 @@
          <!-- BANNER  -->
          <?php
             if(empty($this->arrParam['category_id']) && $this->arrParam['controller'] == 'book'){
-               require_once BLOCK_PATH . 'banner.php' ;
+                  require_once BLOCK_PATH . 'banner.php' ;        
             }
          ?>
       </div>

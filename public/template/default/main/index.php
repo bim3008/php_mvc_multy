@@ -19,7 +19,7 @@
             <?php require_once 'html/header/header-menu.php';?>
 		</header>
         <?php 
-            if($this->arrParam['controller'] == 'index' || $this->arrParam['action'] =='details'){
+            if($this->arrParam['controller'] == 'index' || $this->arrParam['action'] =='details'||$this->arrParam['controller'] == 'user'){
                 require_once MODULE_PATH. $this->_moduleName . DS . 'views' . DS . $this->_fileView . '.php';
             }
             else{

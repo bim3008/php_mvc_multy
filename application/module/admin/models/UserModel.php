@@ -35,8 +35,8 @@ class UserModel extends Model
 	public function listItems($arrParam, $opption = null)
 	{	
 		$query[] = "SELECT `u`.`id`, `u`.`username`, `u`.`password` , `u`.`email` , `u`.`fullname` , `u`.`created`, `u`.`created_by`,`u`.`modified`, `u`.`modified_by`, `u`.`register_date`,`u`.`register_ip` ,`u`.`status`,`u`.`ordering`,`g`.`name` as `group_name`  " ;
-		$query[] = " FROM $this->_tableName AS  `u` , `".DB_TABLE_GROUP."`  AS `g` ";
-		$query[] = " WHERE `u`.`group_id`  =  `g`.`id` " ;
+		$query[] = " FROM $this->_tableName AS  `u` LEFT JOIN `".DB_TABLE_GROUP."`  AS `g` ON `u`.`group_id`  =  `g`.`id` ";
+		$query[] = " WHERE  `u`.`id` > 0 " ;
 		
 		if(isset($arrParam['filter_status'])&&$arrParam['filter_status'] == 'active') {
 			$query[]  = " AND  `u`.`status` = 0 ";
@@ -155,7 +155,7 @@ class UserModel extends Model
 	public function infoItems($arrParam,$opption=null)
 	{	
 		$id = $arrParam['id'] ;
-     	$query = "SELECT `id` , `username`,`fullname` ,`email` , `ordering` ,`status` , `group_id` FROM `$this->_tableName` WHERE `id` = $id " ;
+     	$query = "SELECT `id` , `username`,`fullname` ,`email` ,`status` , `group_id` FROM `$this->_tableName` WHERE `id` = $id " ;
 		return $this->fetchRow($query) ;	
 	}
 	public function itemsInSelectBox($arrParam,$opption=null)
@@ -169,29 +169,30 @@ class UserModel extends Model
 	public function changePassword($arrParam,$opption=null)
 	{	
 			$id 	 	= $arrParam['id'] ;
-			$oldPass 	= md5($arrParam['old-password']) ;
-			$newPass 	= md5($arrParam['new-password']) ;
-			$rePass  	= md5($arrParam['re-password'])  ;
+			$oldPass 	= ($arrParam['old-password']) ;
+			$newPass 	= ($arrParam['new-password']) ;
+			$rePass  	= ($arrParam['re-password'])  ;
 			$query 		= "SELECT `password` FROM `$this->_tableName` WHERE `id` = $id" ; 
 			$result = $this->fetchRow($query) ; 
-			$getOldPass = $result['password'] ; 
-			if($oldPass == '' || $newPass == '' || $rePass == ''){
-				Session::set('messege','Vui lòng không được để rỗng') ;	
+			$getOldPass = $result['password'] ;  
+			if($oldPass == null || $newPass == null || $rePass == null ){
+				Session::set('messege',ERROR_CHANGEPASS) ;	
 			}
 			else{
-				if($oldPass != $getOldPass ){
-					Session::set('messege','Mật khẩu cũ không đúng') ;	
+				if(md5($oldPass) != $getOldPass ){
+					Session::set('messege',ERROR_OLDPASS) ;	
 				}
 				else
 				{
 					if($newPass != $rePass){
-						Session::set('messege','Mật khẩu không trùng khớp') ;			
+						Session::set('messege',ERROR_OLDPASS) ;			
 					}
 					else{
+						$newPass = md5($newPass)			;
 						$queryUpdate  = "UPDATE `$this->_tableName` SET `password` = '$newPass' WHERE `id` = $id " ;
 					 	$resultUpdate = $this->query($queryUpdate) ;  
 						if($resultUpdate == true){
-							Session::set('messege','Thay đổi mật khẩu thành công') ;							
+							Session::set('messege',SUCCESS_CHANGEPASS) ;							
 						}
 						return $resultUpdate  ;
 					}

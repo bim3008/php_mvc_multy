@@ -21,7 +21,6 @@ class IndexModel extends Model{
 	}
 
 	public function inforItems($arrParam,$option = null){	 
-
 		if($option == null)
 		{
 			echo $username 	=  $arrParam['username'] ;

@@ -1,13 +1,14 @@
 <?php
-class BookController extends AdminController
+class BookController extends Controller
 {
-	// public function __construct()
-	// {
-
-	// 	echo '<pre>';
-    //     print_r($this);
-    //     echo '</pre>'; die();
-	// }
+	public function __construct($arrParam){
+      
+        parent::__construct($arrParam);
+        $this->_templateObj->setFolderTemplate('admin/adminlte/');
+        $this->_templateObj->setFileTemplate('index.php');
+        $this->_templateObj->setFileConfig('template.ini');
+        $this->_templateObj->load();    
+    }
 	
 	public function indexAction()
 	{
@@ -38,8 +39,7 @@ class BookController extends AdminController
 			$validate->addRule('name'       , 'string',  array('min' => 3, 'max' => 500))
 					 ->addRule('description', 'string',  array('min' => 3, 'max' => 5000))
 					//  ->addRule('picture'    , 'file',    array('min' => 100, 'max' => 1000000,'extension'=>array('jpg','png')),false)
-					 ->addRule('price'      , 'int',     array('min' => 1000, 'max' => 100000000))
-					 ->addRule('sale_off'   , 'int',     array('min' => 1, 'max' => 100))
+					 ->addRule('price'      , 'int',     array('min' => 1000, 'max' => 1000000000))
 					 ->addRule('special'    , 'status',  array('deny' => array('default')))
 					 ->addRule('status'     , 'status',  array('deny' => array('default')))
 					 ->addRule('category_id', 'status',  array('deny' => array('default')))

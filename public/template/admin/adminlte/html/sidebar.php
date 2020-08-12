@@ -12,8 +12,10 @@
     $urlBookAdd         =  URL::createLink('admin','book','form') ;
     $urlBookList        =  URL::createLink('admin','book','index') ;
 
-    $fullname  = isset($_SESSION['loginFacebook']) ? $_SESSION['loginFacebook']['name'] : '' ;
-    $fullname .= isset($_SESSION['fullname']) ? $_SESSION['fullname']: '' ;
+    $pictureLogo        = $this->_dirImg .'/avatar.jpg ' ;
+    $fullname           = isset($_SESSION['loginFacebook']) ? $_SESSION['loginFacebook']['name'] : '' ;
+    $pitureLogo         = isset($_SESSION['loginFacebook']) ? $_SESSION['loginFacebook']['picture']['url'] : $pictureLogo  ;
+    $fullname           .= isset($_SESSION['fullname']) ? $_SESSION['fullname']: '' ;
 
 ?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -24,7 +26,7 @@
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="<?php echo  $this->_dirImg ?>/avatar.jpg" class="img-circle elevation-2" alt="User Image">
+                <img src="<?php echo  $pitureLogo  ?>" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="#" class="d-block"> <?php echo mb_strtoupper($fullname) ;?> </a>
@@ -41,7 +43,6 @@
                             DASHBROAD
                         </p>
                     </a>
-        
                 </li>               
                 <li class="nav-item has-treeview menu-open">
                     <a href="#" class="nav-link ">

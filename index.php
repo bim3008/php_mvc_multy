@@ -1,5 +1,4 @@
 <?php
-	//error_reporting(0) ;
 	require_once 'define.php';
 	require_once 'define_value.php';
 	require_once 'define_notice.php';

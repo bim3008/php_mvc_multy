@@ -3,57 +3,20 @@
         <div class="shop-main-area mb-5">
             <div class="container">
                 <div class="row">
-                    <?php require_once BLOCK_PATH . 'category.php' ;?>
-                    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
-                        <div class="slider-active owl-carousel">
-                        <div class="single-slider pt-125 pb-130 bg-img" style="background-image:url('<?php echo $urlImages.'/1.jpg'?>');">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-5">
-                                    <div class="slider-content slider-animated-1 text-center">
-                                        <h1>Huge Sale</h1>
-                                        <h2>koparion</h2>
-                                        <h3>Now starting at £99.00</h3>
-                                        <a href="#">Shop now</a>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single-slider slider-h1-2 pt-215 pb-100 bg-img" style="background-image:url('<?php echo $urlImages.'/2.jpg'?>');">
-                            <div class="container">
-                                <div class="slider-content slider-content-2 slider-animated-1">
-                                    <h1>We can help get your</h1>
-                                    <h2>Books in Order</h2>
-                                    <h3>and Accessories</h3>
-                                    <a href="#">Contact Us Today!</a>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
+                    <?php 
+                        require_once BLOCK_PATH . 'category.php' ;
+                        require_once 'element/slider-big.php' ;
+                    ?>
                 </div>
             </div>
         </div>
     </div>
     <!-- SLIDER SALE -->
-    <div class="banner-area-5 mtb-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="banner-img-2">
-                    <a href="#"><img src="<?php echo $this->_dirImg.'/banner/5.jpg'?>" alt="banner" /></a>
-                    <div class="banner-text">
-                        <h3>G. Meyer Books & Spiritual Traveler Press</h3>
-                        <h2>Sale up to 30% off</h2>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php 
+        require_once 'element/slider-sale.php' ;
+    ?>
     <!-- TOP INTERESTING -->
-    <!-- <div class="product-area pt-50 xs-mb">
+    <div class="product-area pt-50 xs-mb">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -67,17 +30,10 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
     <!-- NEW BOOK -->
-    <!-- <div class="new-book-area pb-100">
+    <div class="new-book-area pb-100">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title bt text-center pt-100 mb-30 section-title-res">
-                    <h2>Featured Books</h2>
-                    </div>
-                </div>
-            </div>
             <div class="tab-active owl-carousel">
                 <div class="tab-total">
                     <div class="product-wrapper mb-40">
@@ -648,7 +604,7 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
     <!-- new-book-area-start -->
     <!-- banner-static-area-start -->
     <!-- <div class="banner-static-area bg ptb-100">

@@ -96,8 +96,8 @@
                </div>
                <?php
                   // SẢN PHẨM LIÊN QUAN
-                  require_once 'featured.php' ;
-                  ?>
+                  require_once 'element/relative.php' ;
+               ?>
                <div class="tab-active-2 owl-carousel">
                   <?php echo $xhtml ;?>
                </div>

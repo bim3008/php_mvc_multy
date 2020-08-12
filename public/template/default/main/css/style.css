@@ -94,7 +94,7 @@ a:focus {
 
 img {
     max-width: 100%;
-    height: auto
+    height: auto;
 }
 
 .fix {
@@ -102,7 +102,7 @@ img {
 }
 
 p {
-    margin: 0 0 15px;
+    margin: 0 0 5px;
 }
 
 h1,
@@ -157,7 +157,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     font-weight: 400;
-    color: #666;
+    color: #000000;
 }
 
 ::-moz-selection {
@@ -560,7 +560,7 @@ body {
 /*----------------------------------------*/
 
 .header-search {
-    margin-top: 7px;
+    margin-top: 30px;
 }
 
 .header-search form {
@@ -626,7 +626,7 @@ body {
 .header-mid-area .my-cart {
     display: inline-block;
     float: right;
-    margin-top: -8px;
+    margin-top: 20px;
 }
 
 .header-mid-area .my-cart ul li {
@@ -908,7 +908,6 @@ body {
 .menu-area ul li a:before {
     background: #f07c29 none repeat scroll 0 0;
     bottom: 0;
-    content: "";
     height: 3px;
     left: 0;
     opacity: 0;
@@ -1207,6 +1206,7 @@ body {
 
 .single-slider {
     position: relative;
+    height: 600px;
 }
 
 .slider-img img a img {
@@ -1513,6 +1513,7 @@ body {
 .product-img a img {
     width: 197px;
     height: 253px;
+    padding: 10px;
 }
 
 .quick-view {
@@ -2567,9 +2568,7 @@ footer {
     font-weight: 400;
 }
 
-.bb-2 {
-    border-bottom: 2px solid #393939;
-}
+.bb-2 {}
 
 
 /*----------------------------------------*/
@@ -2580,10 +2579,11 @@ footer {
 
 .single-footer .footer-title h3 {
     color: #ffffff;
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 400;
     line-height: 24px;
     text-transform: uppercase;
+    font-family: 'Nunito', sans-serif;
 }
 
 .footer-mid-menu ul li a {
@@ -2601,22 +2601,15 @@ footer {
     color: #f07c29;
 }
 
-.br-2 {
-    border-right: 1px solid #393939;
-}
-
-.footer-contact p {
-    color: #fff;
-    font-family: 'Rufina', serif;
-    font-weight: 400;
+.footer-contact p span {
+    color: #969696;
+    font-size: 13px;
+    line-height: 30px;
+    margin-bottom: 0
 }
 
 .footer-contact p:last-child {
     margin-bottom: 0;
-}
-
-.footer-contact p span {
-    color: #fff;
 }
 
 .footer-contact p.adress span {
@@ -2632,7 +2625,6 @@ footer {
 /*----------------------------------------*/
 
 .bt-2 {
-    border-top: 2px solid #393939;
     padding: 30px 0;
 }
 
@@ -2640,8 +2632,10 @@ footer {
     color: #fff;
     margin-bottom: 0;
     margin-top: 8px;
-    font-family: 'Rufina', serif;
+    margin-bottom: 0;
+    font-size: 13px;
     font-weight: 400;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .copy-right-area p a {
@@ -4304,7 +4298,6 @@ nav.menu .cr-dropdown ul {
 /*----------------------------------------*/
 
 .breadcrumbs-area {
-    border-bottom: 1px solid #e5e5e5;
     padding: 12px 0;
 }
 
@@ -5074,8 +5067,6 @@ nav.menu .cr-dropdown ul {
 }
 
 .product-reviews-summary {
-    border-bottom: 1px solid #e5e5e5;
-    border-top: 1px solid #e5e5e5;
     display: block;
     margin: 20px 0 0;
     padding: 14px 0 12px;
@@ -5868,9 +5859,7 @@ nav.menu .cr-dropdown ul {
     overflow: hidden;
 }
 
-.single-register form {}
-
-.single-register form label,
+.single-register label,
 .single-register label {
     color: #333;
     display: block;
@@ -5881,16 +5870,16 @@ nav.menu .cr-dropdown ul {
     font-weight: 400;
 }
 
-.single-register form input {
+.single-register input {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     border: 1px solid #eceff8;
     box-shadow: none;
     color: #333;
-    font-size: 14px;
+    font-size: 20px;
     height: 45px;
     padding-left: 10px;
     width: 100%;
-    font-family: 'Rufina', serif;
+    font-family: 'Times New Roman', Times, serif;
     font-weight: 400;
 }
 
@@ -5935,7 +5924,7 @@ nav.menu .cr-dropdown ul {
     font-weight: 400;
 }
 
-.single-register>a {
+.single-register-submit input {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     border: 1px solid #eceff8;
     box-shadow: none;
@@ -5948,9 +5937,10 @@ nav.menu .cr-dropdown ul {
     transition: .3s;
     font-family: 'Rufina', serif;
     font-weight: 400;
+    background-color: antiquewhite;
 }
 
-.single-register>a:hover {
+.single-register-submit>input:hover {
     background-color: #F07C29;
     color: #fff;
     border: 1px solid #F07C29;
@@ -7488,3 +7478,67 @@ p.lost-password a:hover {
     font-size: large;
     content: unset !important;
 } */
+
+.footer-mid-menu ul li span {
+    color: #969696;
+    font-size: 13px;
+    line-height: 30px;
+    margin-bottom: 0;
+}
+
+.list-inline-item {
+    padding: 0;
+    background-color: #fff;
+    border: 1px solid #fff;
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+}
+
+.footer_social_widget ul {
+    margin-bottom: 0;
+}
+
+.footer_social_widget .list-inline-item a i.fa-facebook {
+    color: #4267b2;
+}
+
+.footer_social_widget .list-inline-item {
+    padding: 0;
+    background-color: #fff;
+    border: 1px solid #fff;
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+}
+
+.footer_social_widget .list-inline-item a {
+    font-size: 25px;
+    text-align: center;
+    display: block;
+}
+
+.list-inline-item:not(:last-child) {
+    margin-right: .5rem;
+}
+
+.list-inline-item:hover {
+    background-color: #6f42c1;
+}
+
+.footer_social_widget .list-inline-item a i.fa-facebook:hover {
+    color: white;
+}
+
+.footer_social_widget .list-inline-item item-youtube {
+    background-color: red;
+}
+
+ul.error-public {
+    background-color: antiquewhite;
+    font-weight: 700;
+    font-family: sans-serif;
+    padding: 5px;
+    margin: 5px 0;
+}

@@ -1,26 +1,41 @@
-<div class="wrap-input100 validate-input m-b-23" data-validate="Username is reauired">
-    <span class="label-input100">Username</span>
-    <input class="input100" type="text" name="username" placeholder="Type your username">
-    <span class="focus-input100" data-symbol="&#xf206;"></span>
-</div>
+<?php
+   //VALUE
+   $dataForm         = isset($this->arrParam['form']) ? $this->arrParam['form'] : '';
+   $valueUsername    = isset($dataForm['username']) ? $dataForm['username'] 	:'';
+	// INPUT
+	$inputUsername   = HTMLDefault::inputTextRegister('Username or Email','username' ,$valueUsername);
+	$inputPassword   = HTMLDefault::inputPassRegister('Password','password');
+	$inputHidden     = HTMLDefault::inputHiddenRegister('','token',time());
+	// LINK
+	$linkAction   = URL::createLink('default','user','login');
+	$rowLogin        = $inputUsername .$inputPassword.$inputHidden ;
+?>
 
-<div class="wrap-input100 validate-input" data-validate="Password is required">
-    <span class="label-input100">Password</span>
-    <input class="input100" type="password" name="pass" placeholder="Type your password">
-    <span class="focus-input100" data-symbol="&#xf190;"></span>
+<div class="breadcrumbs-area mb-50">
+	<div class="container">
+	</div>
 </div>
-
-<div class="text-right p-t-8 p-b-31">
-    <a href="#">
-        Forgot password?
-    </a>
+<div class="user-login-area mb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="login-title text-center mb-30">
+                    <h2>Login</h2>
+                </div>
+            </div>
+            <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12 col-xs-12">
+				<form action="<?php echo $linkAction?>" name="loginform" method="POST">
+					<?php echo isset($this->errors) ? $this->errors : '' ;?>
+					<div class="login-form">
+						<?php echo $rowLogin;?>
+						<div class="single-register-submit">
+								<input type="submit" name="form[submit]" value="Login">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
-
-<div class="container-login100-form-btn">
-    <div class="wrap-login100-form-btn">
-        <div class="login100-form-bgbtn"></div>
-        <button class="login100-form-btn">
-            Login
-        </button>
-    </div>
+</div>
 </div>

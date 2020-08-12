@@ -35,7 +35,7 @@ class BookModel extends Model
 	{	
 		$query[] = "SELECT `b`.`id`, `b`.`name`, `b`.`description` , `b`.`price` , `b`.`special` , `b`.`picture`, `b`.`sale_off`, `b`.`created_by`,`b`.`modified`, `b`.`modified_by`,`b`.`status`, `b`.`ordering` ,`c`.`name` as `category_name` " ; //
 		$query[] = " FROM `$this->_tableName` AS `b` , `".DB_TABLE_CATEGORY."`  AS `c` " ; //
-		$query[] = " WHERE  `b`.`category_id` = `c`.`id` " ; 
+		$query[] = " WHERE  `b`.`category_id` = `c`.`id`" ; 
 		
 		if(isset($arrParam['filter_status']) && $arrParam['filter_status'] == 'active') {
 			$query[]  = " AND  `b`.`status` = 0 ";
@@ -47,6 +47,7 @@ class BookModel extends Model
 			$search = '"%'.$arrParam['filter_search'].'%"';
 			$query[]  = " AND (`b`.`name` LIKE $search)  ";
 		}		
+		$query[] = " ORDER BY `id` DESC" ; 
 		$pagination = $arrParam['pagination'] ;
 		$totalItemsPerPage = $pagination['totalItemsPerPage'] ;
 		if($totalItemsPerPage > 0 )
@@ -54,7 +55,7 @@ class BookModel extends Model
 			$position = ($pagination['currentPage'] - 1) * $totalItemsPerPage ;
 			$query[]  = " LIMIT $position, $totalItemsPerPage " ;
 		}
-
+		
 		$query = implode(" " ,$query) ;
 		return $this->fetchAll($query) ;
 	} 
@@ -115,7 +116,7 @@ class BookModel extends Model
 	{	
 		
 		$id				=  $arrParam['id'] ;
-		$name 			=  $arrParam['name'] ;
+		$name 			=  mysqli_real_escape_string($this->connect,$arrParam['name'])  ;
 		$description    =  mysqli_real_escape_string($this->connect,$arrParam['description']) ; 
 		$price 			=  $arrParam['price'] ;
 		$special 		=  $arrParam['special'] ;
@@ -129,7 +130,7 @@ class BookModel extends Model
 		$uploadObj = new Upload();
 		if($opption['task'] == 'add')
 		{
-			$picture = $uploadObj ->uploadFile($picture ,$this->$_tableName) ; 		
+			$picture = $uploadObj ->uploadFile($picture ,$this->_tableName) ; 		
 			$query = "INSERT INTO `$this->_tableName` ( `name`,`description`,`picture`,`sale_off`,`price`,`special`,`status`,`ordering`,`category_id` ) VALUES ('$name','$description','$picture','$saleOff','$price','$special','$status','$ordering','$category_id')" ;
 	     	$result = $this->query($query) ; 
 			if($result == true)

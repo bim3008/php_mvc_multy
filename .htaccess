@@ -1,0 +1,13 @@
+RewriteEngine On
+
+RewriteRule trang-chu.html      index.php?module=default&controller=index&action=index 
+RewriteRule danh-muc.html       index.php?module=default&controller=category&action=index 
+RewriteRule sach.html           index.php?module=default&controller=book&action=index 
+RewriteRule dang-nhap.html      index.php?module=default&controller=user&action=login 
+RewriteRule dang-ky.html        index.php?module=default&controller=user&action=register 
+RewriteRule dang-xuat.html      index.php?module=default&controller=user&action=logout 
+RewriteRule gio-hang.html       index.php?module=default&controller=user&action=cart 
+RewriteRule ho-so.html          index.php?module=default&controller=user&action=index 
+
+RewriteRule ([A-Za-z0-9_-]+)-([0-9]+)\.html                              index.php?module=default&controller=book&action=index&category_id=$2
+RewriteRule ([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+)-([0-9]+)-([0-9]+)\.html    index.php?module=default&controller=book&action=details&category_id=$3&book_id=$4

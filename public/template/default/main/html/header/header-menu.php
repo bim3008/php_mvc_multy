@@ -1,10 +1,9 @@
 <?php      
-      $linkAccount  = URL::createLink('default','myaccount','index');   
-      $linkLogout  = URL::createLink('default','user','logout');   
+
       $myaccount = '' ;
       if(isset($_SESSION['userDefault']['login'])  && $_SESSION['userDefault']['login'] == 1)
       {
-         $myaccount =  ' <li  class="myaccount">
+         $myaccount =  ' <li  class="user">
                            <a href="'.$linkAccount.'">My Account<i class="fa fa-angle"></i></a>
                         </li> ' ;
          $singin    = '<li><a href="'.$linkLogout.'">logout</a></li>';
@@ -22,13 +21,16 @@
       {
          $xhtml ='' ;
          foreach($resultCategory as $key => $value){
-            $name = $value['name'];
-            $link = URL::createLink('default','book','index',['category_id'=>$value['id']]);
-            $xhtml .= HTMLDefault::categoryChil($link,$name);
+            $name    = $value['name'];
+            $id      = $value['id'];
+            $nameURL = URL::filterURL($value['name']);
+            $link    = URL::createLink('default','book','index',['category_id'=>$value['id']] , "$nameURL-$id.html");
+            $xhtml  .= HTMLDefault::categoryChil($link,$name);
          }
       }
 
 ?>
+
 <div class="main-menu-area hidden-sm hidden-xs sticky-header-1" id="header-sticky">
    <div class="container">
       <div class="row">
@@ -39,7 +41,7 @@
                      <li class="index">
                         <a  href="<?php echo $linkHome ;?>">Home<i></i></a>
                      </li>
-                     <li  class="category">
+                     <li class="category">
                         <a href="<?php echo $linkCategory ;?>">Category<i class="fa fa-angle-down"></i></a>
                         <div class="mega-menu">
                               <!-- CATEGORY CHILD -->
@@ -49,9 +51,8 @@
                      <li  class="book">
                         <a href="<?php echo $linkBook ;?>">Book<i class="fa fa-angle"></i></a>
                      </li> 
-                    
                      <?php echo $myaccount ;?>
-                     <li class="user">
+                     <li class="action">
                         <a href="">Sing in<i class="fa fa-angle-down"></i></a>
                         <div class="sub-menu sub-menu-2">
                            <ul>
@@ -69,3 +70,4 @@
       </div>
    </div>
 </div>
+

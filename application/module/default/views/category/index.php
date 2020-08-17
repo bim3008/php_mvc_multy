@@ -4,8 +4,10 @@ $xhtmlList = '';
 if (!empty($this->listItems)) {
     foreach ($this->listItems as $key => $value) {
         $name    = mb_strtoupper($value['name']);
+        $id      = $value['id'];
+        $nameURL = URL::filterURL($value['name']);
         $picture = LINK_IMAGE_CATEGORY . $value['picture'];
-        $link    = URL::createLink($this->arrParam['module'],'book','index',array('category_id'=>$value['id']));
+        $link    = URL::createLink($this->arrParam['module'],'book','index',array('category_id'=>$value['id']), "$nameURL-$id.html");
         $xhtmlGrid .= HTMLDefault::categoryGird($link,$picture,$name);
         $xhtmlList .= HTMLDefault::categoryList($picture,$name);
     }

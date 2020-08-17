@@ -2,7 +2,7 @@
 class URL{
 	
 	public static function createLink($module, $controller, $action, $params = null, $router = null){
-	if(!empty($router)) return ROOT_URL . $router;
+	if(!empty($router)) return ROOT_URL. $router;
 		$linkParams = '' ;
 		if(!empty($params)){
 			foreach ($params as $key => $value){
@@ -18,7 +18,6 @@ class URL{
 		header('location: ' . $link);
 		exit();
 	}
-	
 	public static function checkRefreshPage($value, $module, $controller, $action, $params = null){
 		if(Session::get('token') == $value){
 			Session::delete('token');
@@ -27,25 +26,22 @@ class URL{
 			Session::set('token', $value);
 		}
 	}
-	
 	private function removeSpace($value){
 		$value = trim($value);
 		$value = preg_replace('#(\s)+#', ' ', $value);
 		return $value;
 	}
-	
 	private function replaceSpace($value){
 		$value = trim($value);
 		$value = str_replace(' ', '-', $value);
 		$value = preg_replace('#(-)+#', '-', $value);
 		return $value;
 	}
-	
 	private function removeCircumflex($value){
 		/*a à ả ã á ạ ă ằ ẳ ẵ ắ ặ â ầ ẩ ẫ ấ ậ b c d đ e è ẻ ẽ é ẹ ê ề ể ễ ế ệ
 		 f g h i ì ỉ ĩ í ị j k l m n o ò ỏ õ ó ọ ô ồ ổ ỗ ố ộ ơ ờ ở ỡ ớ ợ
 		p q r s t u ù ủ ũ ú ụ ư ừ ử ữ ứ ự v w x y ỳ ỷ ỹ ý ỵ z*/
-		$value		= strtolower($value);
+		$value		= mb_strtolower($value);
 		
 		$characterA	= '#(a|à|ả|ã|á|ạ|ă|ằ|ẳ|ẵ|ắ|ặ|â|ầ|ẩ|ẫ|ấ|ậ)#imsU';
 		$replaceA	= 'a';
@@ -75,26 +71,22 @@ class URL{
 		$replaceCharaterY = 'y';
 		$value = preg_replace($charaterY,$replaceCharaterY,$value);
 		
-		$charaterSpecial = '#(,|$)#imsU';
+		$charaterSpecial = '#(,|\(|\)|$|)#imsU';
 		$replaceSpecial = '';
 		$value = preg_replace($charaterSpecial,$replaceSpecial,$value);
 		
+		$charaterSpecial1 = '#(--|-–-)#imsU';
+		$replaceSpecial1 = '-';
+		$value = preg_replace($charaterSpecial1,$replaceSpecial1,$value);
 		
 		return $value;
 		
 	}
-	
-	
 	public static function filterURL($value){
-		//$value = URL::removeSpace($value);
+		$value = URL::removeSpace($value);
 		$value = URL::replaceSpace($value);
 		$value = URL::removeCircumflex($value);
-		
 		return $value;
 	}
-	
-	
-	
-	
 	
 }

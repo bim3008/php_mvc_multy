@@ -1,29 +1,40 @@
 <?php
-class UserController extends Controller{
+class UserController extends FontendController{
 	
-	public function __construct($arrParams){
-		parent::__construct($arrParams);
-		$this->_templateObj->setFolderTemplate('default/main/');
-		$this->_templateObj->setFileTemplate('index.php');
-		$this->_templateObj->setFileConfig('template.ini');
-		$this->_templateObj->load();
+	public function indexAction()
+	{ 
+		$this->checkLogin();
+		$this->_view->setTitle('Hồ Sơ');
+		$this->_view->Items = $this->_model->listItems($this->_arrParam,['task'=>'history-cart']) ;
+
+		// CHANGE PASSS
+		if(isset($this->_arrParam['form']['token-fe-change'] ) && $this->_arrParam['form']['token-fe-change'] > 0){
+			$this->checkSession('token-fe-change','default','user','index');
+			$validate = new Validate($this->_arrParam['form']); 
+			$validate ->addRule('old-pass', 'password',array('action' => 'add'))
+					  ->addRule('new-pass', 'password',array('action' => 'add'))
+					  ->addRule('re-pass', 'password',array('action' => 'add'));
+				$validate->run();			 
+				$this->_arrParam['form'] = $validate->getResult();
+				if ($validate->isValid() == false) {
+					$this->_view->errors = $validate->showErrorsPublic();					
+				}else{
+					$this->_model->saveItems($this->_arrParam['form'], ['task' => 'change-pass']);
+				}
+		
+		}
+		$this->_view->render($this->_arrParam['controller'] . DS . 'index');	
 	}
 	public function loginAction(){
+		$this->checkLogined();
 		$this->_view->setTitle('Đăng nhập');
-
-		if(isset($this->_arrParam['form']['submit'])){
-			if(Session::get('token') == $this->_arrParam['form']['token'] ){
-				Session::delete('token');
-				URL::redirect('default','user','login');
-			}else{
-				 Session::set('token',$this->_arrParam['form']['token']) ;
-			}
-		}
+		
 		if(isset($this->_arrParam['form']['token']) && $this->_arrParam['form']['token'] > 0){
+			$this->checkSession('token','default','user','login');
 			$validate = new Validate($this->_arrParam['form']) ;
 			$username = $this->_arrParam['form']['username'] ;
 			$password = md5($this->_arrParam['form']['password']) ; 
-			$query    = "SELECT `id` FROM `".DB_TABLE_USER."` WHERE `username` = '$username' AND  `password` = '$password'" ; 
+			$query    = "SELECT `id` FROM `".DB_TABLE_USER."` WHERE `username` = '$username' AND  `password` = '$password' AND `status` = 0" ; 
 			$validate->addRule('username', 'existRecord' , array('database' => $this->_model , 'query'=> $query)) ;
 			$validate->run() ;
 			if($validate->isValid() == true)
@@ -36,26 +47,22 @@ class UserController extends Controller{
 								'group_acp'	=> $infoUser['group_acp']
 					) ;
 				Session::set('userDefault',$arraySesssionDefault) ;	
-				URL::redirect('default','index','index')	;
+				URL::redirect('default','index','index',null,'trang-chu.html')	;
 			}else
 			{
 				$this->_view->errors = $validate->showErrorsPublic() ;
 			}
 		}
-		
 		$this->_view->render($this->_arrParam['controller'] . DS . 'login');
 	}
 	public function registerAction(){
 
+		$this->checkLogined();
 		$this->_view->setTitle('Đăng ký');
-
 		if(isset($this->_arrParam['form']['submit'])){
-			if(Session::get('token') == $this->_arrParam['form']['token'] ){
-				Session::delete('token');
-				URL::redirect('default','user','register');
-			}else{
-				 Session::set('token',$this->_arrParam['form']['token']) ;
-			}
+
+			$this->checkSession('token','default','user','register');
+
 			if(isset($this->_arrParam['form']['token']) > 0){
 				$queryUserName  = "SELECT `id` FROM `".DB_TABLE_USER."` WHERE `username` = '".$this->_arrParam['form']['username']."'" ; 
 				$queryUserEmail = "SELECT `id` FROM `".DB_TABLE_USER."` WHERE  `email`   = '".$this->_arrParam['form']['email']."'" ; 
@@ -79,12 +86,47 @@ class UserController extends Controller{
 	public function noticeAction(){
 
 		$this->_view->setTitle('Thông báo');
-		
 		$this->_view->render($this->_arrParam['controller'] . DS . 'notice');
+	}
+	public function orderAction()
+	{
+		$this->checkLogin();
+		$cart   = Session::get('cart') ;
+		$bookID = $this->_arrParam['book_id']	;
+		if(empty($cart)){
+			$cart['quantity'][$bookID] = 1 ;
+		}else{
+			if(key_exists($bookID,$cart['quantity'])){
+				$cart['quantity'][$bookID] += 1 ;
+			}else{
+			 	$cart['quantity'][$bookID] = 1 ;
+			}
+		}	
+		Session::set('cart',$cart) ;
+		URL::redirect($this->_arrParam['module'],'user','cart') ;
+	}
+	public function cartAction()
+	{
+		$this->checkLogin();
+		$this->_view->setTitle('Giỏ hàng');
+		$this->_view->Items = $this->_model->listItems($this->_arrParam,['task'=>'books-in-cart']) ;
+		$this->_view->render($this->_arrParam['controller'] . DS . 'cart');		
+	}
+	public function buyAction()
+	{
+		$this->_view->Items = $this->_model->saveItems($this->_arrParam,['task'=>'save-buy-books']);
+		URL::redirect('default','user','notice',['type'=>'buy-success']);	
+	}
+	public function deleteAction()
+	{
+		$this->_view->Items = $this->_model->delete($this->_arrParam,['task'=>'delete-in-cart']);
+		// URL::redirect('default','user','notice',['type'=>'buy-success']);	
 	}
 	public function logoutAction()
 	{
 		Session::destroy() ;
-		URL::redirect('default','index','index') ;
+		URL::redirect('default','index','index',null,'trang-chu.html') ;
 	}
+	
+	
 }

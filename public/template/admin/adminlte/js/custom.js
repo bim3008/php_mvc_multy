@@ -2,6 +2,8 @@ function submitForm(url) {
     $('#addedit').attr('action', url).submit();
 }
 
+
+
 $('#btn-multydelete').click(function() {
     $('#formList').submit();
 });

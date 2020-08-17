@@ -1,6 +1,11 @@
 <?php
 class HTMLDefault
 {   
+    public static function cmsFormInputHidden(  $name, $value, $style = null)
+    {
+        $xhtml = '<input  type="hidden" id="'.$name.'" name="form[' .$name .'][]" class="form-control" value="' . $value . '"  style = "' . $style . '"> ';
+        return $xhtml;
+    }
     public static function categoryGird($link,$picture,$name)
     {
         $xhtml= '
@@ -45,7 +50,7 @@ class HTMLDefault
     public static function categoryTopSelling($picture,$name,$cost,$sale,$link)
     {
         $xhtml = '<div class="single-most-product bd mb-18">
-                    <div class="most-product-img"><a href="#"><img src="'.$picture.'" alt="book" /></a></div>
+                    <div class="most-product-img"><a href="'.$link.'"><img src="'.$picture.'" alt="book" /></a></div>
                         <div class="most-product-content">
                             <h4><a href="'.$link.'">'.$name.'</a></h4>
                         <div class="product-price">
@@ -122,7 +127,7 @@ class HTMLDefault
         ' ;
         return $xhtml ;
     }
-    public static function bookInCategory($link,$img,$sale_off,$name,$price)
+    public static function bookInCategory($link,$img,$sale_off,$name,$price,$linkOder)
     {   
         $title = $name;
         $name = HelperAdmin::textShorten($name,20);
@@ -155,11 +160,11 @@ class HTMLDefault
 
                 <div class="product-link">
                     <div class="product-button">
-                        <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                        <a href="'.$linkOder.'" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                     </div>
                     <div class="add-to-link">
                         <ul>
-                            <li><a href="product-details.html" title="Details"><i class="fa fa-external-link"></i></a></li>
+                            <li><a href="'.$link.'" title="Details"><i class="fa fa-external-link"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -168,7 +173,7 @@ class HTMLDefault
         ' ;
         return $xhtml ;
     }
-    public static function newBook($link,$img,$name,$price,$sale_off)
+    public static function newBook($linkDetail,$img,$name,$price,$sale_off,$linkOder)
     {   
         $title = $name;
         $name = HelperAdmin::textShorten($name,25);
@@ -178,18 +183,57 @@ class HTMLDefault
             $discount = '' ;
         }
         $xhtml = '
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product-wrapper mb-40">
+                    <div class="product-img">
+                        <a  href="'.$linkDetail.'"> <img src="'.$img.'" alt="book" class="primary"></a>
+                        <div class="product-flag">
+                            <ul>
+                                <li><span class="sale">new</span></li>
+                                '.$discount.'
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="product-details text-center">
+                        <h4><a title="'.$title.'" href="'.$linkDetail.'">'.$name.'</a></h4>
+                        <div class="product-price">
+                            <ul>
+                                <li>'.$price.'</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="product-link">
+                        <div class="product-button">
+                            <a href="'.$linkOder.'" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                        </div>
+                        <div class="add-to-link">
+                            <ul>
+                                <li><a href="'.$linkDetail.'" title="Details"><i class="fa fa-external-link"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        ' ;
+        return $xhtml ;
+    }
+    public static function featuredBook($link,$img,$name,$price,$sale_off,$linkOder)
+    {
+        $title = $name;
+        $name = HelperAdmin::textShorten($name,20);
+        if($sale_off > 0){
+            $discount = ' <li><span class="discount-percentage">' . $sale_off . '%</span></li>' ;
+        }else{
+            $discount = '' ;
+        }
+        $xhtml = '
         <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="product-wrapper mb-40">
                 <div class="product-img">
-                    <a  href="'.$link.'"> <img src="'.$img.'" alt="book" class="primary"></a>
-                    <div class="quick-view">
-                        <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                            <i class="fa fa-search-plus"></i>
-                        </a>
-                    </div>
+                    <a href="'.$link.'"> <img src="'.$img.'" alt="book" class="primary"></a>
                     <div class="product-flag">
                         <ul>
-                            <li><span class="sale">new</span></li>
+                            <li><span class="sale">Special</span></li>
                             '.$discount.'
                         </ul>
                     </div>
@@ -204,60 +248,11 @@ class HTMLDefault
                 </div>
                 <div class="product-link">
                     <div class="product-button">
-                        <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                        <a href="'.$linkOder.'" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                     </div>
                     <div class="add-to-link">
                         <ul>
-                            <li><a href="product-details.html" title="Details"><i class="fa fa-external-link"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        ' ;
-        return $xhtml ;
-    }
-    public static function featuredBook($link,$img,$name,$price,$sale_off)
-    {
-        $title = $name;
-        $name = HelperAdmin::textShorten($name,20);
-        if($sale_off > 0){
-            $discount = ' <li><span class="discount-percentage">' . $sale_off . '%</span></li>' ;
-        }else{
-            $discount = '' ;
-        }
-        $xhtml = '
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="product-wrapper mb-40">
-                <div class="product-img">
-                    <a href="'.$link.'"> <img src="'.$img.'" alt="book" class="primary"></a>
-                    <div class="quick-view">
-                        <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                            <i class="fa fa-search-plus"></i>
-                        </a>
-                    </div>
-                    <div class="product-flag">
-                        <ul>
-                            <li><span class="sale">Special</span></li>
-                            '.$discount.'
-                        </ul>
-                    </div>
-                </div>
-                <div class="product-details text-center">
-                    <h4><a title="'.$title.'" href="#">'.$name.'</a></h4>
-                    <div class="product-price">
-                        <ul>
-                            <li>'.$price.'</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="product-link">
-                    <div class="product-button">
-                        <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                    </div>
-                    <div class="add-to-link">
-                        <ul>
-                            <li><a href="product-details.html" title="Details"><i class="fa fa-external-link"></i></a></li>
+                            <li><a href="'.$link.'" title="Details"><i class="fa fa-external-link"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -269,7 +264,7 @@ class HTMLDefault
     public static function titleTopSelling(){
         $xhtml  = '
         <div class="left-title mb-20">
-            <span>Top Selling</span>
+            <h3><a href="#">SÁCH GIẢM GIÁ</a></h3>
         </div>
         ';
         return $xhtml ;
@@ -279,7 +274,7 @@ class HTMLDefault
         $xhtml  = '
         <div class="shop-main-area mb-10">
             <div class="container">
-            <div class="row">
+        <div class="row">
         ';
         return $xhtml ;
     }
@@ -353,7 +348,7 @@ class HTMLDefault
     public static function inputTextRegister($name,$nameId,$value=null){
         $xhtml ='
             <div class="single-register">
-                        <label>'.$name.'<span>*</span></label>
+                        <label>'.$name.'<span></span></label>
                         <input type="text" name="form['.$nameId.']" id="'.$nameId.'" value="'.$value.'">
             </div>
         ';
@@ -362,7 +357,7 @@ class HTMLDefault
     public static function inputPassRegister($name,$nameId,$value=null){
         $xhtml ='
             <div class="single-register">
-                        <label>'.$name.'<span>*</span></label>
+                        <label>'.$name.'<span></span></label>
                         <input type="password" name="form['.$nameId.']" id="'.$nameId.'" value="'.$value.'">
             </div>
         ';
@@ -378,4 +373,109 @@ class HTMLDefault
         return $xhtml ;
     }
 
+    public static function sliderPromotion($img,$day,$moth){
+        $xhtml=' 
+        <div class="col-lg-12">
+                <div class="single-post">
+                    <div class="post-img">
+                        <a href="#"><img src="'.$img.'" alt="post" /></a>
+                        <div class="blog-date-time">
+                            <span class="day-time">'.$day.'</span>
+                            <span class="moth-time">'.$moth.'</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        ';
+        return $xhtml;
+    }
+
+    public static function titleCart(){
+        $xhtml = '
+                <div class="entry-header-area ">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="entry-header-title">
+                                    <h2>Giỏ Hàng</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        ';
+        return $xhtml ;
+    }
+
+    public static function displayBookInCart($product){
+
+        $xhtml = '
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="product-thumbnail">Image</th>
+                            <th class="product-name">Product</th>
+                            <th class="product-price">Price</th>
+                            <th class="product-quantity">Quantity</th>
+                            <th class="product-subtotal">Total</th>
+                            <th class="product-remove">Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>                    
+                          '.$product.'
+                    </tbody>
+                </table>
+        
+        ';
+        return $xhtml ;
+    }
+
+    public static function displayNotice($link,$notice){
+        $xhtml = '
+                <div class="section-element-area ptb-70">
+                <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="entry-header text-center mb-20">      
+                        </div>
+                        <div class="entry-content text-center mb-20">
+                            <h2 class="notice">'.$notice.'</h2>
+                            <a href="'.$link.'"> TRANG CHỦ </a>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        ' ;
+        return $xhtml ;
+    }
+
+      
+    public static function tableTitle(){
+        $xhtml = '
+        <tr>
+            <th>STT</th>
+            <th class="th">Tên sản phẩm</th>
+            <th>Hình ảnh</th>  
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Tổng cổng</th>
+            <th>Trạng thái</th>
+        </tr>
+    
+    ';
+        return $xhtml ;
+    }
+
+
+    public static function statusBuyBooks($status){
+
+        if($status == 0){
+            $xhtml = ' <td><a class="btn btn-sqr">Đang Giao</a></td>' ;
+        }
+        else{
+            $xhtml = ' <td><a class="btn btn-sqr">Đã Giao</a></td>' ;
+        }
+        return $xhtml ;
+    }
 }

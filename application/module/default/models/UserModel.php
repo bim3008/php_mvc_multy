@@ -1,21 +1,104 @@
 <?php
 class UserModel extends Model
 {
-	protected $_tableName = DB_TABLE_USER ;
+    protected $_tableName = DB_TABLE_USER ; 
+    public function listItems($arrParam,$opption=null)
+	{
+        if($opption['task'] == 'books-in-cart'){
+            $cart = Session::get('cart');
+            if(!empty($cart)){
+                $result = array();
+                $ids = '' ;
+                foreach($cart['quantity'] as $key => $value) $ids .= "'$key'," ;
+                $ids .= "'0'" ;
+                if($opption['task'] == 'books-in-cart'){           
+                    $query[] = "SELECT `id`, `name`, `picture`,`price` FROM `".DB_TABLE_BOOK."` " ; 
+                    $query[] = "WHERE `status` = 0 AND `id` IN ($ids)" ;
+                    $query   = implode(" " ,$query) ; 
+                    $result  =  $this->fetchAll($query) ;
+                    
+                    foreach($result as $key => $value)
+                    {
+                        $result[$key]['quantity'] = $cart['quantity'][$value['id']] ;
+                    }
+                }
+                return $result ;
+            }     
+        }
+        if($opption['task'] == 'history-cart'){
+
+            $id = Session::get('userDefault')['info']['id'];  
+            $query[] = "SELECT `id` , `books`,`prices`,`quantities`,`names`,`pictures`,`status`, `date` "  ;
+            $query[] = "FROM `".TBL_CART."` " ;
+            $query[] = "WHERE `username` = '$id' " ;
+
+            $query = implode(" ",$query);
+            
+            return $this->fetchAll($query) ;
+
+        }
+      
+    }		
     public function saveItems($arrParam,$option=null)
-    {
-        $username 		=  $arrParam['username'] ;
-        $password 		=  md5($arrParam['password']) ;
-        $fullname 		=  $arrParam['fullname'] ;
-        $email 			=  $arrParam['email'] ;
-        $phone 			=  $arrParam['phone'] ;
-        $status 		=  0 ;  
-        $register_date 	=  date("Y-m-d H:i:s",time());		
-        $register_ip 	=  $_SERVER['SERVER_ADDR'] ;		
+    {      	
         if($option['task'] == 'user-register'){
-			$query = "INSERT INTO `$this->_tableName` ( `username`, `password`,`fullname`,`phone`,`email`,`status`,`register_date`,`register_ip`) VALUES ('$username','$password','$fullname','$phone','$email','$status','$register_date','$register_ip')" ;
+            $username 		=  $arrParam['username'] ;
+            $password 		=  md5($arrParam['password']) ;
+            $fullname 		=  $arrParam['fullname'] ;
+            $email 			=  $arrParam['email'] ;
+            $phone 			=  $arrParam['phone'] ;
+            $status 		=  1 ;  
+            $group_id       = 3 ;	
+            $register_ip 	=  $_SERVER['SERVER_ADDR'] ;	
+
+			$query = "INSERT INTO `$this->_tableName` ( `username`, `password`,`fullname`,`phone`,`email`,`status`,`register_date`,`register_ip`,`group_id`) VALUES ('$username','$password','$fullname','$phone','$email','$status','$register_ip','$group_id')" ;
 	     	$result = $this->query($query) ; 		
 			return $result ;
+        }
+        if($option['task'] == 'save-buy-books'){        
+
+            $id         = $this->randomString(6) ;
+            $names      = json_encode($arrParam['form']['name'],JSON_UNESCAPED_UNICODE)      ;
+            $book       = json_encode($arrParam['form']['id'])  ;
+            $quantity   = json_encode($arrParam['form']['quantity'])  ;
+            $prices     = json_encode($arrParam['form']['price'])     ;
+            $pictures   = json_encode($arrParam['form']['picture'])   ;
+            $status     = 0 ;
+            $date       = date("d-m-y H:i:s",time()) ;
+            $username = Session::get('userDefault')['info']['id'];         
+
+            $query  = "INSERT INTO `".TBL_CART."` 
+                                (`id`,`username`,`books`,`prices`,`quantities`,`names`,`pictures`,`status`,`date`) 
+                        VALUES    ('$id','$username','$book','$prices','$quantity','$names','$pictures','$status','$date')       
+                    " ;
+            $result = $this->query($query) ;
+            Session::delete('cart') ;
+        }
+
+        if($option['task'] == 'change-pass'){        
+            $username   = Session::get('userDefault')['info']['id'];  
+            $queryPass  = "SELECT `password` FROM `user` WHERE `id` = '$username' " ;
+            $resultPass = $this->fetchRow($queryPass) ;
+            $getPass    = $resultPass['password'] ; // Lấy Pass Cũ ;
+            $oldPass    = md5($arrParam['old-pass']);
+            $newPass    = md5($arrParam['new-pass']);
+            $rePass     = md5($arrParam['re-pass']);
+            if($oldPass != $getPass){
+                    Session::set('pass',PASS_WRONG);
+            }else{
+                if($newPass != $rePass){
+                    Session::set('pass',PASS_NOTMATCH);
+                }
+                else{
+                    $query  = " UPDATE `$this->_tableName` SET `password` = '$newPass' WHERE `id` = '$username'  " ;     
+                    $result =  $this->query($query) ;
+                    if($result == true){
+                        Session::set('pass',PASS_SUCCESS);
+                    }
+                    return $result ;
+                }
+            }
+                          
         }
     }
     public function inforItems($arrParam,$option=null){	   
@@ -30,5 +113,38 @@ class UserModel extends Model
 			$resutl =  $this->fetchRow($query) ;
 			return $resutl ;
 		}
-	}
-}
+    } 	
+    public function delete($arrParam,$option=null){	   
+        if($option['task'] == 'delete-in-cart')
+		{   
+            //  $id = $arrParam['id'] ;
+            //  $idInCart = Session::get('cart') ;
+            //  if(!empty($idInCart)){
+            //     if(key_exists($arrParam['id'],$idInCart['quantity'])){
+            //       foreach($idInCart['quantity'] as $key){
+                    
+            //       }
+            //     }
+               
+            //  }
+           
+            // if($arrParam['id'] == )
+            // echo '<pre>';
+            // print_r($arrParam);
+            // echo '</pre>';
+            // echo '<pre>';
+            // print_r($_SESSION);
+            // echo '</pre>';
+		}
+    }
+    private function randomString($length){
+	
+		$arrCharacter = array_merge(range('a','z'),range(0,9),range('A','Z') );
+		$arrCharacter = implode('',$arrCharacter);
+		$arrCharacter = str_shuffle($arrCharacter);	
+		$result		= substr($arrCharacter, 0, $length);
+		return $result;
+    }
+
+
+} 

@@ -1,9 +1,11 @@
 <?php
+   // INFORMATION BOOK DETAILS
     if(!empty($this->getBookDetails)){
         foreach($this->getBookDetails as $key => $value){
             $sale        = $value['sale_off'];
+            $linkOrder   = URL::createLink('default','user','order',  ['book_id'=>$value['id']]) ;
             $name        = $value['name'];
-            $description = $value['description'];
+            $description = mb_strtolower($value['description']);
             $cost        = $value['price'];
             $priceSale   = $cost - ($cost * $sale / 100);
             $cost        = HelperAdmin::formatVND($cost);
@@ -57,7 +59,7 @@
                               <div class="quality-button">
                                  <input class="qty" min = 1 type="number" value="1">
                               </div>
-                              <a href="#">Add to cart</a>
+                              <a class="add-to-cart" href="<?php echo $linkOrder ;?>">Add to cart</a>
                            </form>
                         </div>
                         <div class="product-social-links">

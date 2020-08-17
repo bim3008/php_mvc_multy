@@ -1,13 +1,7 @@
 <?php
-class IndexController extends Controller{
+class IndexController extends AdminController{
 	
-	public function __construct($arrParams){
-		parent::__construct($arrParams);
-		$this->_templateObj->setFolderTemplate('admin/login/');
-		$this->_templateObj->setFileTemplate('index.php');
-		$this->_templateObj->setFileConfig('template.ini');
-		$this->_templateObj->load();
-	}
+	
 	public function indexAction(){
 		// Kiểm tra đăng nhập
 		$infomationUser = Session::get('user') ;
@@ -35,6 +29,13 @@ class IndexController extends Controller{
 	}
 	public function loginAction()
 	{
+	
+		
+		$this->_templateObj->setFolderTemplate('admin/login/');
+		$this->_templateObj->setFileTemplate('index.php');
+		$this->_templateObj->setFileConfig('template.ini');
+		$this->_templateObj->load();
+		
 		$this->_view->setTitle(ucfirst($this->_arrParam['action']) );
 
 		$infomationUser = Session::get('user') ;

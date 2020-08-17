@@ -22,9 +22,9 @@
 	define	('LINK_IMAGE_CATEGORY'	, PUBLIC_URL . 'files'. DS .'category'. DS); 
 	define	('LINK_IMAGE_BOOK'		, PUBLIC_URL . 'files'. DS .'book'. DS); 
 	//=========================================================
-	define	('DEFAULT_MODULE'		, 'admin');
+	define	('DEFAULT_MODULE'		, 'default');
 	define	('DEFAULT_CONTROLLER'	, 'index');
-	define	('DEFAULT_ACTION'		, 'login');	
+	define	('DEFAULT_ACTION'		, 'index');	
 	// ====================== DATABASE TABLE===========================
 	define ('TBL_GROUP'			, 'group');
 	define ('TBL_USER'			, 'user');
@@ -34,13 +34,13 @@
 	define ('TBL_CART'			, 'cart');
 	
 	// ====================== DATABASE ===========================
-		define("DB_HOST", "localhost");
-		define("DB_USER", "root");
-		define("DB_PASS", "");
-		define("DB_NAME", "php_bookstore");		
-		define('DB_TABLE', 'group');		
-		define	('DB_TABLE_GROUP'			, 'group');
-		define	('DB_TABLE_USER'			, 'user');
-		define	('DB_TABLE_CATEGORY'		, 'category');
-		define	('DB_TABLE_BOOK'			, 'book');
+	define("DB_HOST", "localhost");
+	define("DB_USER", "root");
+	define("DB_PASS", "");
+	define("DB_NAME", "php_bookstore");		
+	define('DB_TABLE', 'group');		
+	define	('DB_TABLE_GROUP'			, 'group');
+	define	('DB_TABLE_USER'			, 'user');
+	define	('DB_TABLE_CATEGORY'		, 'category');
+	define	('DB_TABLE_BOOK'			, 'book');
 		

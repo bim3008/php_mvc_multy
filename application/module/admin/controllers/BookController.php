@@ -1,15 +1,6 @@
 <?php
-class BookController extends Controller
+class BookController extends AdminController
 {
-	public function __construct($arrParam){
-      
-        parent::__construct($arrParam);
-        $this->_templateObj->setFolderTemplate('admin/adminlte/');
-        $this->_templateObj->setFileTemplate('index.php');
-        $this->_templateObj->setFileConfig('template.ini');
-        $this->_templateObj->load();    
-    }
-	
 	public function indexAction()
 	{
 		$this->_view->setTitle(ucfirst($this->_arrParam['controller']));

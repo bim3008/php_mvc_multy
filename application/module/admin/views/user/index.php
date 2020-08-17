@@ -10,7 +10,6 @@ if(isset($this->listItems)){
 	foreach ($this->listItems as $key => $value) {
 		// VALUE
 		$id 			= $value['id'];
-	//	$username       = ($lblFilterSearch != null) ? preg_replace("/\p{L}*?" . preg_quote($lblFilterSearch) . "\p{L}*/ui", '<b style="background-color: pink;">\\0</b>', $value['username']) : $value['username'];
 		$username       = HelperAdmin::highLightSearch($lblFilterSearch ,$value['username']) ;
 		$email			= HelperAdmin::highLightSearch($lblFilterSearch ,$value['email']) ;
 		$fullname		= $value['fullname'];

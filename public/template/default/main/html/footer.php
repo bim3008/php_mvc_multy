@@ -1,24 +1,6 @@
 
 <footer>
-    <!-- <div class="footer-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="footer-top-menu bb-2">
-                        <nav>
-                            <ul>
-                                <li><a href="<?php echo $linkHome?>">Home</a></li>
-                                <li><a href="<?php echo $linkCategory?>">Category</a></li>
-                                <li><a href="<?php echo $linkBook?>">Book</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-<!-- footer-top-start -->
-<!-- footer-mid-start -->
+       
 <div class="footer-mid ptb-20">
    <div class="container">
       <div class="row">

@@ -7,23 +7,24 @@ class BookModel extends Model
 		if(!empty($arrParam['category_id'])){	
 			$id = $arrParam['category_id'] ;
 			if($opption['task'] == 'book-in-cate'){
-				$query  = 'SELECT `id`,`name`,`price`,`sale_off`,`picture`,`special`, `status` FROM `'.$this->_tableName.'` WHERE `category_id` = '.$id.' AND `status` = 0 ' ; 
+				$query  = 'SELECT `b`.`id`,`b`.`name`,`b`.`price`,`b`.`sale_off`,`b`.`picture`,`b`.`special`, `b`.`status`,`b`.`category_id`, `c`.`name` AS `category_name`  FROM `'.$this->_tableName.'` AS `b` , `category` AS `c` WHERE `b`.`category_id` = `c`.`id`  AND `category_id` = '.$id.' AND`b`.`status` = 0 ORDER BY `id` DESC LIMIT 8' ; 
+				// $query  = 'SELECT `id`,`name`,`price`,`sale_off`,`picture`,`special`, `status` ,`category_id`FROM `'.$this->_tableName.'` WHERE `category_id` = '.$id.' AND `status` = 0 ' ; 
 				$result = $this->fetchAll($query) ;
 				return $result ;
 			}
 		}
 		if($opption['task'] == 'get-new-book'){
-			$query  = 'SELECT `id`,`name`,`price`,`sale_off`,`picture`,`special`, `status` FROM `'.$this->_tableName.'` WHERE `id` > 0 AND `status` = 0 ORDER BY `id` DESC LIMIT 8' ; 
+			$query  = 'SELECT `b`.`id`,`b`.`name`,`b`.`price`,`b`.`sale_off`,`b`.`picture`,`b`.`special`, `b`.`status`,`b`.`category_id`, `c`.`name` AS `category_name`  FROM `'.$this->_tableName.'` AS `b` , `category` AS `c` WHERE `b`.`category_id` = `c`.`id`  AND `b`.`status` = 0 ORDER BY `id` DESC LIMIT 8' ; 
 			$result = $this->fetchAll($query) ;
 			return $result ;
 		}
 		if($opption['task'] == 'get-featured-book'){
-			$query  = 'SELECT `id`,`name`,`price`,`sale_off`,`picture`,`special`, `status` FROM `'.$this->_tableName.'` WHERE `id` > 0 AND `special` = 1 ORDER BY `id` DESC LIMIT 8' ; 
+			$query  = 'SELECT `b`.`id`,`b`.`name`,`b`.`price`,`b`.`sale_off`,`b`.`picture`,`b`.`special`, `b`.`status`,`b`.`category_id`, `c`.`name` AS `category_name`  FROM `'.$this->_tableName.'` AS `b` , `category` AS `c` WHERE `b`.`category_id` = `c`.`id`  AND `b`.`special` = 1 ORDER BY `id` DESC LIMIT 8' ; 
 			$result = $this->fetchAll($query) ;
 			return $result ;
 		}
 		if($opption['task'] == 'get-details-book'){
-			$id     = $arrParam['id'];
+			$id     = $arrParam['book_id'];
 			$queryId  = "SELECT `id` FROM `$this->_tableName` ORDER BY `id` DESC LIMIT 1 " ;
 			$resultID = $this->fetchRow($queryId);
 			$checkID = $resultID['id'] ; 	
@@ -31,22 +32,20 @@ class BookModel extends Model
 			{
 				echo URL::redirect('default','error','index');
 			}
-			$query  = 'SELECT `id`,`name`,`price`,`sale_off`,`picture`,`special`, `status` , `description`,`ordering`  FROM `'.$this->_tableName.'` WHERE `id` = '.$id.' ' ; 
+			$query  = 'SELECT `id`,`name`,`price`,`sale_off`,`picture`,`special`, `status` , `description`,`ordering`,`category_id`  FROM `'.$this->_tableName.'` WHERE `id` = '.$id.' ' ; 
 			$result = $this->fetchAll($query) ;
 			return $result ;
 		}
 		if($opption['task'] == 'get-reletive-book'){
-			$bookID 	= $arrParam['id'];
-			$queryCate  = "SELECT `category_id` FROM `$this->_tableName` WHERE `id` = '$bookID' " ;
-			$resultCate = $this->fetchRow($queryCate);
-			$cateID = $resultCate['category_id'];
 			
-			$query  = 'SELECT `id`,`name`,`price`,`sale_off`,`picture`,`special`, `status`, `category_id` FROM `'.$this->_tableName.'` WHERE `category_id` = '.$cateID.' AND `id` <> '.$bookID.' ORDER BY `ordering` ASC ' ; 
+			$bookID = $arrParam['book_id'];
+			$cateID = $arrParam['category_id'];
+			$query  = 'SELECT `b`.`id`,`b`.`name`,`b`.`price`,`b`.`sale_off`,`b`.`picture`,`b`.`special`, `b`.`status`,`b`.`category_id`, `c`.`name` AS `category_name`  FROM `'.$this->_tableName.'` AS `b` , `category` AS `c` WHERE `b`.`category_id` = `c`.`id`  AND  `category_id` = '.$cateID.' AND `b`.`id` <> '.$bookID.' ORDER BY `b`.`ordering` ASC ' ; 
 			$result = $this->fetchAll($query) ;
 			return $result ;
 		}
 	}			
-	public function inforItem($arrParam, $opption=null)
+	public function inforItem($arrParam, $opption=null)   
 	{
 		if(!empty($arrParam['category_id']))
 		{
@@ -55,7 +54,7 @@ class BookModel extends Model
 			{
 				$query  = 'SELECT `name` FROM `'.DB_TABLE_CATEGORY.'` WHERE `id` = '.$id.' ' ; 
 				$result = $this->fetchRow($query) ;
-				return $result['name'] ;
+				return mb_strtolower($result['name']) ;
 			}
 		}
 	

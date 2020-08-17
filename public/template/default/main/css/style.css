@@ -5924,6 +5924,10 @@ nav.menu .cr-dropdown ul {
     font-weight: 400;
 }
 
+.single-register-submit {
+    text-align: center;
+}
+
 .single-register-submit input {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     border: 1px solid #eceff8;
@@ -6354,6 +6358,7 @@ nav.menu .cr-dropdown ul {
     color: #333;
     font-family: 'Rufina', serif;
     font-weight: 400;
+    margin-top: 20px;
 }
 
 .entry-header-area {
@@ -7267,13 +7272,13 @@ p.lost-password a:hover {
     font-weight: 400;
 }
 
-.page .entry-content p {
+.entry-content a {
     font-size: 15px;
     margin-bottom: 40px;
     color: #333;
 }
 
-.page .entry-content a {
+.entry-content a {
     border: 2px solid #aaa;
     color: #333;
     font-weight: 700;
@@ -7285,7 +7290,7 @@ p.lost-password a:hover {
     font-weight: 400;
 }
 
-.page .entry-content a:hover {
+.entry-content a:hover {
     background: #F07C29 none repeat scroll 0 0;
     border-color: #F07C29;
     color: #fff;
@@ -7523,6 +7528,10 @@ p.lost-password a:hover {
     margin-right: .5rem;
 }
 
+.fa {
+    padding-top: 5px;
+}
+
 .list-inline-item:hover {
     background-color: #6f42c1;
 }
@@ -7535,10 +7544,189 @@ p.lost-password a:hover {
     background-color: red;
 }
 
+.account-details-form .single-input-item input,
+.single-input-item textarea {
+    color: #555555;
+    border: 1px solid #ccc;
+    padding: 12px 10px;
+    width: 100%;
+    font-size: 14px;
+    background: #f9f9f9;
+}
+
+button,
+input {
+    overflow: visible;
+}
+
+.myaccount-content {
+    border: 1px solid #eeeeee;
+    padding: 30px;
+    display: contents;
+}
+
+.myaccount-content h5 {
+    border-bottom: 1px dashed #ccc;
+    font-weight: 600;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
 ul.error-public {
     background-color: antiquewhite;
     font-weight: 700;
     font-family: sans-serif;
     padding: 5px;
     margin: 5px 0;
+}
+
+.update {
+    text-align: center;
+    padding: 100px;
+}
+
+.buy {
+    text-align: center;
+    margin: 200px 0px;
+}
+
+.notice {
+    margin: 50px 0px;
+}
+
+.btn.btn-sqr,
+.buttons-cart ul li a,
+.coupon form a {
+    margin-top: 10px;
+    background: #252525 none repeat scroll 0 0;
+    border-radius: 0;
+    box-shadow: none;
+    color: #fff;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    height: 40px;
+    line-height: 40px;
+    margin-right: 15px;
+    padding: 0 15px;
+    text-shadow: none;
+    text-transform: uppercase;
+    transition: all 0.3s ease 0s;
+    font-family: 'Rufina', serif;
+    font-weight: 400;
+}
+
+.btn.btn-sqr:hover,
+.buttons-cart ul li a:hover,
+.coupon form a:hover {
+    background: #F07C29 none repeat scroll 0 0;
+    color: #fff;
+}
+
+.myaccount-tab-menu {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.myaccount-tab-menu a:hover,
+.myaccount-tab-menu a.active {
+    background-color: #f07c29;
+    border-color: #c29958;
+    color: #fff;
+}
+
+.myaccount-tab-menu a {
+    border: 1px solid #efefef;
+    border-bottom: none;
+    color: #222222;
+    font-weight: 400;
+    font-size: 15px;
+    display: block;
+    padding: 10px 15px;
+    text-transform: capitalize;
+}
+
+.myaccount-tab-menu a {
+    border: 1px solid #efefef;
+    border-bottom: none;
+    color: #222222;
+    font-weight: 400;
+    font-size: 15px;
+    display: block;
+    padding: 10px 15px;
+    text-transform: capitalize;
+}
+
+.myaccount-tab-menu a:last-child {
+    border-bottom: 1px solid #efefef;
+}
+
+.myaccount-tab-menu a:hover,
+.myaccount-tab-menu a.active {
+    background-color: #f07c29;
+    border-color: #c29958;
+    color: #fff;
+}
+
+.thead-light th {
+    text-align: center;
+}
+
+.img-his {
+    width: 100px;
+}
+
+.th {
+    width: 250px;
+}
+
+.btn-call-now {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    width: 260px;
+    bottom: 35px;
+    background: #f22727;
+    -webkit-box-shadow: 0 0 5px #ddd;
+    -moz-box-shadow: 0 0 5px #ddd;
+    box-shadow: 0 0 5px #ddd;
+    z-index: 999999999;
+    left: 20px;
+    top: initial!important;
+    color: #FFF;
+    font-weight: 700;
+    font-size: 125%;
+    border-radius: 25px;
+    padding: 5px;
+    -moz-animation-duration: 500ms;
+    -moz-animation-name: calllink;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-direction: alternate;
+    -webkit-animation-duration: 500ms;
+    -webkit-animation-name: calllink;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+    animation-duration: 500ms;
+    animation-name: calllink;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.btn-call-now .fa {
+    color: #b70100;
+    font-size: 26px;
+    background: #fff;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 20px;
+    margin-right: 5px;
+    text-align: center;
+}
+
+.success {
+    text-align: center;
 }

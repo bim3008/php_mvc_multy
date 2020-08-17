@@ -1,0 +1,85 @@
+<div class="tab-pane fade" id="orders" role="tabpanel">
+    <?php
+        
+        if(!empty($this->Items)){
+            $xhtml = '' ;
+            foreach($this->Items as $key => $value){
+                $id             =  $value['id'];
+                $arrBook        =  json_decode($value['books']);
+                $arrName        =  json_decode($value['names']);
+                $arrPicture     =  json_decode($value['pictures']);
+                $arrQuantity    =  json_decode($value['quantities']);
+                $arrPrice       =  json_decode($value['prices']);
+                $date           =   date("H:i d/m/Y" , strtotime($value['date'])) ;
+                $tableContent   = '' ;
+                $i = 0; 
+                foreach($arrBook as $keyB => $valueB){
+                    $i++;
+                    $tableContent   .= 
+                            '<tr>
+                                <td>'.$i.'</td>
+                                <td>'.$arrName[$keyB].'</td>
+                                <td><img  class="img-his" src=" '.LINK_IMAGE_BOOK.$arrPicture[$keyB].'"></td>
+                                <td>'.HelperAdmin::formatVND($arrPrice[$keyB]).'</td>
+                                <td>'.$arrQuantity[$keyB].'</td>  
+                                <td>'.HelperAdmin::formatVND($arrQuantity[$keyB]*$arrPrice[$keyB]).'</td>  
+                                '.HTMLDefault::statusBuyBooks($value['status']).'
+                            </tr>' ;
+                }
+               
+                    $xhtml  .= '
+                            <div class="myaccount-content"><legend>Mã đơn hàng : '.$id.' -  Ngày: '.$date.'</legend></div>
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <thead class="thead-light">
+                                                '.HTMLDefault::tableTitle().$tableContent.'    
+                                        </thead> 
+                                    </tbody>
+                                            
+                                </table>';
+            }
+            echo $xhtml ;
+        }
+         
+    ?>
+
+  
+</div>
+<img src="" alt="">
+
+                                        <!-- <td>'.$name.'</td>
+                                        <td>'.$picture.'</td>
+                                        <td>'.$quantity.'</td>
+                                        <td>'.$total.'</td> -->
+                                        <!-- <div class="myaccount-table table-responsive text-center">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Hình ảnh</th>  
+                                            <th>Số lượng</th>
+                                            <th>Tổng cổng</th>
+                                            <th>Trạng thái</th>
+                                        </tr>
+                                    </thead> 
+                                    <tr>
+                                        <td>'.$i.'</td>
+                                        // <td><p class="btn btn-sqr">View</p></td>
+                                    // <td><p class="btn btn-sqr">View</p></td>
+                                    // <td><p class="btn btn-sqr">View</p></td>
+                                    // <td><p class="btn btn-sqr">View</p></td>
+                                    // <td><p class="btn btn-sqr">View</p></td>
+                                    // <td><p class="btn btn-sqr">View</p></td>
+                                        <td><p class="btn btn-sqr">View</p></td>
+                                        <td><p class="btn btn-sqr">View</p></td>
+                                        <td><p class="btn btn-sqr">View</p></td>
+                                        <td><p class="btn btn-sqr">View</p></td>
+                                        <td><p class="btn btn-sqr">View</p></td>
+                                        <td><p class="btn btn-sqr">View</p></td>
+                                    </tr>                  
+                                </tbody>
+                                
+                            </table>
+                        </div> -->

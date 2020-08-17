@@ -1,13 +1,7 @@
 <?php
-class ErrorController extends Controller{
+class ErrorController extends FontendController{
 	
-	public function __construct($arrParams){
-		parent::__construct($arrParams);
-		$this->_templateObj->setFolderTemplate('default/main/');
-		$this->_templateObj->setFileTemplate('index.php');
-		$this->_templateObj->setFileConfig('template.ini');
-		$this->_templateObj->load();
-	}
+
 	public function indexAction(){
 		$this->_view->setTitle('Error');
 		$this->_view->render($this->_arrParam['controller'] . DS . 'index',false);

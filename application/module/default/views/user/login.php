@@ -3,8 +3,8 @@
    $dataForm         = isset($this->arrParam['form']) ? $this->arrParam['form'] : '';
    $valueUsername    = isset($dataForm['username']) ? $dataForm['username'] 	:'';
 	// INPUT
-	$inputUsername   = HTMLDefault::inputTextRegister('Username or Email','username' ,$valueUsername);
-	$inputPassword   = HTMLDefault::inputPassRegister('Password','password');
+	$inputUsername   = HTMLDefault::inputTextRegister('Username or Email :codephp123','username' ,$valueUsername);
+	$inputPassword   = HTMLDefault::inputPassRegister('Password : 123456Q!','password');
 	$inputHidden     = HTMLDefault::inputHiddenRegister('','token',time());
 	// LINK
 	$linkAction   = URL::createLink('default','user','login');
@@ -12,8 +12,6 @@
 ?>
 
 <div class="breadcrumbs-area mb-50">
-	<div class="container">
-	</div>
 </div>
 <div class="user-login-area mb-70">
     <div class="container">
@@ -36,6 +34,4 @@
 			</div>
 		</div>
 	</div>
-</div>
-</div>
 </div>

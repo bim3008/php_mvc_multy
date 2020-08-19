@@ -9,14 +9,15 @@
         $html = '' ;
         $toal = 0  ;
         foreach($this->Items as $key => $value){
+        
             $inputHiddenId         = HTMLDefault::cmsFormInputHidden('id',$value['id']) ;
             $inputHiddenPrice      = HTMLDefault::cmsFormInputHidden('price',$value['price']) ;
             $inputHiddenQuantity   = HTMLDefault::cmsFormInputHidden('quantity',$value['quantity']) ;
             $inputHiddenName       = HTMLDefault::cmsFormInputHidden('name',$value['name']) ;
             $inputHiddenPicture    = HTMLDefault::cmsFormInputHidden('picture',$value['picture']) ;
 
-            $linkDetail =  URL::createLink('default','book','details',['id'=>$value['id']]);
-            $linkDelete =  URL::createLink('default','user','notice' ,['type'=>'maintenance']); // 
+            $linkDetail =  URL::createLink('default','book','details',['id'=>$value['id']], '');
+            $linkDelete =  URL::createLink('default','user','delete',['id'=>$value['id']]); // 
             $name       =  $value['name'];
             $price      =  $value['price'] ;  
             $picture    =  LINK_IMAGE_BOOK . $value['picture'];
@@ -60,7 +61,7 @@
                         <table>
                             <tbody>
                                 <tr class="order-total">
-                                    <th>Total</th>
+                                    <th>Tổng cổng</th>
                                     <td>
                                         <strong>
                                             <span class="amount"><?php echo HelperAdmin::formatVND($toal) ;?></span>
@@ -70,7 +71,7 @@
                             </tbody>
                         </table>
                         <div class="wc-proceed-to-checkout">
-                            <a href="#">Thanh toán</a>
+                            <a href="#">Đặt mua</a>
                         </div>
                     </div>
                 </div>

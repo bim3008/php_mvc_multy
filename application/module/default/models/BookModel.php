@@ -8,7 +8,6 @@ class BookModel extends Model
 			$id = $arrParam['category_id'] ;
 			if($opption['task'] == 'book-in-cate'){
 				$query  = 'SELECT `b`.`id`,`b`.`name`,`b`.`price`,`b`.`sale_off`,`b`.`picture`,`b`.`special`, `b`.`status`,`b`.`category_id`, `c`.`name` AS `category_name`  FROM `'.$this->_tableName.'` AS `b` , `category` AS `c` WHERE `b`.`category_id` = `c`.`id`  AND `category_id` = '.$id.' AND`b`.`status` = 0 ORDER BY `id` DESC LIMIT 8' ; 
-				// $query  = 'SELECT `id`,`name`,`price`,`sale_off`,`picture`,`special`, `status` ,`category_id`FROM `'.$this->_tableName.'` WHERE `category_id` = '.$id.' AND `status` = 0 ' ; 
 				$result = $this->fetchAll($query) ;
 				return $result ;
 			}
@@ -25,14 +24,13 @@ class BookModel extends Model
 		}
 		if($opption['task'] == 'get-details-book'){
 			$id     = $arrParam['book_id'];
-			$queryId  = "SELECT `id` FROM `$this->_tableName` ORDER BY `id` DESC LIMIT 1 " ;
+			$queryId  = "SELECT `id` FROM `$this->_tableName` ORDER BY `id` DESC" ;
 			$resultID = $this->fetchRow($queryId);
 			$checkID = $resultID['id'] ; 	
-			if($id > $checkID || $id < 0 )
-			{
-				echo URL::redirect('default','error','index');
+			if($id > $checkID || $id <= 0){
+				URL::redirect('default','error','index',null,'404.html');
 			}
-			$query  = 'SELECT `id`,`name`,`price`,`sale_off`,`picture`,`special`, `status` , `description`,`ordering`,`category_id`  FROM `'.$this->_tableName.'` WHERE `id` = '.$id.' ' ; 
+			$query  = 'SELECT `b`.`id`,`b`.`name`,`b`.`price`,`b`.`sale_off`,`b`.`picture`,`b`.`special`, `b`.`status` , `b`.`description`,`b`.`ordering`,`b`.`category_id` , `c`.`name` AS `category_name` FROM `'.$this->_tableName.'` AS `b` , `category` AS `c` WHERE `b`.`category_id` = `c`.`id` AND`b`.`id` = '.$id.' ' ; 
 			$result = $this->fetchAll($query) ;
 			return $result ;
 		}
@@ -43,6 +41,13 @@ class BookModel extends Model
 			$query  = 'SELECT `b`.`id`,`b`.`name`,`b`.`price`,`b`.`sale_off`,`b`.`picture`,`b`.`special`, `b`.`status`,`b`.`category_id`, `c`.`name` AS `category_name`  FROM `'.$this->_tableName.'` AS `b` , `category` AS `c` WHERE `b`.`category_id` = `c`.`id`  AND  `category_id` = '.$cateID.' AND `b`.`id` <> '.$bookID.' ORDER BY `b`.`ordering` ASC ' ; 
 			$result = $this->fetchAll($query) ;
 			return $result ;
+		}
+		if($opption['task'] == 'get-title-book'){
+			
+			$bookID = $arrParam['book_id'];
+			$query  = 'SELECT `name` FROM `'.$this->_tableName.'` WHERE `id` = '.$bookID.' ' ; 
+			$result = $this->fetchRow($query) ;
+			return $result['name'] ;
 		}
 	}			
 	public function inforItem($arrParam, $opption=null)   

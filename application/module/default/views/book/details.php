@@ -2,18 +2,24 @@
    // INFORMATION BOOK DETAILS
     if(!empty($this->getBookDetails)){
         foreach($this->getBookDetails as $key => $value){
-            $sale        = $value['sale_off'];
-            $linkOrder   = URL::createLink('default','user','order',  ['book_id'=>$value['id']]) ;
-            $name        = $value['name'];
-            $description = mb_strtolower($value['description']);
-            $cost        = $value['price'];
-            $priceSale   = $cost - ($cost * $sale / 100);
-            $cost        = HelperAdmin::formatVND($cost);
-            $priceSale   = HelperAdmin::formatVND($priceSale);
-            $status      = $value['status'];
-            $special     = $value['special'];
-            $picture     = $value['picture'];
-            $imageURL    = LINK_IMAGE_BOOK . $picture ;
+         $idCate           = $value['category_id'] ;
+         $idBook           = $value['id'] ;
+         $categoryNameURL  = URL::filterURL($value['category_name']);
+         $bookNameURL      = URL::filterURL($value['name']);
+         $linkOrder        = ROOT_URL.URL::createLink('default','user','order',['category_id'=> $value['category_id'],'book_id'=>$value['id']]) ;
+
+
+         $sale        = $value['sale_off'];
+         $name        = $value['name'];
+         $description = mb_strtolower($value['description']);
+         $cost        = $value['price'];
+         $priceSale   = $cost - ($cost * $sale / 100);
+         $cost        = HelperAdmin::formatVND($cost);
+         $priceSale   = HelperAdmin::formatVND($priceSale);
+         $status      = $value['status'];
+         $special     = $value['special'];
+         $picture     = $value['picture'];
+         $imageURL    = LINK_IMAGE_BOOK . $picture ;
         }
     }
     if($sale > 0 ){
@@ -79,13 +85,13 @@
                <div class="tab-content">
                   <div class="tab-pane active" id="Details">
                      <div class="valu">
-                        <p><?php echo substr($description,0,200) ;?>
+                        <p><?php echo mb_strtolower(substr($description,0,200)) ;?>
                         </p>
                         <ul>
-                           <li><i class="fa fa-circle"></i><?php echo substr($description,0,20)?></li>
-                           <li><i class="fa fa-circle"></i><?php echo substr($description,20,40)?></li>
-                           <li><i class="fa fa-circle"></i><?php echo substr($description,40,80)?></li>
-                           <li><i class="fa fa-circle"></i><?php echo substr($description,80,100)?></li>
+                           <li><i class="fa fa-circle"></i><?php echo mb_strtolower(substr($description,0,20))?></li>
+                           <li><i class="fa fa-circle"></i><?php echo mb_strtolower(substr($description,20,40))?></li>
+                           <li><i class="fa fa-circle"></i><?php echo mb_strtolower(substr($description,40,80))?></li>
+                           <li><i class="fa fa-circle"></i><?php echo mb_strtolower(substr($description,80,100))?></li>
                         </ul>
                      </div>
                   </div>

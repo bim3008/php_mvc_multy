@@ -10,7 +10,7 @@
                             <div class="row">
                                 <div class="col-lg-3 col-md-4">
                                     <div class="myaccount-tab-menu nav" role="tablist">
-                                        <a href="#dashboad" class="active" data-toggle="tab"><i class="fa fa-dashboard"></i> QUẢN LÝ </a>
+                                        <a href="#dashboad" class="active" data-toggle="tab"><i class="fa fa-dashboard"></i> Hồ sơ </a>
                                         <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Lịch sử </a>
                                         <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i> Thay đổi mật khẩu </a>                   
                                     </div>

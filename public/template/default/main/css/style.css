@@ -207,6 +207,7 @@ body {
 
 .mb-20 {
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .mb-40 {
@@ -4780,7 +4781,7 @@ nav.menu .cr-dropdown ul {
 }
 
 .product-info-area .valu>p {
-    font-size: 13px;
+    font-size: 14px;
     margin-bottom: 15px;
     color: #333;
 }
@@ -5183,7 +5184,7 @@ nav.menu .cr-dropdown ul {
 .product-addto-links-text p {
     clear: both;
     color: #333;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 28px;
     margin: 10px 0 0;
     padding: 30px 0;
@@ -6392,7 +6393,7 @@ nav.menu .cr-dropdown ul {
 
 .table-content table th {
     border-top: medium none;
-    font-weight: normal;
+    font-weight: 600px;
     padding: 20px 10px;
     text-align: center;
     text-transform: uppercase;
@@ -6407,10 +6408,9 @@ nav.menu .cr-dropdown ul {
 
 .table-content table td {
     border-top: medium none;
-    font-size: 13px;
+    font-size: 20px;
     padding: 20px 10px;
     vertical-align: middle;
-    font-family: 'Rufina', serif;
     font-weight: 400;
 }
 
@@ -6420,7 +6420,7 @@ nav.menu .cr-dropdown ul {
 
 .table-content table td.product-name a {
     color: #6f6f6f;
-    font-size: 14px;
+    font-size: 25px;
     font-weight: 700;
     margin-left: 10px;
     text-decoration: none;
@@ -6434,7 +6434,7 @@ nav.menu .cr-dropdown ul {
 }
 
 .table-content table td.product-quantity {
-    width: 180px;
+    width: 100px;
 }
 
 .table-content table td input {
@@ -6452,17 +6452,22 @@ nav.menu .cr-dropdown ul {
 }
 
 .table-content table td.product-subtotal {
-    font-size: 14px;
-    font-weight: bold;
-    width: 120px;
-    font-family: 'Rufina', serif;
-    font-weight: 400;
+    width: 130px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+th.product-name {
+    width: 350px;
 }
 
 .table-content table .product-price .amount {
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 700;
     color: #333;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .table-content table td.product-remove {
@@ -6637,7 +6642,7 @@ nav.menu .cr-dropdown ul {
     font-size: 20px;
     text-transform: uppercase;
     white-space: nowrap;
-    font-family: 'Rufina', serif;
+    font-family: 'Times New Roman', Times, serif;
     font-weight: 400;
 }
 
@@ -7729,4 +7734,13 @@ ul.error-public {
 
 .success {
     text-align: center;
+}
+
+.cart {
+    text-align: center;
+    margin-top: 68px;
+    color: red;
+}
+
+
 }

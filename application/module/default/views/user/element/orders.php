@@ -38,8 +38,13 @@
                                             
                                 </table>';
             }
-            echo $xhtml ;
+           
         }
+        else{
+
+            $xhtml = '<h2 class="cart">BẠN CHƯA MUA SẢN PHẨM NÀO</h2>' ;
+        }
+        echo $xhtml ;
          
     ?>
 

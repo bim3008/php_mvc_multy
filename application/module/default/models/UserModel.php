@@ -33,11 +33,23 @@ class UserModel extends Model
             $query[] = "WHERE `username` = '$id' " ;
 
             $query = implode(" ",$query);
-            
             return $this->fetchAll($query) ;
 
         }
-      
+        // ORDER
+        if($opption['task'] == 'getNameBook'){
+            
+           $query = 'SELECT `name` FROM `book` WHERE `id` = '.$arrParam['book_id'].' ' ;
+           $result = $this->fetchRow($query) ;
+           return $result['name'] ;
+        }
+        if($opption['task'] == 'getNameCate'){
+            
+            $query = 'SELECT `name` FROM `category` WHERE `id` = '.$arrParam['category_id'].' ' ;
+            $result = $this->fetchRow($query) ;
+            return $result['name'] ;
+         }
+
     }		
     public function saveItems($arrParam,$option=null)
     {      	
@@ -114,27 +126,20 @@ class UserModel extends Model
 			return $resutl ;
 		}
     } 	
-    public function delete($arrParam,$option=null){	   
+    public function delete($arrParam,$option=null){	 
         if($option['task'] == 'delete-in-cart')
 		{   
-            //  $id = $arrParam['id'] ;
-            //  $idInCart = Session::get('cart') ;
-            //  if(!empty($idInCart)){
-            //     if(key_exists($arrParam['id'],$idInCart['quantity'])){
-            //       foreach($idInCart['quantity'] as $key){
-                    
-            //       }
-            //     }
-               
-            //  }
-           
-            // if($arrParam['id'] == )
-            // echo '<pre>';
-            // print_r($arrParam);
-            // echo '</pre>';
-            // echo '<pre>';
-            // print_r($_SESSION);
-            // echo '</pre>';
+            $id = $arrParam['id'] ;
+            if (!empty($_SESSION["cart"])) {
+                foreach ($_SESSION["cart"] as $key => $value) {
+                    foreach($value as $keyB =>$valueB){
+                       if($keyB == $id){
+                            unset($_SESSION["cart"]['quantity'][$keyB]);
+                       }
+                    }
+                }
+
+            }
 		}
     }
     private function randomString($length){

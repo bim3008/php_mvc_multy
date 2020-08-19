@@ -4,62 +4,72 @@
 <div class="footer-mid ptb-20">
    <div class="container">
       <div class="row">
-         <div class="col-sm-6 col-md-6 col-lg-8">
-            <div class="row">
-               <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                  <div class="single-footer br-2 xs-mb">
-                     <div class="footer-title mb-20">
-                            <h3>GIỚI THIỆU</h3>
-                     </div>
-                     <div class="footer-mid-menu">
-                        <img src="<?php echo $this->_dirImg . DS .'footer/bct.png'?>" alt="">
-                        <ul>
-                           <li><span>Công ty cổ phần Sách Bim Store Việt Nam </span></li>
-                           <li><span>Mã số thuế : 9999999999999 </span></li>
-                           <li><span>Tầng 5, Tòa nhà Songdo, 62A Phạm Ngọc Thạch, Phường 6, Quận 3, TP. Hồ Chí Minh </span></li>
-                           <li><span>Giấy phép đăng ký kinh doanh số 90745 do Sở Kế hoạch và Đầu tư Thành phố Hồ Chí Minh cấp ngày 09/05/2017</span></li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>    
-               <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                  <div class="single-footer br-2 xs-mb">
-                     <div class="footer-title mb-20">
-                        <h3>Your account</h3>
-                     </div>
-                     <div class="footer-mid-menu">
-                        <ul>
-                           <li><a href="contact.php">Addresses</a></li>
-                           <li><a href="#">Credit slips </a></li>
-                           <li><a href="#"> Orders</a></li>
-                           <li><a href="#">Personal info</a></li>
-                        </ul>
-                     </div>
-                  </div>
-               </div> -->
-            </div>
-         </div>
-         <div class="col-sm-6 col-md-6 col-lg-4">
-            <div class="single-footer mrg-sm">
-               <div class="footer-title mb-20">
-                  <h3>THÔNG TIN CỬA HÀNG</h3>
-               </div>
-               <div class="footer_social_widget mb-40">
-                    <ul class="text-left">
-                        <li class="list-inline-item item-facebook"><a target="_blank" href="https://www.facebook.com/bimmm3008"><i class="fa fa-facebook"></i></a></li>
-                        <li class="list-inline-item item-youtube"><a target="_blank" href="https://www.youtube.com/user/zendvn123"><i class="fa fa-youtube"></i></a></li>
-                    </ul>
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="single-footer br-2 xs-mb">
+                                <div class="footer-title mb-20">
+                                    <h3>Hổ trợ khách hàng</h3>
+                                </div>
+                                <div class="footer-mid-menu">
+                                    <ul>
+                                        <li><a href="https://hotro.tiki.vn/hc/vi">Câu hỏi thường gặp</a></li>
+                                        <li><a href="https://hotro.tiki.vn/hc/vi/categories/200126644">Hướng dẫn đặt hàng</a></li>
+                                        <li><a href="https://hotro.tiki.vn/hc/vi/categories/200123960">Phương thức vận chuyển</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="single-footer br-2 xs-mb">
+                                <div class="footer-title mb-20">
+                                    <h3>Tài khoản</h3>
+                                </div>
+                                <div class="footer-mid-menu">   
+                                    <ul>
+                                        <li><a href="dang-ky.html">Đăng ký</a></li>
+                                        <li><a href="dang-nhap.html">Đăng nhập</a></li>
+                                        <li><a href="ho-so.html">Hồ sơ</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="single-footer br-2 xs-mb">
+                                <div class="footer-title mb-20">
+                                    <h3>Thông tin hữu ích</h3>
+                                </div>
+                                <div class="footer-mid-menu">
+                                    <ul>
+                                        <li><a href="sach.html">Sách mới</a></li>
+                                        <li><a href="sach.html">Sách nổi bật</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                <div class="col-sm-6 col-md-6 col-lg-4">
+                    <div class="single-footer mrg-sm">
+                    <div class="footer-title mb-20">
+                        <h3>THÔNG TIN CỬA HÀNG</h3>
+                    </div>
+                    <div class="footer_social_widget mb-5">
+                            <ul class="text-left">
+                                <li class="list-inline-item item-facebook"><a target="_blank" href="https://www.facebook.com/bimmm3008"><i class="fa fa-facebook"></i></a></li>
+                                <li class="list-inline-item item-youtube"><a target="_blank" href="https://www.youtube.com/user/zendvn123"><i class="fa fa-youtube"></i></a></li>
+                            </ul>
+                        </div>
+                    <div class="footer-contact">
+                        <p><span>Địa chỉ : 566 Nguyễn Thái Sơn P.5 Q.Gò Vấp Tp.Hồ Chí Minh</span></p>
+                        <p><span>Số điện thoại: (+84)036-476-4002</span>  </p>
+                        <p><span>Email :bimmm3008@gmail.com</span>  </p>
+                    </div>
+                    </div>
                 </div>
-               <div class="footer-contact">
-                  <p><span>Địa chỉ : 566 Nguyễn Thái Sơn P.5 Q.Gò Vấp Tp.Hồ Chí Minh</span></p>
-                  <p><span>Số điện thoại: (+84)036-476-4002</span>  </p>
-                  <p><span>Email :bimmm3008@gmail.com</span>  </p>
-               </div>
             </div>
-         </div>
-      </div>
-   </div>
-</div>
+        </div>
+    </div>
 <!-- footer-mid-end -->
 <!-- footer-bottom-start -->
 <div style="background-color: #0a0a0a;" class="footer-bottom">

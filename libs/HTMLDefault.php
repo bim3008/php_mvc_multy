@@ -122,15 +122,14 @@ class HTMLDefault
     {
         $xhtml = '
             <div class="section-title-5 mb-30">
-                <h2>WELCOM TO MY BOOKS</h2>
+                <h2>THẾ GIỚI SÁCH CỦA BẠN</h2>
             </div>
         ' ;
         return $xhtml ;
     }
     public static function bookInCategory($link,$img,$sale_off,$name,$price,$linkOder)
     {   
-        $title = $name;
-        $name = HelperAdmin::textShorten($name,20);
+     
         if($sale_off > 0){
             $discount = ' <li><span class="discount-percentage">' . $sale_off . '%</span></li>' ;
         }else{
@@ -138,6 +137,7 @@ class HTMLDefault
         }
      
         $xhtml = '
+       
         <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="product-wrapper mb-40">
                 <div class="product-img">
@@ -150,7 +150,7 @@ class HTMLDefault
                     </div>
                 </div>
                 <div class="product-details text-center">
-                    <h4><a title="'.$title.'" href="'.$link.'">' . $name . '</a></h4>
+                    <h4><a title="" href="'.$link.'">' .HelperAdmin::textShorten($name,25) . '</a></h4>
                     <div class="product-price">
                         <ul>
                             <li>' . $price . '</li>
@@ -413,12 +413,12 @@ class HTMLDefault
                 <table>
                     <thead>
                         <tr>
-                            <th class="product-thumbnail">Image</th>
-                            <th class="product-name">Product</th>
-                            <th class="product-price">Price</th>
-                            <th class="product-quantity">Quantity</th>
-                            <th class="product-subtotal">Total</th>
-                            <th class="product-remove">Remove</th>
+                            <th class="product-thumbnail">Hình ảnh</th>
+                            <th class="product-name">Tên sản phẩm</th>
+                            <th class="product-price">Giá</th>
+                            <th class="product-quantity">Số Lượng</th>
+                            <th class="product-subtotal">Tổng cổng</th>
+                            <th class="product-remove">Xóa</th>
                         </tr>
                     </thead>
                     <tbody>                    
@@ -476,6 +476,43 @@ class HTMLDefault
         else{
             $xhtml = ' <td><a class="btn btn-sqr">Đã Giao</a></td>' ;
         }
+        return $xhtml ;
+    }
+
+    public static function listCategory($xhtmlGrid,$xhtmlList){
+        $xhtml = '
+                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                <div class="section-title-5 mb-30">
+                <h2>Category</h2>
+                </div>
+                <div class="toolbar mb-30">
+                <div class="shop-tab">
+                    <div class="tab-3">
+                        <ul>
+                            <li class="active"><a href="#th" data-toggle="tab"><i class="fa fa-th-large"></i>Grid</a></li>
+                            <li><a href="#list" data-toggle="tab"><i class="fa fa-bars"></i>List</a></li>
+                        </ul>
+                    </div>
+                </div>
+                </div>
+                <div class="tab-content">
+                <div class="tab-pane active" id="th">
+                    <div class="row">
+                        <!-- SHOW CATEGORY GIRD-->
+                     '.$xhtmlGrid.'
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="list">
+                    <div class="single-shop mb-30">
+                            <!-- SHOW CATEGORY LIST-->
+                   '.$xhtmlList.'
+                </div>
+                </div>
+                </div>
+            </div>
+        
+        ';
+
         return $xhtml ;
     }
 }

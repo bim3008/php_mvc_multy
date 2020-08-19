@@ -32,3 +32,10 @@ $(document).ready(function() {
         $("#userchange").submit();
     });
 });
+
+
+$(document).ready(function() {
+    $(".header-search a").click(function() {
+        $("#defaultSearch").submit();
+    });
+});

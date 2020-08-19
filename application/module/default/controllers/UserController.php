@@ -92,7 +92,11 @@ class UserController extends FontendController{
 	{
 		$this->checkLogin();
 		$cart   = Session::get('cart') ;
-		$bookID = $this->_arrParam['book_id']	;
+		$cateID = $this->_arrParam['category_id'];
+		$bookID = $this->_arrParam['book_id']	 ;
+		$nameBook = URL::filterURL($this->_model->listItems($this->_arrParam,['task'=>'getNameBook']));
+		$nameCate = URL::filterURL($this->_model->listItems($this->_arrParam,['task'=>'getNameCate']));
+
 		if(empty($cart)){
 			$cart['quantity'][$bookID] = 1 ;
 		}else{
@@ -103,7 +107,7 @@ class UserController extends FontendController{
 			}
 		}	
 		Session::set('cart',$cart) ;
-		URL::redirect($this->_arrParam['module'],'user','cart') ;
+		header('location:gio-hang.html') ;
 	}
 	public function cartAction()
 	{
@@ -119,8 +123,9 @@ class UserController extends FontendController{
 	}
 	public function deleteAction()
 	{
+		
 		$this->_view->Items = $this->_model->delete($this->_arrParam,['task'=>'delete-in-cart']);
-		// URL::redirect('default','user','notice',['type'=>'buy-success']);	
+		header('location:gio-hang.html') ;	
 	}
 	public function logoutAction()
 	{

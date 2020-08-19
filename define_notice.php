@@ -16,5 +16,10 @@
     // define('PASS_WRONG'             , 'Mật khẩu cũ không đúng') ;
     define('PASS_NOTMATCH'          , '<h2 class="success">Mật khẩu không trùng nhau</h2>') ;
     define('PASS_SUCCESS'           , '<h2 class="success">Bạn đã thay đổi mật khẩu thành công</h2>') ;
+    // ENTER PASS
+
+    define('ENTER_PASSOLD'           , 'Nhập mật khẩu hiện tại') ;
+    define('ENTER_PASSNEW'           , 'Nhập mật khẩu mới') ;
+    define('ENTER_PASSRE'           ,  'Nhập lại mật khẩu') ;
 
 ?>

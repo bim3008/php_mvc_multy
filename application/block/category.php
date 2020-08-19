@@ -10,7 +10,7 @@
             {
                $nameURL = URL::filterURL($valueCategory['name']);
                $id      = $valueCategory['id'];
-               $link    = URL::createLink($this->arrParam['module'],'book','index',['category_id'=>$valueCategory['id']], "$nameURL-$id.html" );
+               $link    = URL::createLink($this->arrParam['module'],'category','index',['category_id'=>$valueCategory['id']], "$nameURL-$id.html" );
                $name    = mb_strtoupper($valueCategory['name']);
                if($cateId == $valueCategory['id']){
                   $xhtmlNameCategory .= '<li><a class="active" href="'.$link.'">'. $name.'<span></span></a></li>';

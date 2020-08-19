@@ -14,7 +14,7 @@
     require_once 'element/slider-sale.php' ;
 ?>
 <!-- TOP INTERESTING -->
-<div class="product-area pt-50 xs-mb">
+<!-- <div class="product-area pt-50 xs-mb">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -28,8 +28,8 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- NEW BOOK -->
-<?php require_once 'element/new-book.php'?>
+<?php // require_once 'element/new-book.php'?>
 <?php // No Update?>
 <?php require_once 'element/slider-promotion.php'; ?>

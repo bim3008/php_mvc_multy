@@ -28,12 +28,17 @@ class UserModel extends Model
 		{	
 			$query[] =  "AND `u`.`status` =  1" ;
 		}
-	
+		if(!empty($arrParam['filter_group_id']) && is_numeric($arrParam['filter_group_id'])) {
+			$groupId =  $arrParam['filter_group_id'] ;
+			$query[]  = " AND `group_id` = $groupId ";
+		}
+
 	    $query  = implode(" " ,$query) ;
 		return $this->fetchRow($query) ;
 	}	
 	public function listItems($arrParam, $opption = null)
 	{	
+	
 		$query[] = "SELECT `u`.`id`, `u`.`username`, `u`.`password` , `u`.`email` , `u`.`fullname` , `u`.`created`, `u`.`created_by`,`u`.`modified`, `u`.`modified_by`, `u`.`register_date`,`u`.`register_ip` ,`u`.`status`,`u`.`ordering`,`g`.`name` as `group_name`  " ;
 		$query[] = " FROM $this->_tableName AS  `u` LEFT JOIN `".DB_TABLE_GROUP."`  AS `g` ON `u`.`group_id`  =  `g`.`id` ";
 		$query[] = " WHERE  `u`.`id` > 0 " ;
@@ -47,7 +52,11 @@ class UserModel extends Model
 		if(!empty($arrParam['filter_search'])) {
 			$search = '"%'.$arrParam['filter_search'].'%"';
 			$query[]  = " AND (`u`.`username` LIKE $search  OR `u`.`email` LIKE $search )  ";
-		}		
+		}	
+		if(!empty($arrParam['filter_group_id']) && is_numeric($arrParam['filter_group_id'])) {
+			$groupId =  $arrParam['filter_group_id'] ;
+			$query[]  = " AND `u`.`group_id` = $groupId ";
+		}			
 		$pagination = $arrParam['pagination'] ;
 		$totalItemsPerPage = $pagination['totalItemsPerPage'] ;
 		if($totalItemsPerPage > 0 )
@@ -160,11 +169,14 @@ class UserModel extends Model
 	}
 	public function itemsInSelectBox($arrParam,$opption=null)
 	{
-		$query 		= " SELECT   `id`, `name` FROM `".DB_TABLE_GROUP."` "  ; 
-		$result 	= $this->fetchPairs($query) ;
-		$result['default']	= " <--Select Group --> " ;
-		ksort($result) ;
-		return $result ;
+		if($opption == null){
+			$query 		= " SELECT   `id`, `name` FROM `".DB_TABLE_GROUP."` "  ; 
+			$result 	= $this->fetchPairs($query) ;
+			$result['default']	= "Select Group" ;
+			ksort($result) ;
+			return $result ;
+		}
+	
 	}
 	public function changePassword($arrParam,$opption=null)
 	{	

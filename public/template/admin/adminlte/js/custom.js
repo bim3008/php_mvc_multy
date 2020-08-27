@@ -2,8 +2,6 @@ function submitForm(url) {
     $('#addedit').attr('action', url).submit();
 }
 
-
-
 $('#btn-multydelete').click(function() {
     $('#formList').submit();
 });
@@ -45,7 +43,12 @@ $(document).ready(function() {
         $('#changePasswod').submit();
     });
 
-    // $(".filter_category_id").change(function() {
-    //     $('#formBox').submit();
-    // });
+    $("#filter_group_id").change(function() {
+        $('#formSearch').submit();
+    });
+    $("#filter_category_id").change(function() {
+        $('#formSearch').submit();
+    });
 })
+
+$('#delete').click(function() { alert('Bạn có chắc chắn muốn xóa không ? ') })

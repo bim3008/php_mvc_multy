@@ -1,11 +1,10 @@
 <?php
-require_once 'submenu/index.php';
-echo	HelperAdmin::notifyMessege('messege');
+	require_once 'submenu/index.php';
+	echo	HelperAdmin::notifyMessege('messege');
+	echo HelperAdmin::toolbar($btnFillter, $formSearch, $btnCRUD.$slectBoxCategory);
+	echo HTMLAdmin::menuBook() ;
 ?>
-<?php
-
-echo HelperAdmin::toolbar($btnFillter, $formSearch, $btnCRUD);
-echo HTMLAdmin::menuBook() ?>
+</form>
 <?php
 if(isset($this->listItems))
 {
@@ -57,7 +56,7 @@ if(isset($this->listItems))
 ?>
 </tbody>
 </table>
-</form>
+
 <div>
 	<input type="hidden" name="filter_page" value="1">
 	<input type="hidden" name="form['token']" value="14323">

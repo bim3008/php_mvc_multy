@@ -66,7 +66,7 @@ class GroupModel extends Model
 		{
 			$status = ($arrParam['status'] == 0 ) ? 1 : 0  ;
 			$id     = $arrParam['id'] ;
-			$query[]  = "SET `status` = $status WHERE `id` = '$id' " ;
+			$query[] = "SET `status` = $status WHERE `id` = '$id' " ;
 			$query = implode(" " ,$query) ;		
 			$result = $this->query($query) ;
 			Session::set('messege',SUCCESS_STATUS) ;

@@ -15,6 +15,9 @@ class IndexModel extends Model{
 		if($option['task'] == 'book'){
 			$query[] = "SELECT count(`id`) as `total` FROM `".DB_TABLE_BOOK."` 		WHERE `id` > 0" ;
 		}
+		if($option['task'] == 'cart'){
+			$query[] = "SELECT count(`id`) as `total` FROM `".DB_TABLE_CART."`" ;
+		}
 		$query  = implode(" " ,$query) ;
 		$resutl =  $this->fetchRow($query) ;
 		return $resutl['total'] ;

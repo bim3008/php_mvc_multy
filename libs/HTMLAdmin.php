@@ -98,7 +98,6 @@
 
             return $xhtml ;
         }
-
         public static function menuBook()
         {
             $xhtml = '
@@ -127,7 +126,30 @@
 
             return $xhtml ;
         }
+        public static function admidnOrder()
+        {
+            $xhtml = '
+            <div class="card-body">
+            <form action="'.URL::createLink('admin','order','delete').'" method="POST" id="formList">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th style="width: 1%;text-align:center  ">MDH</th>
+						<th style="width: 14%;text-align:center ">TÊN KH</th>
+                        <th style="width: 14% ;text-align:center">GIÁ</th>
+                        <th style="width: 12% ;text-align:center">SỐ LƯỢNG</th>
+						<th style="width: 16%;text-align:center ">TÊN SÁCH</th>
+						<th style="width: 15%;text-align:center ">HÌNH ẢNH</th>
+						<th style="width: 15%;text-align:center   ">TRẠNG THÁI</th>
+						<th style="width: 15%;text-align:center  ">NGÀY MUA</th>
+						<th style="width: 15%;text-align:center "></th>
+					</tr>
+				</thead>
+				<tbody>
+            ' ;
 
+            return $xhtml ;
+        }
         public static function inputDescription($value){
 
             $xhtml = '
@@ -135,7 +157,18 @@
             ' ;
             return $xhtml ;
         }
+        public static function statusBuyBooks($status,$link){
 
+            if($status == 0){
+                $xhtml = ' <td><a class="btn btn-sqr" href="'.$link.'">Đã đặt</a></td>' ;
+            }
+            else if($status == 1) {
+                $xhtml = '<td><a class="btn btn-sqr" href="'.$link.'">Đang giao</a></td>' ;
+            }else{
+                $xhtml = '<td><a class="btn btn-sqr">Đã giao</a></td>' ;
+            }
+            return $xhtml ;
+        }
 }
 
 ?>

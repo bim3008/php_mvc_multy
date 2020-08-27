@@ -7,16 +7,16 @@
     echo $error = isset($this->errors) ? $this->errors : '' ;
 ?> 
 <form action = "<?php echo $linkURL ;?>" method="POST"  name="form-login">
-   <span class="login100-form-title p-b-49">Login</span>
+   <span class="login100-form-title p-b-49">Đăng nhập</span>
  
             <div class="wrap-input100 validate-input m-b-23" data-validate="Username is reauired">
-                <span class="label-input100">Username</span>
-                <input class="input100" type="text" name="form[username]" placeholder="Type your username">
+                <span class="label-input100">Tài khoản</span>
+                <input class="input100" type="text" name="form[username]" placeholder="Nhập tài khoản của bạn">
                 <span class="focus-input100" data-symbol="&#xf206;"></span>
             </div>
             <div class="wrap-input100 validate-input" data-validate="Password is required">
-                <span class="label-input100">Password</span>
-                <input class="input100" type="password" name="form[password]" placeholder="Type your password">
+                <span class="label-input100">Mật khẩu</span>
+                <input class="input100" type="password" name="form[password]" placeholder="Nhập mật khẩu của bạn">
                 <span class="focus-input100" data-symbol="&#xf190;"></span>
             </div>
             <div>
@@ -48,11 +48,8 @@
 						</a>
         </div>
         <div class="flex-col-c p-t-10">
-            <span class="txt1 p-b-17">
-            Or Sign Up Using
-            </span>
             <a href="#" class="txt2">
-            Sign Up
+            Đăng ký
             </a>
         </div>
 </form>

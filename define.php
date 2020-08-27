@@ -43,4 +43,5 @@
 	define	('DB_TABLE_USER'			, 'user');
 	define	('DB_TABLE_CATEGORY'		, 'category');
 	define	('DB_TABLE_BOOK'			, 'book');
+	define	('DB_TABLE_CART'			, 'cart');
 		

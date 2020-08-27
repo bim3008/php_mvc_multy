@@ -21,7 +21,7 @@ class HelperAdmin
     }
     public static function cmsButtonDelete($link, $name)
     {
-            $xhtml = ' <a href="' . $link . '" " class="btn btn-danger btn-sm btn-delete" id="delete"  > <span class="fa fa-trash" ></span> ' . $name . '</a> ';
+            $xhtml = ' <a href="' . $link . '" class="btn btn-danger btn-sm btn-delete" id="delete"  > <span class="fa fa-trash" ></span> ' . $name . '</a> ';
 
         return $xhtml;
     }
@@ -240,4 +240,13 @@ class HelperAdmin
         $xhtml = ($filterSearch != null) ? preg_replace("/\p{L}*?" . preg_quote($filterSearch) . "\p{L}*/ui", '<b style="background-color: red;">\\0</b>', $valueName) :  $valueName;
         return $xhtml ;
     }
+
+    // Formate Date
+	public static function formatDate($format, $value){
+		$result = '';
+		if(!empty($value) && $value != '0000-00-00' ){
+			$result = date($format, strtotime($value));
+		}
+		return $result;
+	}
 }

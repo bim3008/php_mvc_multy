@@ -7,8 +7,8 @@ class BookController extends AdminController
 		$this->_view->listItems      		= $this->_model->listItems($this->_arrParam);
 		$this->_view->selectBox             = $this->_model->itemsInSelectBox($this->_arrParam);
 		$this->_view->countItems[]			= $this->_model->countItems($this->_arrParam);
-		$this->_view->countItems[]   		= $this->_model->countItems($this->_arrParam, array('task' => 'active'));
-		$this->_view->countItems[]   		= $this->_model->countItems($this->_arrParam, array('task' => 'inactive'));
+		$this->_view->countItems[]   		= $this->_model->countItems($this->_arrParam, ['task' => 'active']);
+		$this->_view->countItems[]   		= $this->_model->countItems($this->_arrParam, ['task' => 'inactive']);
 		$this->_view->pagination        	= new Pagination($this->_view->countItems[0]['total'], $this->_pagination);
 
 		$this->_view->render($this->_arrParam['controller'] . DS . 'index');

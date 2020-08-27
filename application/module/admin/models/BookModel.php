@@ -28,6 +28,12 @@ class BookModel extends Model
 		if( ($opption['task']) == 'inactive'){	
 			$query[] =  "AND `b`.`status` =  1" ;
 		}
+		//FILTER :FILTER
+		$cateId = $arrParam['filter_category_id'] ;
+		if(!empty($arrParam['filter_category_id']) && is_numeric($arrParam['filter_category_id'])) {
+			$groupId =  $arrParam['filter_category_id'] ;
+			$query[]  = " AND `category_id` = $cateId ";
+		}		
 	    $query  = implode(" " ,$query) ;
 		return $this->fetchRow($query) ;
 	}	
@@ -36,7 +42,8 @@ class BookModel extends Model
 		$query[] = "SELECT `b`.`id`, `b`.`name`, `b`.`description` , `b`.`price` , `b`.`special` , `b`.`picture`, `b`.`sale_off`, `b`.`created_by`,`b`.`modified`, `b`.`modified_by`,`b`.`status`, `b`.`ordering` ,`c`.`name` as `category_name` " ; //
 		$query[] = " FROM `$this->_tableName` AS `b` , `".DB_TABLE_CATEGORY."`  AS `c` " ; //
 		$query[] = " WHERE  `b`.`category_id` = `c`.`id`" ; 
-		
+		$cateId = $arrParam['filter_category_id'] ;
+
 		if(isset($arrParam['filter_status']) && $arrParam['filter_status'] == 'active') {
 			$query[]  = " AND  `b`.`status` = 0 ";
 		} 
@@ -47,7 +54,13 @@ class BookModel extends Model
 			$search = '"%'.$arrParam['filter_search'].'%"';
 			$query[]  = " AND (`b`.`name` LIKE $search)  ";
 		}		
+		if(!empty($arrParam['filter_category_id']) && is_numeric($arrParam['filter_category_id'])) {
+			$groupId =  $arrParam['filter_category_id'] ;
+			$query[]  = " AND `b`.`category_id` = $cateId ";
+		}			
 		$query[] = " ORDER BY `id` DESC" ; 
+
+		
 		$pagination = $arrParam['pagination'] ;
 		$totalItemsPerPage = $pagination['totalItemsPerPage'] ;
 		if($totalItemsPerPage > 0 )

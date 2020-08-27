@@ -62,9 +62,9 @@ class UserModel extends Model
             $status 		=  1 ;  
             $group_id       = 3 ;	
             $register_ip 	=  $_SERVER['SERVER_ADDR'] ;	
-
-			$query = "INSERT INTO `$this->_tableName` ( `username`, `password`,`fullname`,`phone`,`email`,`status`,`register_date`,`register_ip`,`group_id`) VALUES ('$username','$password','$fullname','$phone','$email','$status','$register_ip','$group_id')" ;
-	     	$result = $this->query($query) ; 		
+            $date  = date('d-m-Y H:i:s') ;
+			$query = "INSERT INTO `$this->_tableName` ( `username`, `password`,`fullname`,`phone`,`email`,`status`,`register_date`,`register_ip`,`group_id`) VALUES ('$username','$password','$fullname','$phone','$email','$status','$date','$register_ip','$group_id')" ;
+            $result = $this->query($query) ; 		
 			return $result ;
         }
         if($option['task'] == 'save-buy-books'){        

@@ -6,7 +6,7 @@
          $idBook           = $value['id'] ;
          $categoryNameURL  = URL::filterURL($value['category_name']);
          $bookNameURL      = URL::filterURL($value['name']);
-         $linkOrder        = ROOT_URL.URL::createLink('default','user','order',['category_id'=> $value['category_id'],'book_id'=>$value['id']]) ;
+         $linkOrder        = URL::createLink('default','user','order',['category_id'=> $value['category_id'],'book_id'=>$value['id']]) ;
 
 
          $sale        = $value['sale_off'];
@@ -61,7 +61,8 @@
                            </div>
                         </div>
                         <div class="product-add-form">
-                           <form action="#">
+                        <!--  -->
+                           <form action="#" > 
                               <div class="quality-button">
                                  <input class="qty" min = 1 type="number" value="1">
                               </div>

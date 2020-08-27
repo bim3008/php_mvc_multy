@@ -68,7 +68,6 @@ class HTMLDefault
         $xhtml = '<span id="show-error">'.$error.'</span>';
         return $xhtml ;
     }
-
     public static function listBook($nameBoook,$listBook)
     {
         $xhtml = '
@@ -137,39 +136,38 @@ class HTMLDefault
         }
      
         $xhtml = '
-       
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="product-wrapper mb-40">
-                <div class="product-img">
-                    <a href="'.$link.'"> <img src="' . $img . '" alt="book" class="primary"></a>
-                    <div class="product-flag">
-                        <ul>
-                            <li><span class="sale">new</span></li>
-                            '.$discount.'
-                        </ul>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product-wrapper mb-40">
+                    <div class="product-img">
+                        <a href="'.$link.'"> <img src="' . $img . '" alt="book" class="primary"></a>
+                        <div class="product-flag">
+                            <ul>
+                                <li><span class="sale">new</span></li>
+                                '.$discount.'
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="product-details text-center">
-                    <h4><a title="" href="'.$link.'">' .HelperAdmin::textShorten($name,25) . '</a></h4>
-                    <div class="product-price">
-                        <ul>
-                            <li>' . $price . '</li>
-                        </ul>
+                    <div class="product-details text-center">
+                        <h4><a title="" href="'.$link.'">' .HelperAdmin::textShorten($name,25) . '</a></h4>
+                        <div class="product-price">
+                            <ul>
+                                <li>' . $price . '</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
 
-                <div class="product-link">
-                    <div class="product-button">
-                        <a href="'.$linkOder.'" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                    </div>
-                    <div class="add-to-link">
-                        <ul>
-                            <li><a href="'.$link.'" title="Details"><i class="fa fa-external-link"></i></a></li>
-                        </ul>
+                    <div class="product-link">
+                        <div class="product-button">
+                            <a href="'.$linkOder.'" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                        </div>
+                        <div class="add-to-link">
+                            <ul>
+                                <li><a href="'.$link.'" title="Details"><i class="fa fa-external-link"></i></a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         ' ;
         return $xhtml ;
     }
@@ -269,7 +267,6 @@ class HTMLDefault
         ';
         return $xhtml ;
     }
-
     public static function classRowContent(){
         $xhtml  = '
         <div class="shop-main-area mb-10">
@@ -324,7 +321,6 @@ class HTMLDefault
                    </span>';
         return $xhtml ;
     }
-
     public static function rowInputTextRegister($name,$nameId,$value = null){
         $xhtml ='
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -372,7 +368,6 @@ class HTMLDefault
         ';
         return $xhtml ;
     }
-
     public static function sliderPromotion($img,$day,$moth){
         $xhtml=' 
         <div class="col-lg-12">
@@ -389,7 +384,6 @@ class HTMLDefault
         ';
         return $xhtml;
     }
-
     public static function titleCart(){
         $xhtml = '
                 <div class="entry-header-area ">
@@ -406,7 +400,6 @@ class HTMLDefault
         ';
         return $xhtml ;
     }
-
     public static function displayBookInCart($product){
 
         $xhtml = '
@@ -429,7 +422,6 @@ class HTMLDefault
         ';
         return $xhtml ;
     }
-
     public static function displayNotice($link,$notice){
         $xhtml = '
                 <div class="section-element-area ptb-70">
@@ -448,9 +440,7 @@ class HTMLDefault
             </div>
         ' ;
         return $xhtml ;
-    }
-
-      
+    }  
     public static function tableTitle(){
         $xhtml = '
         <tr>
@@ -466,8 +456,6 @@ class HTMLDefault
     ';
         return $xhtml ;
     }
-
-
     public static function statusBuyBooks($status){
 
         if($status == 0){

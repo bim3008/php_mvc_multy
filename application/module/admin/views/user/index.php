@@ -3,8 +3,9 @@ require_once 'submenu/index.php';
 	echo	HelperAdmin::notifyMessege('messege');
 ?>
 <?php
-	echo HelperAdmin::toolbarUser($btnFillter, $formSearch, $btnCRUD);
+	echo HelperAdmin::toolbarUser($btnFillter, $formSearch, $btnCRUD. $slectBoxGroup);
 	echo HTMLAdmin::menuUser() ?>
+ </form> 
 <?php
 if(isset($this->listItems)){
 	foreach ($this->listItems as $key => $value) {

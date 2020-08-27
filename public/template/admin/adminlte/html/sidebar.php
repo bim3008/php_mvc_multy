@@ -11,6 +11,7 @@
 
     $urlBookAdd         =  URL::createLink('admin','book','form') ;
     $urlBookList        =  URL::createLink('admin','book','index') ;
+    $urlOrderList        =  URL::createLink('admin','order','index') ;
 
     $pictureLogo        = $this->_dirImg .'/avatar.jpg ' ;
     $fullname           = isset($_SESSION['loginFacebook']) ? $_SESSION['loginFacebook']['name'] : '' ;
@@ -43,8 +44,8 @@
                             DASHBROAD
                         </p>
                     </a>
-                </li>               
-                <li class="nav-item has-treeview menu-open">
+                </li>         
+                <li class="nav-item has-treeview">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-layer-group"></i>
                         <p>
@@ -57,7 +58,8 @@
                             echo HelperAdmin::sidebarAdmin($urlGroupAdd,'Add') ;
                     ?>
                 </li>
-                <li class="nav-item has-treeview menu-open">
+
+                <li class="nav-item has-treeview">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
@@ -70,7 +72,8 @@
                             echo HelperAdmin::sidebarAdmin($urlUserAdd,'Add') ;
                     ?>
                 </li>
-                <li class="nav-item has-treeview menu-open">
+
+                <li class="nav-item has-treeview">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-book-reader"></i>
                         <p>
@@ -83,7 +86,8 @@
                             echo HelperAdmin::sidebarAdmin($urlCategoryAdd,'Add') ;
                     ?>
                 </li>
-                <li class="nav-item has-treeview menu-open">
+
+                <li class="nav-item has-treeview">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-book-open"></i>
                         <p>
@@ -96,6 +100,20 @@
                             echo HelperAdmin::sidebarAdmin($urlBookAdd,'Add') ;
                     ?>
                 </li>
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link ">
+                        <i class="nav-icon fas fa-shopping-cart"></i>
+                        <p>
+                            ORDER
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <?php                    
+                            echo HelperAdmin::sidebarAdmin($urlOrderList,'List') ;
+                    ?>
+                </li>
+
             </ul>
         </nav>
  

@@ -1,7 +1,6 @@
 <?php
 class IndexController extends AdminController{
 	
-	
 	public function indexAction(){
 		// Kiểm tra đăng nhập
 		$infomationUser = Session::get('user') ;
@@ -24,6 +23,7 @@ class IndexController extends AdminController{
 		$this->_view->countItemsIndex[] = $this->_model->countItemsIndex($this->_arrParam,array('task' => 'user'));
 		$this->_view->countItemsIndex[] = $this->_model->countItemsIndex($this->_arrParam,array('task' => 'category'));
 		$this->_view->countItemsIndex[] = $this->_model->countItemsIndex($this->_arrParam,array('task' => 'book'));
+		$this->_view->countItemsIndex[] = $this->_model->countItemsIndex($this->_arrParam,array('task' => 'cart'));
 		$this->_view->render('index/index');
 				
 	}
